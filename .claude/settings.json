@@ -1,0 +1,28 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"C:/Users/xentr/proyectos/dotaplatim/scripts/bitacora_inicio.py\" 2>/dev/null || echo '{}'",
+            "timeout": 30,
+            "statusMessage": "Preparando el briefing de dotaplatim..."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"C:/Users/xentr/proyectos/dotaplatim/scripts/bitacora_log.py\" 2>/dev/null || true",
+            "timeout": 10,
+            "suppressOutput": true
+          }
+        ]
+      }
+    ]
+  }
+}

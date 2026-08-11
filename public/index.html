@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PLATIM Marketplace — Ferreterías de Colombia</title>
+<style>
+  :root { --azul: #0d3b66; --acento: #f4a300; --gris: #f5f6f8; }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: system-ui, sans-serif; background: var(--gris); color: #222; }
+  header { background: var(--azul); color: #fff; padding: 1rem 1.5rem;
+           display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+  header h1 { font-size: 1.3rem; } header small { opacity: .8; }
+  .controles { display: flex; gap: .5rem; flex: 1; min-width: 260px; }
+  input, select { padding: .55rem .7rem; border: 1px solid #ccc; border-radius: 8px;
+                  font-size: .95rem; }
+  input { flex: 1; }
+  main { max-width: 1100px; margin: 1.5rem auto; padding: 0 1rem; }
+  #resumen { margin-bottom: 1rem; color: #555; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+          gap: 1rem; }
+  .card { background: #fff; border-radius: 12px; padding: 1rem;
+          box-shadow: 0 1px 4px rgb(0 0 0 / .08); display: flex; flex-direction: column; }
+  .card .marca { color: var(--acento); font-weight: 700; font-size: .78rem;
+                 text-transform: uppercase; }
+  .card h3 { font-size: .95rem; margin: .3rem 0 .6rem; flex: 1; }
+  .card .precio { font-size: 1.1rem; font-weight: 700; color: var(--azul); }
+  .card .tienda { font-size: .78rem; color: #777; margin-top: .4rem; }
+  .pag { display: flex; gap: .5rem; justify-content: center; margin: 1.5rem 0; }
+  .pag button { padding: .5rem 1rem; border: none; border-radius: 8px; cursor: pointer;
+                background: var(--azul); color: #fff; }
+  .pag button:disabled { opacity: .4; cursor: default; }
+  .cta { background: linear-gradient(100deg, var(--azul), #16548f); color: #fff;
+         border-radius: 14px; padding: 1.3rem 1.5rem; margin-bottom: 1.5rem;
+         display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+         justify-content: space-between; }
+  .cta h2 { font-size: 1.25rem; } .cta p { opacity: .9; font-size: .92rem; margin-top: .3rem; }
+  .cta a { background: var(--acento); color: #222; font-weight: 700; text-decoration: none;
+           padding: .7rem 1.3rem; border-radius: 10px; white-space: nowrap; }
+  .card.invitacion { border: 2px dashed var(--acento); background: #fffaf0;
+                     align-items: center; justify-content: center; text-align: center; }
+  .card.invitacion h3 { color: var(--azul); flex: 0; }
+  .card.invitacion a { color: var(--azul); font-weight: 700; }
+</style>
+</head>
+<body>
+<header>
+  <div><h1>PLATIM Marketplace</h1><small>Ferreterías de Colombia, despachos a nivel nacional</small></div>
+  <div class="controles">
+    <input id="q" placeholder="Buscar producto o SKU...">
+    <select id="marca"><option value="">Todas las marcas</option></select>
+  </div>
+</header>
+<main>
+  <div class="cta" id="unirse">
+    <div>
+      <h2>¿Quieres que tu ferretería esté aquí?</h2>
+      <p>Tu catálogo en internet sin montar página web: nosotros ponemos la plataforma,
+         el posicionamiento y los despachos a todo el país. Tú solo vendes.</p>
+    </div>
+    <a href="https://wa.me/573000000000?text=Quiero%20vincular%20mi%20ferreter%C3%ADa%20a%20PLATIM"
+       target="_blank">Vincular mi ferretería</a>
+  </div>
+  <p id="resumen"></p>
+  <div class="grid" id="grid"></div>
+  <div class="pag">
+    <button id="prev">&larr; Anterior</button>
+    <button id="next">Siguiente &rarr;</button>
+  </div>
+</main>
+<script>
+const cop = n => n == null ? "Consultar" : "$" + n.toLocaleString("es-CO");
+let page = 1;
+
+async function cargarMarcas() {
+  const marcas = await (await fetch("/api/marcas")).json();
+  for (const m of marcas) {
+    const o = document.createElement("option");
+    o.value = m.marca; o.textContent = `${m.marca} (${m.productos})`;
+    document.getElementById("marca").appendChild(o);
+  }
+}
+
+async function cargar() {
+  const q = document.getElementById("q").value;
+  const marca = document.getElementById("marca").value;
+  const r = await (await fetch(`/api/productos?page=${page}&q=${encodeURIComponent(q)}&marca=${encodeURIComponent(marca)}`)).json();
+  document.getElementById("resumen").textContent =
+    `${r.total} productos — página ${r.page} de ${Math.max(1, Math.ceil(r.total / r.porPagina))}`;
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+  for (const p of r.productos) {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `<span class="marca"></span><h3></h3>
+      <div class="precio"></div><div class="tienda"></div>`;
+    card.querySelector(".marca").textContent = p.marca || "genérico";
+    card.querySelector("h3").textContent = p.nombre;
+    card.querySelector(".precio").textContent = cop(p.precio);
+    card.querySelector(".tienda").textContent = `${p.sku} · ${p.ferreteria}`;
+    grid.appendChild(card);
+  }
+  const inv = document.createElement("div");
+  inv.className = "card invitacion";
+  inv.innerHTML = `<h3>Aquí puede estar<br>tu ferretería</h3>
+    <a href="#unirse">Quiero vincularme &uarr;</a>`;
+  grid.appendChild(inv);
+  document.getElementById("prev").disabled = r.page <= 1;
+  document.getElementById("next").disabled = r.page * r.porPagina >= r.total;
+}
+
+document.getElementById("q").addEventListener("input", () => { page = 1; cargar(); });
+document.getElementById("marca").addEventListener("change", () => { page = 1; cargar(); });
+document.getElementById("prev").onclick = () => { page--; cargar(); };
+document.getElementById("next").onclick = () => { page++; cargar(); };
+cargarMarcas(); cargar();
+</script>
+</body>
+</html>

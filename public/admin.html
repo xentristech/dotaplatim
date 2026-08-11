@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel PLATIM Marketplace</title>
+<style>
+  :root { --azul: #0d3b66; --acento: #f4a300; --gris: #f5f6f8; --ok: #1a7f37; --off: #b42318; }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: system-ui, sans-serif; background: var(--gris); color: #222; }
+  header { background: var(--azul); color: #fff; padding: .9rem 1.5rem; display: flex;
+           gap: 1rem; align-items: center; flex-wrap: wrap; }
+  header h1 { font-size: 1.15rem; } header .quien { opacity: .85; font-size: .88rem; flex: 1; }
+  header button { background: transparent; border: 1px solid #ffffff88; color: #fff;
+                  border-radius: 8px; padding: .35rem .8rem; cursor: pointer; }
+  main { max-width: 1150px; margin: 1.3rem auto; padding: 0 1rem; }
+  .tabs { display: flex; gap: .5rem; margin-bottom: 1rem; }
+  .tabs button { padding: .55rem 1.1rem; border: none; border-radius: 9px; cursor: pointer;
+                 background: #dde3ea; font-weight: 600; }
+  .tabs button.activa { background: var(--azul); color: #fff; }
+  .caja { background: #fff; border-radius: 12px; padding: 1.1rem;
+          box-shadow: 0 1px 4px rgb(0 0 0 / .08); margin-bottom: 1.2rem; }
+  .caja h2 { font-size: 1rem; margin-bottom: .8rem; color: var(--azul); }
+  table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+  th, td { text-align: left; padding: .5rem .6rem; border-bottom: 1px solid #eee; }
+  th { color: #666; font-size: .78rem; text-transform: uppercase; }
+  .fila-form { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .8rem; }
+  input, select { padding: .5rem .65rem; border: 1px solid #ccc; border-radius: 8px;
+                  font-size: .9rem; }
+  .btn { background: var(--acento); border: none; border-radius: 8px; padding: .5rem 1rem;
+         font-weight: 700; cursor: pointer; }
+  .btn.azul { background: var(--azul); color: #fff; }
+  .estado { font-weight: 700; cursor: pointer; border: none; background: none; }
+  .estado.on { color: var(--ok); } .estado.off { color: var(--off); }
+  #login { max-width: 380px; margin: 4rem auto; }
+  #login input { width: 100%; margin-bottom: .7rem; }
+  #login .btn { width: 100%; }
+  .error { color: var(--off); font-size: .88rem; margin-top: .5rem; min-height: 1.2em; }
+  .muted { color: #888; font-size: .8rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Panel PLATIM</h1>
+  <span class="quien" id="quien"></span>
+  <button id="salir" hidden>Cerrar sesión</button>
+</header>
+<main>
+  <div class="caja" id="login">
+    <h2>Iniciar sesión</h2>
+    <input id="l-email" type="email" placeholder="Correo" autocomplete="username">
+    <input id="l-pass" type="password" placeholder="Contraseña" autocomplete="current-password">
+    <button class="btn azul" id="l-entrar">Entrar</button>
+    <p class="error" id="l-error"></p>
+  </div>
+
+  <div id="panel" hidden>
+    <div class="tabs">
+      <button data-tab="productos" class="activa">Productos</button>
+      <button data-tab="ferreterias" id="tab-ferr" hidden>Ferreterías</button>
+    </div>
+
+    <section id="v-productos">
+      <div class="caja">
+        <h2>Agregar producto</h2>
+        <div class="fila-form">
+          <select id="p-ferreteria" hidden></select>
+          <input id="p-sku" placeholder="SKU *" style="width:130px">
+          <input id="p-nombre" placeholder="Nombre *" style="flex:1;min-width:220px">
+          <input id="p-marca" placeholder="Marca" style="width:120px">
+          <input id="p-precio" type="number" placeholder="Precio" style="width:120px">
+          <button class="btn" id="p-crear">Agregar</button>
+        </div>
+        <p class="error" id="p-error"></p>
+      </div>
+      <div class="caja">
+        <h2>Catálogo</h2>
+        <div class="fila-form">
+          <input id="f-q" placeholder="Buscar por nombre o SKU..." style="flex:1;min-width:200px">
+          <select id="f-ferreteria" hidden><option value="">Todas las ferreterías</option></select>
+        </div>
+        <p class="muted" id="p-resumen"></p>
+        <table>
+          <thead><tr><th>SKU</th><th>Nombre</th><th>Marca</th><th>Precio</th>
+                     <th id="col-tienda">Tienda</th><th>Estado</th></tr></thead>
+          <tbody id="p-tabla"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="v-ferreterias" hidden>
+      <div class="caja">
+        <h2>Vincular ferretería nueva</h2>
+        <div class="fila-form">
+          <input id="n-nombre" placeholder="Nombre *" style="flex:1;min-width:180px">
+          <input id="n-slug" placeholder="slug-url *" style="width:150px">
+          <input id="n-ciudad" placeholder="Ciudad" style="width:130px">
+          <input id="n-telefono" placeholder="Teléfono" style="width:130px">
+          <input id="n-email" placeholder="Correo de acceso" style="width:180px">
+          <input id="n-pass" placeholder="Contraseña" style="width:140px">
+          <button class="btn" id="n-crear">Vincular</button>
+        </div>
+        <p class="error" id="n-error"></p>
+      </div>
+      <div class="caja">
+        <h2>Ferreterías vinculadas</h2>
+        <table>
+          <thead><tr><th>Nombre</th><th>Ciudad</th><th>Productos</th><th>Estado</th></tr></thead>
+          <tbody id="f-tabla"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+const cop = n => n == null ? "—" : "$" + n.toLocaleString("es-CO");
+let yo = null;
+
+const api = async (ruta, opciones = {}) => {
+  opciones.headers = { "Content-Type": "application/json",
+                       Authorization: "Bearer " + (localStorage.token || "") };
+  const r = await fetch(ruta, opciones);
+  if (r.status === 401 && ruta !== "/api/login") { salir(); throw new Error("sesión vencida"); }
+  return r.json();
+};
+
+function salir() { localStorage.removeItem("token"); location.reload(); }
+$("salir").onclick = salir;
+
+// --- Login ---
+$("l-entrar").onclick = async () => {
+  const r = await api("/api/login", { method: "POST", body: JSON.stringify({
+    email: $("l-email").value.trim(), password: $("l-pass").value }) });
+  if (r.token) { localStorage.token = r.token; iniciar(); }
+  else $("l-error").textContent = r.error || "no se pudo entrar";
+};
+$("l-pass").addEventListener("keydown", e => { if (e.key === "Enter") $("l-entrar").click(); });
+
+// --- Panel ---
+async function iniciar() {
+  try { yo = await api("/api/me"); } catch { return; }
+  if (yo.error) return;
+  $("login").hidden = true; $("panel").hidden = false; $("salir").hidden = false;
+  $("quien").textContent = yo.rol === "marketplace"
+    ? `${yo.nombre} — administrador del marketplace`
+    : `${yo.nombre} — panel de ${yo.ferreteria}`;
+  if (yo.rol === "marketplace") {
+    $("tab-ferr").hidden = false;
+    $("p-ferreteria").hidden = false;
+    $("f-ferreteria").hidden = false;
+    await cargarFerreterias();
+  } else {
+    $("col-tienda").hidden = true;
+  }
+  cargarProductos();
+}
+
+document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => {
+  document.querySelectorAll(".tabs button").forEach(x => x.classList.remove("activa"));
+  b.classList.add("activa");
+  $("v-productos").hidden = b.dataset.tab !== "productos";
+  $("v-ferreterias").hidden = b.dataset.tab !== "ferreterias";
+});
+
+// --- Ferreterías ---
+async function cargarFerreterias() {
+  const fs = await api("/api/ferreterias");
+  for (const sel of [$("p-ferreteria"), $("f-ferreteria")]) {
+    [...sel.querySelectorAll("option")].filter(o => o.value).forEach(o => o.remove());
+    for (const f of fs) {
+      const o = document.createElement("option");
+      o.value = f.id; o.textContent = f.nombre;
+      sel.appendChild(o);
+    }
+  }
+  const cuerpo = $("f-tabla"); cuerpo.innerHTML = "";
+  for (const f of fs) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td></td><td></td><td></td>
+      <td><button class="estado on">activa</button></td>`;
+    tr.children[0].textContent = f.nombre;
+    tr.children[1].textContent = f.ciudad;
+    tr.children[2].textContent = f.productos;
+    tr.querySelector("button").onclick = async () => {
+      await api("/api/ferreterias/" + f.id, { method: "PUT",
+        body: JSON.stringify({ activa: false }) });
+      cargarFerreterias();
+    };
+    cuerpo.appendChild(tr);
+  }
+}
+
+$("n-crear").onclick = async () => {
+  const r = await api("/api/ferreterias", { method: "POST", body: JSON.stringify({
+    nombre: $("n-nombre").value.trim(), slug: $("n-slug").value.trim(),
+    ciudad: $("n-ciudad").value.trim(), telefono: $("n-telefono").value.trim(),
+    email: $("n-email").value.trim() || undefined,
+    password: $("n-pass").value || undefined }) });
+  $("n-error").textContent = r.error || "";
+  if (r.ok) {
+    ["n-nombre","n-slug","n-ciudad","n-telefono","n-email","n-pass"].forEach(i => $(i).value = "");
+    cargarFerreterias();
+  }
+};
+
+// --- Productos ---
+async function cargarProductos() {
+  const q = $("f-q").value, ferr = $("f-ferreteria").value;
+  const r = await api(`/api/admin/productos?q=${encodeURIComponent(q)}&ferreteria=${ferr}`);
+  $("p-resumen").textContent = `${r.total} productos (mostrando ${r.productos.length})`;
+  const cuerpo = $("p-tabla"); cuerpo.innerHTML = "";
+  for (const p of r.productos) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td></td><td></td><td></td>
+      <td><input type="number" style="width:110px"></td>
+      <td class="tienda"></td>
+      <td><button class="estado"></button></td>`;
+    tr.children[0].textContent = p.sku;
+    tr.children[1].textContent = p.nombre;
+    tr.children[2].textContent = p.marca;
+    const precio = tr.querySelector("input");
+    precio.value = p.precio ?? "";
+    precio.onchange = async () => {
+      await api("/api/productos/" + p.id, { method: "PUT",
+        body: JSON.stringify({ precio: precio.value === "" ? null : Number(precio.value) }) });
+    };
+    tr.querySelector(".tienda").textContent = p.ferreteria;
+    tr.querySelector(".tienda").hidden = yo.rol !== "marketplace";
+    const est = tr.querySelector(".estado");
+    const pintar = () => { est.textContent = p.activo ? "activo" : "inactivo";
+                           est.className = "estado " + (p.activo ? "on" : "off"); };
+    pintar();
+    est.onclick = async () => {
+      p.activo = p.activo ? 0 : 1;
+      await api("/api/productos/" + p.id, { method: "PUT",
+        body: JSON.stringify({ activo: !!p.activo }) });
+      pintar();
+    };
+    cuerpo.appendChild(tr);
+  }
+}
+$("f-q").addEventListener("input", () => cargarProductos());
+$("f-ferreteria").addEventListener("change", () => cargarProductos());
+
+$("p-crear").onclick = async () => {
+  const nombre = $("p-nombre").value.trim();
+  const slug = nombre.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  const r = await api("/api/productos", { method: "POST", body: JSON.stringify({
+    ferreteria_id: $("p-ferreteria").value ? Number($("p-ferreteria").value) : undefined,
+    sku: $("p-sku").value.trim(), nombre, slug,
+    marca: $("p-marca").value.trim().toUpperCase(),
+    precio: $("p-precio").value ? Number($("p-precio").value) : null }) });
+  $("p-error").textContent = r.error || "";
+  if (r.ok) { ["p-sku","p-nombre","p-marca","p-precio"].forEach(i => $(i).value = "");
+              cargarProductos(); }
+};
+
+if (localStorage.token) iniciar();
+</script>
+</body>
+</html>
