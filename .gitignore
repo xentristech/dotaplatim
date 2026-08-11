@@ -27,6 +27,9 @@ marca-icon.ico
 # Bitácora de sesiones (quién hizo qué y cuándo — no se versiona)
 docs/bitacora/
 
+# Configuración local de permisos de Claude (por máquina)
+.claude/settings.local.json
+
 # Generados con credenciales/hashes — viajan solo a Vercel, nunca a git
 api/_datos.js
 api/_credenciales.js

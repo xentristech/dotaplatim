@@ -1,0 +1,9 @@
+{
+  "panel-proyecto": {
+    "titulo": "PLATIM Marketplace — Panel del proyecto",
+    "url": "https://claude.ai/code/artifact/f9783fa3-528a-4ec8-8a13-849e91705078",
+    "publico": false,
+    "actualizar_cuando": "cambie el estado del proyecto: deploy hecho, pendiente cerrado, módulo nuevo",
+    "nota": "Actualizar SIEMPRE pasando esta url al publicar; sin la url se crea un artefacto paralelo."
+  }
+}
