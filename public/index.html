@@ -254,7 +254,7 @@ const EMOJI = {
   "Agro y ganadería": "🚜", "Bombas y agua": "💧", "Lavado y limpieza": "🧽",
   "Energía": "🔋", "Motores": "⚙️", "Construcción": "🏗️",
 };
-let page = 1, categoriaActiva = "";
+let page = 1, categoriaActiva = "", versionCarga = 0;
 
 // --- Categorías ---
 async function cargarCategorias() {
@@ -279,7 +279,9 @@ async function cargarCategorias() {
 // --- Listado ---
 async function cargar() {
   const q = $id("q").value;
+  const miVersion = ++versionCarga; // descartar respuestas viejas que lleguen tarde
   const r = await (await fetch(`/api/productos?page=${page}&q=${encodeURIComponent(q)}&categoria=${encodeURIComponent(categoriaActiva)}`)).json();
+  if (miVersion !== versionCarga) return;
   $id("resumen").textContent =
     `${r.total} productos — página ${r.page} de ${Math.max(1, Math.ceil(r.total / r.porPagina))}`;
   const grid = $id("grid");
@@ -354,12 +356,13 @@ function guardarCarrito() {
   $id("carrito-n").textContent = carrito.reduce((s, i) => s + i.cantidad, 0);
 }
 
-function agregarAlCarrito(p) {
+function agregarAlCarrito(p, abrir = true) {
   const ya = carrito.find(i => i.producto_id === p.id);
   if (ya) ya.cantidad++;
   else carrito.push({ producto_id: p.id, nombre: p.nombre, precio: p.precio, cantidad: 1 });
   guardarCarrito(); pintarCarrito();
-  $id("carrito").hidden = false;
+  // No abrir el panel encima del asesor: la conversación manda mientras esté abierta
+  if (abrir && $id("asesor").hidden) $id("carrito").hidden = false;
 }
 
 function pintarCarrito() {
@@ -472,7 +475,7 @@ async function preguntarAsesor(mensaje, mostrar) {
         encodeURIComponent(`Hola PLATIM, quiero cotizar ${p.nombre} (SKU ${p.sku})`), "_blank");
     } else {
       btn.onclick = () => {
-        agregarAlCarrito(p);
+        agregarAlCarrito(p, false);
         burbuja(`¡Listo! Agregué ${p.nombre} a tu pedido. ¿Necesitas algo más o cerramos el pedido? (El botón 🛒 de arriba finaliza la compra.)`, "bot");
       };
     }
