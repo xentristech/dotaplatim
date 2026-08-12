@@ -7,6 +7,8 @@
 <style>
   :root { --azul: #0d3b66; --acento: #f4a300; --gris: #f5f6f8; --ok: #1a7f37; --off: #b42318; }
   * { box-sizing: border-box; margin: 0; }
+  /* El atributo hidden debe ganarle a cualquier display de autor */
+  [hidden] { display: none !important; }
   body { font-family: system-ui, sans-serif; background: var(--gris); color: #222; }
   header { background: var(--azul); color: #fff; padding: .9rem 1.5rem; display: flex;
            gap: 1rem; align-items: center; flex-wrap: wrap; }

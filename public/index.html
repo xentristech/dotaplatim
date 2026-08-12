@@ -9,6 +9,8 @@
   :root { --azul: #0D1B2A; --verde: #6BAA1F; --verde-osc: #4d7a16; --verde-claro: #A7D957;
           --gris-sec: #F6F7F9; --gris-texto: #51607a; --borde: #E5E7EB; --blanco: #fff; }
   * { box-sizing: border-box; margin: 0; }
+  /* El atributo hidden debe ganarle a cualquier display de autor (carrito/asesor) */
+  [hidden] { display: none !important; }
   body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
          background: var(--gris-sec); color: var(--azul); }
   header { background: var(--azul); color: #fff; padding: .9rem 1.5rem;
