@@ -101,6 +101,123 @@ export function crearApp(db, SECRET) {
     p ? res.json(p) : res.status(404).json({ error: "producto no encontrado" });
   });
 
+  // --- Asesor IA de ventas ---
+  // Motor de intenciones sobre el catálogo: entiende la necesidad en lenguaje natural,
+  // recomienda productos y empuja el cierre (agregar al pedido / WhatsApp).
+  // Diseñado para poder reemplazar el motor por un LLM (Claude API) sin tocar el frontend.
+  const sinAcentos = (t) => t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const INTENCIONES = [
+    { claves: ["fumig", "plaga", "cultivo", "aspersor", "veneno", "herbicida"],
+      categoria: "Fumigación",
+      texto: "Para proteger tu cultivo estas fumigadoras son las más pedidas:" },
+    { claves: ["perfor", "hueco", "pared", "concreto", "taladr", "atornill", "tornillo"],
+      q: "taladro",
+      texto: "Para perforar y atornillar, mira estos taladros:" },
+    { claves: ["cortar arbol", "arbol", "lena", "madera", "motosierra", "poda", "tronco"],
+      q: "motosierra",
+      texto: "Para corte de madera y poda, estas motosierras responden:" },
+    { claves: ["pasto", "cesped", "jardin", "guadan", "maleza", "monte"],
+      categoria: "Jardín y forestal",
+      texto: "Para mantener el jardín o el lote a raya:" },
+    { claves: ["luz", "apagon", "energia", "electricidad", "planta electrica", "generador"],
+      categoria: "Energía",
+      texto: "Para no quedarte sin energía, estas opciones:" },
+    { claves: ["agua", "pozo", "tanque", "riego", "bomba", "presion", "inundacion"],
+      categoria: "Bombas y agua",
+      texto: "Para mover o presurizar agua, esto es lo que hay:" },
+    { claves: ["lavar", "hidrolavadora", "carro", "fachada", "limpieza"],
+      categoria: "Lavado y limpieza",
+      texto: "Para lavado a presión y limpieza:" },
+    { claves: ["soldar", "soldadura", "soldador"],
+      q: "motosoldador",
+      texto: "Para soldadura en campo:" },
+    { claves: ["finca", "ganado", "vaca", "ordeno", "maiz", "grano", "moler", "alimento"],
+      categoria: "Agro y ganadería",
+      texto: "Para el trabajo de la finca:" },
+    { claves: ["obra", "construccion", "placa", "cortar piso", "compresor", "andamio", "demoler"],
+      categoria: "Construcción",
+      texto: "Para la obra, estos equipos:" },
+    { claves: ["pulir", "pulidora", "cortar metal", "esmeril", "disco"],
+      q: "pulidora",
+      texto: "Para pulir y cortar con disco:" },
+    { claves: ["lancha", "bote", "rio", "fuera de borda", "navegar"],
+      q: "fuera de borda",
+      texto: "Para tu embarcación, motores fuera de borda HIDEA:" },
+  ];
+
+  app.post("/api/asesor", (req, res) => {
+    const mensaje = String((req.body || {}).mensaje || "").slice(0, 300);
+    const plano = sinAcentos(mensaje);
+    if (!plano.trim()) {
+      return res.json({
+        texto: "Cuéntame qué necesitas resolver y te recomiendo el equipo exacto. " +
+               "Por ejemplo: «necesito fumigar mi cultivo» o «se va mucho la luz en la finca».",
+        productos: [],
+        sugerencias: ["Necesito fumigar mi cultivo", "Se va mucho la luz",
+                      "Algo para perforar concreto", "Una bomba para un pozo"],
+      });
+    }
+
+    // Presupuesto y orden: "barato/económico" o una cifra tope
+    let orden = "p.precio IS NULL, p.precio ASC", tope = null;
+    const cifra = plano.replace(/[.,]/g, "").match(/\b(\d{5,9})\b/);
+    if (cifra) tope = Number(cifra[1]);
+    if (/(profesional|potente|industrial|pesad)/.test(plano)) {
+      orden = "p.precio IS NULL, p.precio DESC";
+    }
+
+    // Marca mencionada
+    const marcas = db.prepare("SELECT DISTINCT marca FROM productos WHERE marca != ''").all();
+    const marca = marcas.find(m => plano.includes(sinAcentos(m.marca)))?.marca;
+
+    // Intención por palabras clave
+    const intencion = INTENCIONES.find(i => i.claves.some(c => plano.includes(c)));
+
+    const filtros = ["p.activo = 1"], args = [];
+    if (intencion?.categoria) { filtros.push("p.categoria = ?"); args.push(intencion.categoria); }
+    if (intencion?.q) {
+      filtros.push("(p.nombre LIKE ? OR p.descripcion_corta LIKE ?)");
+      args.push(`%${intencion.q}%`, `%${intencion.q}%`);
+    }
+    if (marca) { filtros.push("p.marca = ?"); args.push(marca); }
+    if (tope) { filtros.push("p.precio <= ?"); args.push(tope); }
+    if (!intencion) {
+      // Sin intención clara: usar las palabras del mensaje como búsqueda amplia
+      const palabras = plano.split(/\s+/).filter(w => w.length > 3).slice(0, 4);
+      if (palabras.length) {
+        filtros.push("(" + palabras.map(() =>
+          "(p.nombre LIKE ? OR p.categoria LIKE ? OR p.marca LIKE ?)").join(" OR ") + ")");
+        for (const w of palabras) args.push(`%${w}%`, `%${w}%`, `%${w}%`);
+      }
+    }
+
+    const productos = db.prepare(
+      `SELECT p.id, p.sku, p.nombre, p.slug, p.precio, p.marca, p.categoria, p.imagen,
+              f.nombre AS ferreteria
+       FROM productos p JOIN ferreterias f ON f.id = p.ferreteria_id
+       WHERE ${filtros.join(" AND ")} ORDER BY ${orden} LIMIT 4`
+    ).all(...args);
+
+    let texto;
+    if (!productos.length) {
+      texto = "No encontré un equipo exacto para eso en el catálogo, pero un asesor humano " +
+              "te lo consigue: escríbenos por WhatsApp y lo cotizamos. " +
+              "¿O me lo cuentas con otras palabras?";
+    } else {
+      texto = (intencion?.texto || "Esto es lo que te puedo ofrecer:") +
+        (marca ? ` (marca ${marca})` : "") +
+        (tope ? ` con presupuesto hasta $${tope.toLocaleString("es-CO")}` : "") +
+        " Toca «Agregar» y te lo despachamos a cualquier parte del país.";
+    }
+    res.json({
+      texto,
+      productos,
+      sugerencias: productos.length
+        ? ["Más económico", "Algo más profesional", "Ver otra categoría"]
+        : ["Necesito fumigar mi cultivo", "Se va mucho la luz", "Una bomba para un pozo"],
+    });
+  });
+
   // --- Pedidos (crear es público: es el checkout del catálogo) ---
   app.post("/api/pedidos", (req, res) => {
     const { cliente, telefono, ciudad, direccion, notas = "", items } = req.body || {};

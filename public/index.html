@@ -114,6 +114,45 @@
   #carrito .exito { background: #eef7e2; color: var(--verde-osc); border-radius: 10px;
                     padding: 1rem; font-weight: 600; }
   #carrito .error-pedido { color: #b42318; font-size: .88rem; min-height: 1.2em; }
+  /* Asesor IA */
+  #btn-asesor { position: fixed; bottom: 1.2rem; right: 1.2rem; z-index: 38;
+                background: var(--verde); color: #fff; border: none; border-radius: 99px;
+                padding: .85rem 1.3rem; font-size: 1rem; font-weight: 800; cursor: pointer;
+                box-shadow: 0 6px 18px rgb(13 27 42 / .3); }
+  #asesor { position: fixed; bottom: 1.2rem; right: 1.2rem; z-index: 48;
+            width: min(390px, calc(100vw - 1.6rem)); height: min(560px, 84vh);
+            background: #fff; border-radius: 16px; display: flex; flex-direction: column;
+            box-shadow: 0 10px 34px rgb(13 27 42 / .35); overflow: hidden; }
+  #asesor header { background: var(--azul); padding: .8rem 1rem; display: flex;
+                   align-items: center; gap: .6rem; }
+  #asesor header .titulo { flex: 1; font-weight: 700; font-size: .95rem; }
+  #asesor header small { display: block; opacity: .7; font-weight: 400; font-size: .72rem; }
+  #asesor header button { background: none; border: none; color: #fff; font-size: 1.3rem;
+                          cursor: pointer; }
+  #chat { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column;
+          gap: .6rem; background: var(--gris-sec); }
+  .msg { max-width: 88%; padding: .6rem .8rem; border-radius: 12px; font-size: .88rem;
+         line-height: 1.45; }
+  .msg.bot { background: #fff; border: 1px solid var(--borde); align-self: flex-start; }
+  .msg.yo { background: var(--verde); color: #fff; align-self: flex-end; }
+  .msg .prod { display: flex; gap: .6rem; align-items: center; border-top: 1px solid var(--borde);
+               padding: .5rem 0; }
+  .msg .prod .icono { font-size: 1.6rem; }
+  .msg .prod .info { flex: 1; min-width: 0; }
+  .msg .prod .info b { display: block; font-size: .8rem; font-weight: 600;
+                       overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .msg .prod .info span { color: var(--azul); font-weight: 800; font-size: .85rem; }
+  .msg .prod button { background: var(--verde); color: #fff; border: none; border-radius: 7px;
+                      padding: .35rem .6rem; font-size: .76rem; font-weight: 700;
+                      cursor: pointer; }
+  #chips { display: flex; gap: .4rem; flex-wrap: wrap; padding: .5rem 1rem 0; }
+  #chips button { border: 1px solid var(--verde); color: var(--verde-osc); background: #fff;
+                  border-radius: 99px; padding: .3rem .75rem; font-size: .78rem;
+                  cursor: pointer; }
+  #asesor form { display: flex; gap: .5rem; padding: .7rem 1rem 1rem; }
+  #asesor form input { flex: 1; }
+  #asesor form button { background: var(--azul); color: #fff; border: none;
+                        border-radius: 9px; padding: 0 1rem; font-weight: 700; cursor: pointer; }
 </style>
 </head>
 <body>
@@ -167,6 +206,22 @@
     <h3>Resumen</h3><div id="f-corta"></div>
     <h3>Descripción completa</h3><div id="f-larga"></div>
   </div>
+</section>
+
+<button id="btn-asesor">💬 ¿Qué necesitas? Te asesoro</button>
+<section id="asesor" hidden>
+  <header>
+    <span style="font-size:1.4rem">🤖</span>
+    <div class="titulo">Asesor PLATIM
+      <small>Te ayudo a encontrar el equipo exacto y te lo despachamos</small></div>
+    <button id="asesor-cerrar">&times;</button>
+  </header>
+  <div id="chat"></div>
+  <div id="chips"></div>
+  <form id="asesor-form">
+    <input id="asesor-input" placeholder="Cuéntame qué necesitas..." autocomplete="off">
+    <button type="submit">Enviar</button>
+  </form>
 </section>
 
 <aside id="carrito" hidden>
@@ -362,6 +417,100 @@ $id("q").addEventListener("input", () => { page = 1; cargar(); });
 $id("prev").onclick = () => { page--; cargar(); };
 $id("next").onclick = () => { page++; cargar(); };
 cargarCategorias(); cargar(); guardarCarrito();
+
+// --- Asesor IA de ventas ---
+let ultimaConsulta = "";
+
+function burbuja(texto, quien) {
+  const m = document.createElement("div");
+  m.className = "msg " + quien;
+  m.textContent = texto;
+  $id("chat").appendChild(m);
+  $id("chat").scrollTop = $id("chat").scrollHeight;
+  return m;
+}
+
+function pintarChips(sugerencias) {
+  const chips = $id("chips");
+  chips.innerHTML = "";
+  for (const s of sugerencias || []) {
+    const b = document.createElement("button");
+    b.textContent = s;
+    b.onclick = () => {
+      // Los refinamientos ("más económico") conservan la consulta anterior
+      const refina = /económico|profesional|categoría/i.test(s);
+      preguntarAsesor(refina && ultimaConsulta ? `${ultimaConsulta} ${s}` : s, s);
+    };
+    chips.appendChild(b);
+  }
+}
+
+async function preguntarAsesor(mensaje, mostrar) {
+  burbuja(mostrar || mensaje, "yo");
+  if (!/económico|profesional|categoría/i.test(mensaje)) ultimaConsulta = mensaje;
+  const r = await fetch("/api/asesor", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ mensaje }),
+  }).then(x => x.json()).catch(() => ({ texto: "Se me cruzaron los cables, intenta de nuevo.", productos: [] }));
+  const m = burbuja(r.texto, "bot");
+  for (const p of r.productos || []) {
+    const fila = document.createElement("div");
+    fila.className = "prod";
+    fila.innerHTML = `<span class="icono"></span>
+      <div class="info"><b></b><span></span></div><button>Agregar</button>`;
+    fila.querySelector(".icono").textContent = EMOJI[p.categoria] || "🔩";
+    fila.querySelector("b").textContent = p.nombre;
+    fila.querySelector(".info span").textContent = cop(p.precio);
+    fila.querySelector("b").style.cursor = "pointer";
+    fila.querySelector("b").onclick = () => abrirFicha(p.slug);
+    const btn = fila.querySelector("button");
+    if (p.precio == null) {
+      btn.textContent = "Consultar";
+      btn.onclick = () => window.open(`https://wa.me/${WSP}?text=` +
+        encodeURIComponent(`Hola PLATIM, quiero cotizar ${p.nombre} (SKU ${p.sku})`), "_blank");
+    } else {
+      btn.onclick = () => {
+        agregarAlCarrito(p);
+        burbuja(`¡Listo! Agregué ${p.nombre} a tu pedido. ¿Necesitas algo más o cerramos el pedido? (El botón 🛒 de arriba finaliza la compra.)`, "bot");
+      };
+    }
+    m.appendChild(fila);
+  }
+  if (!r.productos?.length && /WhatsApp/i.test(r.texto)) {
+    const fila = document.createElement("div");
+    fila.className = "prod";
+    fila.innerHTML = `<span class="icono">📱</span><div class="info"><b>Hablar con un asesor humano</b></div><button>WhatsApp</button>`;
+    fila.querySelector("button").onclick = () => window.open(`https://wa.me/${WSP}?text=` +
+      encodeURIComponent(`Hola PLATIM, necesito: ${ultimaConsulta}`), "_blank");
+    m.appendChild(fila);
+  }
+  pintarChips(r.sugerencias);
+  $id("chat").scrollTop = $id("chat").scrollHeight;
+}
+
+$id("btn-asesor").onclick = async () => {
+  $id("btn-asesor").hidden = true;
+  $id("asesor").hidden = false;
+  if (!$id("chat").children.length) {
+    const r = await fetch("/api/asesor", { method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ mensaje: "" }) }).then(x => x.json());
+    burbuja(r.texto, "bot");
+    pintarChips(r.sugerencias);
+  }
+  $id("asesor-input").focus();
+};
+$id("asesor-cerrar").onclick = () => {
+  $id("asesor").hidden = true;
+  $id("btn-asesor").hidden = false;
+};
+$id("asesor-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const v = $id("asesor-input").value.trim();
+  if (!v) return;
+  $id("asesor-input").value = "";
+  preguntarAsesor(v);
+});
 </script>
 </body>
 </html>
