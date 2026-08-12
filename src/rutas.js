@@ -248,7 +248,7 @@ ${p.imagen ? `<p><img src="${esc(p.imagen)}" alt="${esc(p.nombre)}"></p>` : ""}
                "Por ejemplo: «necesito fumigar mi cultivo» o «se va mucho la luz en la finca».",
         productos: [],
         sugerencias: ["Necesito fumigar mi cultivo", "Se va mucho la luz",
-                      "Algo para perforar concreto", "Una bomba para un pozo"],
+                      "Dotación para mis empleados", "Una bomba para un pozo"],
       });
     }
 
