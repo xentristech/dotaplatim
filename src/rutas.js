@@ -166,10 +166,10 @@ export function crearApp(db, SECRET) {
 ${p.imagen ? `<meta property="og:image" content="${esc(p.imagen)}">` : ""}
 <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
 <style>body{font-family:system-ui,sans-serif;max-width:720px;margin:2rem auto;padding:0 1rem;
-color:#0D1B2A;line-height:1.5}a.btn{display:inline-block;background:#4d7a16;color:#fff;
+color:#1b1b1b;line-height:1.5}a.btn{display:inline-block;background:#2e2e2e;color:#fff;
 padding:.7rem 1.2rem;border-radius:9px;text-decoration:none;font-weight:700;margin:.3rem .4rem 0 0}
 img{max-width:100%;max-height:320px;object-fit:contain}.precio{font-size:1.6rem;font-weight:800}
-small{color:#51607a}</style></head><body>
+small{color:#5f5f5f}</style></head><body>
 <p><a href="/">← PLATIM Marketplace</a> · ${esc(p.categoria || "Catálogo")}</p>
 <h1>${esc(p.nombre)}</h1>
 <small>${esc(p.marca || "")} · SKU ${esc(p.sku)} · Vendido por ${esc(p.ferreteria)} (verificada)</small>
@@ -177,7 +177,7 @@ ${p.imagen ? `<p><img src="${esc(p.imagen)}" alt="${esc(p.nombre)}"></p>` : ""}
 <p class="precio">${p.precio ? "$" + p.precio.toLocaleString("es-CO") + " COP" : "Precio a consultar"}</p>
 <div>${p.descripcion_corta || ""}</div>
 <p><a class="btn" href="/?q=${encodeURIComponent(p.sku)}">Comprar en el catálogo</a>
-<a class="btn" style="background:#0D1B2A"
+<a class="btn" style="background:#111111"
    href="https://wa.me/573023660481?text=${encodeURIComponent(`Hola PLATIM, quiero información de ${p.nombre} (SKU ${p.sku})`)}">
    Preguntar por WhatsApp</a></p>
 <div>${p.descripcion || ""}</div>
