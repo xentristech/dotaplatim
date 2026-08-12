@@ -5,5 +5,12 @@
     "publico": false,
     "actualizar_cuando": "cambie el estado del proyecto: deploy hecho, pendiente cerrado, módulo nuevo",
     "nota": "Actualizar SIEMPRE pasando esta url al publicar; sin la url se crea un artefacto paralelo."
+  },
+  "estudio-competencia": {
+    "titulo": "PLATIM frente al mercado",
+    "url": "https://claude.ai/code/artifact/16afbb18-381f-4032-9a02-7ad5d3e4d17d",
+    "publico": false,
+    "actualizar_cuando": "cambie la estrategia de posicionamiento o se cumplan pasos del plan SEO",
+    "nota": "Versión markdown en docs/seo/estudio-competencia.md; misma regla: republicar pasando esta url."
   }
 }
