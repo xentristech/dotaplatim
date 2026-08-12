@@ -27,10 +27,20 @@
   button, a { touch-action: manipulation; }
   :focus-visible { outline: 3px solid var(--verde-osc); outline-offset: 2px; }
   #carrito, #asesor, #ficha { overscroll-behavior: contain; }
+  button:not(:disabled):active { transform: scale(.97); }
   @media (prefers-reduced-motion: reduce) {
     .card { transition: none; }
     .card:hover { transform: none; }
+    button:not(:disabled):active { transform: none; }
   }
+  /* Barra de confianza */
+  .confianza { display: flex; flex-wrap: wrap; gap: .4rem 1.6rem; list-style: none;
+               padding: .65rem 0; margin-bottom: 1rem; font-size: .84rem;
+               color: var(--gris-texto); border-bottom: 1px solid var(--borde); }
+  .confianza b { color: var(--verde-osc); }
+  .sello { display: inline-block; background: #eef7e2; color: var(--verde-osc);
+           font-size: .74rem; font-weight: 700; border-radius: 99px;
+           padding: .15rem .6rem; margin-left: .4rem; vertical-align: middle; }
   #btn-carrito { background: var(--verde-osc); color: #fff; border: none; border-radius: 10px;
                  padding: .65rem 1.1rem; min-height: 44px; font-weight: 700; cursor: pointer;
                  white-space: nowrap; }
@@ -57,7 +67,10 @@
   .card .marca { color: var(--verde-osc); font-weight: 700; font-size: .74rem;
                  text-transform: uppercase; letter-spacing: .04em; }
   .card h3 { font-size: .92rem; margin: .25rem 0 .5rem; flex: 1; font-weight: 600; }
-  .card .precio { font-size: 1.08rem; font-weight: 800; color: var(--azul); }
+  .card .precio { font-size: 1.08rem; font-weight: 800; color: var(--azul);
+                  font-variant-numeric: tabular-nums; }
+  .precio-antes { font-size: .8rem; color: var(--gris-texto); text-decoration: line-through;
+                  font-weight: 400; margin-left: .4rem; }
   .card .tienda { font-size: .75rem; color: var(--gris-texto); margin-top: .3rem; }
   .card .agregar { margin-top: .7rem; background: var(--verde-osc); color: #fff; border: none;
                    border-radius: 8px; padding: .65rem .8rem; min-height: 44px;
@@ -196,6 +209,12 @@
     <a href="https://wa.me/573023660481?text=Quiero%20vincular%20mi%20ferreter%C3%ADa%20a%20PLATIM"
        target="_blank">Vincular mi ferretería</a>
   </div>
+  <ul class="confianza" aria-label="Por qué comprar en PLATIM">
+    <li><b>✓</b> Ferreterías verificadas</li>
+    <li><b>✓</b> +200 productos de marcas originales</li>
+    <li><b>✓</b> Despacho a todo Colombia</li>
+    <li><b>✓</b> Asesoría real por WhatsApp</li>
+  </ul>
   <nav id="categorias" aria-label="Categorías"></nav>
   <p id="resumen" aria-live="polite"></p>
   <div class="grid" id="grid"></div>
@@ -327,6 +346,12 @@ async function cargar() {
       (p.marca || "genérico") + " · " + (p.categoria || "");
     card.querySelector("h3").textContent = p.nombre;
     card.querySelector(".precio").textContent = cop(p.precio);
+    if (p.precio_regular && p.precio && p.precio_regular > p.precio) {
+      const antes = document.createElement("span");
+      antes.className = "precio-antes";
+      antes.textContent = cop(p.precio_regular);
+      card.querySelector(".precio").appendChild(antes);
+    }
     card.querySelector(".tienda").textContent = `${p.sku} · ${p.ferreteria}`;
     const btn = card.querySelector(".agregar");
     if (p.precio == null) { btn.textContent = "Precio a consultar"; btn.disabled = true; }
@@ -383,8 +408,19 @@ async function abrirFicha(slug) {
   else foto.textContent = EMOJI[p.categoria] || "🔩";
   $id("f-ruta").textContent = `${p.categoria || "Catálogo"} › ${p.marca || "genérico"} › ${p.sku}`;
   $id("f-nombre").textContent = p.nombre;
-  $id("f-tienda").textContent = "Vendido por " + p.ferreteria + " · despacho nacional";
+  $id("f-tienda").innerHTML = "";
+  $id("f-tienda").append("Vendido por " + p.ferreteria + " · despacho nacional");
+  const sello = document.createElement("span");
+  sello.className = "sello";
+  sello.textContent = "✓ Verificada";
+  $id("f-tienda").appendChild(sello);
   $id("f-precio").textContent = cop(p.precio);
+  if (p.precio_regular && p.precio && p.precio_regular > p.precio) {
+    const antes = document.createElement("span");
+    antes.className = "precio-antes";
+    antes.textContent = "antes " + cop(p.precio_regular);
+    $id("f-precio").appendChild(antes);
+  }
   $id("f-corta").innerHTML = p.descripcion_corta ||
     "<p>Este producto aún no tiene resumen publicado.</p>";
   $id("f-larga").innerHTML = p.descripcion ||
