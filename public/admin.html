@@ -62,8 +62,32 @@
     <div class="tabs">
       <button data-tab="productos" class="activa">Productos</button>
       <button data-tab="pedidos">Pedidos</button>
+      <button data-tab="ia">✨ Estudio IA</button>
       <button data-tab="ferreterias" id="tab-ferr" hidden>Ferreterías</button>
     </div>
+
+    <section id="v-ia" hidden>
+      <div class="caja">
+        <h2>Estudio de competencia y posicionamiento</h2>
+        <p class="muted">La IA analiza tu catálogo y te dice cómo pararte frente a Homecenter,
+           Mercado Libre, TUL y las demás tiendas online de Colombia.</p>
+        <button class="btn azul" id="ia-generar" style="margin-top:.6rem">Generar mi estudio</button>
+        <div id="ia-estudio" hidden style="margin-top:1rem">
+          <p id="ia-narrativa" style="background:#f0f6e8;border-left:4px solid #4d7a16;
+             padding:.8rem 1rem;border-radius:0 10px 10px 0;line-height:1.55"></p>
+          <h2 style="margin-top:1.2rem">Tu catálogo en números</h2>
+          <p id="ia-resumen"></p>
+          <h2 style="margin-top:1.2rem">Qué hacer ya (oportunidades detectadas)</h2>
+          <ul id="ia-oportunidades" style="padding-left:1.2rem;line-height:1.7"></ul>
+          <h2 style="margin-top:1.2rem">Qué está buscando la gente (palabras clave)</h2>
+          <div id="ia-keywords"></div>
+          <h2 style="margin-top:1.2rem">Contra quién compites</h2>
+          <table><thead><tr><th>Competidor</th><th>Su fuerte</th><th>Su flanco débil (tu entrada)</th></tr></thead>
+            <tbody id="ia-competidores"></tbody></table>
+          <p class="muted" id="ia-motor" style="margin-top:.8rem"></p>
+        </div>
+      </div>
+    </section>
 
     <section id="v-pedidos" hidden>
       <div class="caja">
@@ -101,7 +125,7 @@
         <p class="muted" id="p-resumen"></p>
         <table>
           <thead><tr><th>SKU</th><th>Nombre</th><th>Marca</th><th>Precio</th>
-                     <th id="col-tienda">Tienda</th><th>Estado</th></tr></thead>
+                     <th id="col-tienda">Tienda</th><th>Estado</th><th>SEO</th></tr></thead>
           <tbody id="p-tabla"></tbody>
         </table>
       </div>
@@ -182,8 +206,60 @@ document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => {
   $("v-productos").hidden = b.dataset.tab !== "productos";
   $("v-ferreterias").hidden = b.dataset.tab !== "ferreterias";
   $("v-pedidos").hidden = b.dataset.tab !== "pedidos";
+  $("v-ia").hidden = b.dataset.tab !== "ia";
   if (b.dataset.tab === "pedidos") cargarPedidos();
 });
+
+// --- Estudio IA de competencia ---
+$("ia-generar").onclick = async () => {
+  $("ia-generar").disabled = true;
+  $("ia-generar").textContent = "Analizando tu catálogo…";
+  try {
+    const e = await api("/api/ia/competencia");
+    $("ia-narrativa").textContent = e.narrativa;
+    const r = e.resumen;
+    $("ia-resumen").textContent =
+      `${r.productos} productos activos · ${r.marcas} marcas · ${r.categorias} categorías · ` +
+      `${r.con_precio} con precio (${r.sin_precio} sin precio) · ${r.sin_imagen} sin foto · ` +
+      `${r.sin_meta} sin descripción SEO`;
+    const ops = $("ia-oportunidades"); ops.innerHTML = "";
+    for (const o of e.oportunidades) {
+      const li = document.createElement("li"); li.textContent = o; ops.appendChild(li);
+    }
+    const kw = $("ia-keywords"); kw.innerHTML = "";
+    for (const grupo of e.keywords) {
+      const p = document.createElement("p");
+      p.style.margin = ".3rem 0";
+      const b = document.createElement("b"); b.textContent = grupo.categoria + ": ";
+      p.appendChild(b);
+      grupo.buscan.forEach(k => {
+        const chip = document.createElement("span");
+        chip.textContent = k;
+        chip.style.cssText = "display:inline-block;background:#eef2f7;border-radius:99px;" +
+          "padding:.15rem .6rem;margin:.15rem .25rem;font-size:.82rem";
+        p.appendChild(chip);
+      });
+      kw.appendChild(p);
+    }
+    const comp = $("ia-competidores"); comp.innerHTML = "";
+    for (const c of e.competidores) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = "<td></td><td></td><td></td>";
+      tr.children[0].innerHTML = "<b></b><br><span class='muted'></span>";
+      tr.children[0].querySelector("b").textContent = c.nombre;
+      tr.children[0].querySelector("span").textContent = c.tipo;
+      tr.children[1].textContent = c.fuerte;
+      tr.children[2].textContent = c.flanco;
+      comp.appendChild(tr);
+    }
+    $("ia-motor").textContent = e.motor === "claude"
+      ? "Estudio redactado con Claude (IA generativa) sobre los datos reales de tu catálogo."
+      : "Estudio generado por el motor PLATIM sobre los datos reales de tu catálogo. " +
+        "Con la clave de Claude API conectada, la IA generativa lo redacta a tu medida.";
+    $("ia-estudio").hidden = false;
+    $("ia-generar").textContent = "Actualizar estudio";
+  } finally { $("ia-generar").disabled = false; }
+};
 
 // --- Pedidos ---
 const ESTADOS = ["recibido", "confirmado", "despachado", "entregado", "cancelado"];
@@ -279,7 +355,9 @@ async function cargarProductos() {
     tr.innerHTML = `<td></td><td></td><td></td>
       <td><input type="number" style="width:110px"></td>
       <td class="tienda"></td>
-      <td><button class="estado"></button></td>`;
+      <td><button class="estado"></button></td>
+      <td><button class="btn-seo" title="Generar SEO con IA"
+           style="border:none;background:none;cursor:pointer;font-size:1rem">✨</button></td>`;
     tr.children[0].textContent = p.sku;
     tr.children[1].textContent = p.nombre;
     tr.children[2].textContent = p.marca;
@@ -300,6 +378,42 @@ async function cargarProductos() {
       await api("/api/productos/" + p.id, { method: "PUT",
         body: JSON.stringify({ activo: !!p.activo }) });
       pintar();
+    };
+    // Botón ✨: la IA propone título, meta descripción y palabras clave del producto
+    const seoBtn = tr.querySelector(".btn-seo");
+    seoBtn.onclick = async () => {
+      const abierta = tr.nextElementSibling;
+      if (abierta && abierta.classList.contains("fila-seo")) { abierta.remove(); return; }
+      seoBtn.textContent = "…";
+      const s = await api("/api/ia/seo", { method: "POST",
+        body: JSON.stringify({ producto_id: p.id }) });
+      seoBtn.textContent = "✨";
+      if (s.error) return;
+      const fila = document.createElement("tr");
+      fila.className = "fila-seo";
+      const celda = document.createElement("td");
+      celda.colSpan = 7;
+      celda.style.cssText = "background:#f7f9fb;padding:.8rem 1rem";
+      celda.innerHTML = `<b>Título SEO:</b> <span class="s-titulo"></span><br>
+        <b>Meta descripción:</b> <span class="s-meta"></span><br>
+        <b>Búsquedas objetivo:</b> <span class="s-kw"></span><br>
+        <b>Consejo:</b> <span class="s-consejo"></span><br>
+        <button class="btn" style="margin-top:.5rem">Aplicar a la ficha del producto</button>
+        <span class="muted s-estado" style="margin-left:.6rem"></span>`;
+      celda.querySelector(".s-titulo").textContent = s.titulo;
+      celda.querySelector(".s-meta").textContent = s.meta_descripcion;
+      celda.querySelector(".s-kw").textContent = (s.keywords || []).join(" · ");
+      celda.querySelector(".s-consejo").textContent = s.consejo || "";
+      celda.querySelector("button").onclick = async (e) => {
+        e.target.disabled = true;
+        const r = await api("/api/ia/seo", { method: "POST",
+          body: JSON.stringify({ producto_id: p.id, guardar: true }) });
+        celda.querySelector(".s-estado").textContent =
+          r.guardado ? "✓ Guardado: ya sale así en Google y en la página del producto."
+                     : (r.error || "no se pudo guardar");
+      };
+      fila.appendChild(celda);
+      tr.after(fila);
     };
     cuerpo.appendChild(tr);
   }

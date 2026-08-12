@@ -15,8 +15,11 @@ const db = abrirDb();
 function crearUsuario(email, nombre, rol, ferreteriaId, password) {
   const salt = randomBytes(16).toString("hex");
   const hash = scryptSync(password, salt, 64).toString("hex");
-  db.prepare(`INSERT OR IGNORE INTO usuarios (email, nombre, rol, ferreteria_id, hash, salt)
-              VALUES (?, ?, ?, ?, ?, ?)`).run(email, nombre, rol, ferreteriaId, hash, salt);
+  // Upsert: si la base se recreó, el hash queda alineado con la clave del .env
+  db.prepare(`INSERT INTO usuarios (email, nombre, rol, ferreteria_id, hash, salt)
+              VALUES (?, ?, ?, ?, ?, ?)
+              ON CONFLICT(email) DO UPDATE SET hash = excluded.hash, salt = excluded.salt`)
+    .run(email, nombre, rol, ferreteriaId, hash, salt);
 }
 
 // --- 1. Tiendas base: la ferretería fundadora y PLATIM mismo (el marketplace también
@@ -27,8 +30,16 @@ db.prepare(`INSERT OR IGNORE INTO ferreterias (id, nombre, slug, ciudad)
             VALUES (2, 'PLATIM', 'platim', 'Colombia')`).run();
 
 // --- 2. Usuarios ---
-const passAdmin = randomBytes(9).toString("base64url");
-const passFerre = randomBytes(9).toString("base64url");
+// Si el .env ya existe se REUTILIZAN sus contraseñas (re-sembrar nunca rompe el login);
+// si no existe, se generan nuevas y se guardan abajo.
+const envPath = path.join(raiz, ".env");
+const envActual = existsSync(envPath)
+  ? Object.fromEntries(readFileSync(envPath, "utf-8").split(/\r?\n/)
+      .filter(l => l.includes("=") && !l.startsWith("#"))
+      .map(l => l.split(/=(.*)/s).slice(0, 2)))
+  : {};
+const passAdmin = envActual.MARKETPLACE_ADMIN_PASSWORD || randomBytes(9).toString("base64url");
+const passFerre = envActual.FERRETERIA_FUNDADORA_PASSWORD || randomBytes(9).toString("base64url");
 crearUsuario("admin@platim.co", "Administrador Marketplace", "marketplace", null, passAdmin);
 crearUsuario("fundadora@platim.co", "Ferretería Fundadora", "ferreteria", 1, passFerre);
 
@@ -50,7 +61,6 @@ for (const p of productos) {
 }
 
 // --- Guardar credenciales en .env (solo si es la primera vez) ---
-const envPath = path.join(raiz, ".env");
 if (!existsSync(envPath)) {
   writeFileSync(envPath, [
     "# Credenciales generadas por src/seed.js — NO subir a git (.env está en .gitignore)",

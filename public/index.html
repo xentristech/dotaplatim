@@ -4,7 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0D1B2A">
-<title>PLATIM Marketplace — Ferreterías de Colombia</title>
+<title>PLATIM Marketplace — Ferretería online con despacho a toda Colombia</title>
+<meta name="description" content="Compra herramientas y maquinaria DEWALT, STIHL, HUSQVARNA y más en el marketplace de ferreterías verificadas de Colombia. Despacho nacional y asesoría gratis por WhatsApp.">
+<link rel="canonical" href="https://platim-marketplace.vercel.app/">
+<meta property="og:site_name" content="PLATIM Marketplace">
+<meta property="og:title" content="PLATIM — Ferreterías de Colombia en un solo catálogo">
+<meta property="og:description" content="+200 productos de marcas originales, ferreterías verificadas y despacho a todo el país.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://platim-marketplace.vercel.app/">
+<meta property="og:image" content="https://raw.githubusercontent.com/xentristech/dotaplatim/main/public/logo-platim.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"Organization","name":"PLATIM — Dotaindustria Platim","url":"https://platim-marketplace.vercel.app/",
+  "logo":"https://raw.githubusercontent.com/xentristech/dotaplatim/main/public/logo-platim.png",
+  "sameAs":["https://www.platim.co"]},
+ {"@type":"WebSite","name":"PLATIM Marketplace","url":"https://platim-marketplace.vercel.app/",
+  "potentialAction":{"@type":"SearchAction",
+   "target":"https://platim-marketplace.vercel.app/?q={busqueda}","query-input":"required name=busqueda"}}]}
+</script>
 <style>
   /* Identidad PLATIM (tomada del sitio oficial platim.co) */
   :root { --azul: #0D1B2A; --verde: #6BAA1F; --verde-osc: #4d7a16; --verde-claro: #A7D957;
@@ -334,8 +351,10 @@ async function cargar() {
   for (const p of r.productos) {
     const card = document.createElement("div");
     card.className = "card";
+    // El nombre es un enlace real a /p/{slug}: Google lo rastrea; el usuario ve el modal
     card.innerHTML = `<div class="foto"></div><div class="cuerpo">
-      <span class="marca"></span><h3></h3>
+      <span class="marca"></span>
+      <h3><a style="color:inherit;text-decoration:none"></a></h3>
       <div class="precio"></div><div class="tienda"></div>
       <button class="agregar"></button></div>`;
     const foto = card.querySelector(".foto");
@@ -344,7 +363,10 @@ async function cargar() {
     else foto.textContent = EMOJI[p.categoria] || "🔩";
     card.querySelector(".marca").textContent =
       (p.marca || "genérico") + " · " + (p.categoria || "");
-    card.querySelector("h3").textContent = p.nombre;
+    const enlace = card.querySelector("h3 a");
+    enlace.textContent = p.nombre;
+    enlace.href = "/p/" + encodeURIComponent(p.slug);
+    enlace.onclick = (e) => e.preventDefault(); // el clic de la card abre el modal
     card.querySelector(".precio").textContent = cop(p.precio);
     if (p.precio_regular && p.precio && p.precio_regular > p.precio) {
       const antes = document.createElement("span");

@@ -3,6 +3,7 @@
 // eso lo pone cada entrada (src/server.js local, api/index.js en Vercel).
 import express from "express";
 import { createHmac, scryptSync, timingSafeEqual, randomBytes } from "node:crypto";
+import { generarSeo, estudioCompetencia } from "./ia.js";
 
 export function crearApp(db, SECRET) {
   const app = express();
@@ -99,6 +100,84 @@ export function crearApp(db, SECRET) {
        JOIN ferreterias f ON f.id = p.ferreteria_id WHERE p.slug = ? AND p.activo = 1`
     ).get(req.params.slug);
     p ? res.json(p) : res.status(404).json({ error: "producto no encontrado" });
+  });
+
+  // --- SEO técnico: robots, sitemap y páginas de producto indexables ---
+  const baseUrl = (req) => `https://${req.get("host")}`;
+  const esc = (t) => String(t ?? "").replace(/[&<>"]/g,
+    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  app.get("/robots.txt", (req, res) => {
+    res.type("text/plain").send(
+      `User-agent: *\nAllow: /\nDisallow: /admin.html\nDisallow: /api/\n` +
+      `Sitemap: ${baseUrl(req)}/sitemap.xml\n`);
+  });
+
+  app.get("/sitemap.xml", (req, res) => {
+    const base = baseUrl(req);
+    const filas = db.prepare(
+      "SELECT slug, creado_en FROM productos WHERE activo = 1 ORDER BY id").all();
+    const urls = [`<url><loc>${base}/</loc><changefreq>daily</changefreq></url>`,
+      ...filas.map(f => `<url><loc>${base}/p/${encodeURIComponent(f.slug)}</loc>` +
+        `<lastmod>${(f.creado_en || "").slice(0, 10)}</lastmod></url>`)];
+    res.type("application/xml").send(
+      `<?xml version="1.0" encoding="UTF-8"?>\n` +
+      `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>`);
+  });
+
+  // Página de producto renderizada en el servidor: es la que Google indexa y
+  // posiciona (título, meta, JSON-LD Product). El catálogo interactivo la enlaza.
+  app.get("/p/:slug", (req, res) => {
+    const p = db.prepare(
+      `SELECT p.*, f.nombre AS ferreteria FROM productos p
+       JOIN ferreterias f ON f.id = p.ferreteria_id WHERE p.slug = ? AND p.activo = 1`
+    ).get(req.params.slug);
+    if (!p) return res.status(404).type("html").send(
+      `<meta charset="utf-8"><title>Producto no encontrado — PLATIM</title>
+       <p>Este producto ya no está publicado. <a href="/">Volver al catálogo</a></p>`);
+    const base = baseUrl(req);
+    const titulo = `${p.nombre} | PLATIM Colombia`.slice(0, 60);
+    const meta = (p.meta_descripcion ||
+      `Compra ${p.nombre} en PLATIM con despacho a toda Colombia y asesoría por WhatsApp.`)
+      .replace(/<[^>]+>/g, " ").slice(0, 160);
+    const jsonLd = {
+      "@context": "https://schema.org", "@type": "Product",
+      name: p.nombre, sku: p.sku, brand: { "@type": "Brand", name: p.marca || "PLATIM" },
+      description: meta, url: `${base}/p/${p.slug}`,
+      ...(p.imagen ? { image: p.imagen } : {}),
+      ...(p.precio ? { offers: { "@type": "Offer", price: p.precio, priceCurrency: "COP",
+        availability: "https://schema.org/InStock",
+        seller: { "@type": "Organization", name: p.ferreteria } } } : {}),
+    };
+    res.type("html").send(`<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(titulo)}</title>
+<meta name="description" content="${esc(meta)}">
+<link rel="canonical" href="${base}/p/${esc(p.slug)}">
+<meta property="og:title" content="${esc(titulo)}">
+<meta property="og:description" content="${esc(meta)}">
+<meta property="og:type" content="product">
+${p.imagen ? `<meta property="og:image" content="${esc(p.imagen)}">` : ""}
+<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
+<style>body{font-family:system-ui,sans-serif;max-width:720px;margin:2rem auto;padding:0 1rem;
+color:#0D1B2A;line-height:1.5}a.btn{display:inline-block;background:#4d7a16;color:#fff;
+padding:.7rem 1.2rem;border-radius:9px;text-decoration:none;font-weight:700;margin:.3rem .4rem 0 0}
+img{max-width:100%;max-height:320px;object-fit:contain}.precio{font-size:1.6rem;font-weight:800}
+small{color:#51607a}</style></head><body>
+<p><a href="/">← PLATIM Marketplace</a> · ${esc(p.categoria || "Catálogo")}</p>
+<h1>${esc(p.nombre)}</h1>
+<small>${esc(p.marca || "")} · SKU ${esc(p.sku)} · Vendido por ${esc(p.ferreteria)} (verificada)</small>
+${p.imagen ? `<p><img src="${esc(p.imagen)}" alt="${esc(p.nombre)}"></p>` : ""}
+<p class="precio">${p.precio ? "$" + p.precio.toLocaleString("es-CO") + " COP" : "Precio a consultar"}</p>
+<div>${p.descripcion_corta || ""}</div>
+<p><a class="btn" href="/?q=${encodeURIComponent(p.sku)}">Comprar en el catálogo</a>
+<a class="btn" style="background:#0D1B2A"
+   href="https://wa.me/573023660481?text=${encodeURIComponent(`Hola PLATIM, quiero información de ${p.nombre} (SKU ${p.sku})`)}">
+   Preguntar por WhatsApp</a></p>
+<div>${p.descripcion || ""}</div>
+<p><small>Despacho a toda Colombia desde ferreterías verificadas · PLATIM Marketplace</small></p>
+</body></html>`);
   });
 
   // --- Asesor IA de ventas ---
@@ -282,6 +361,35 @@ export function crearApp(db, SECRET) {
     const r = db.prepare("UPDATE pedidos SET estado = ? WHERE id = ?")
       .run(estado, Number(req.params.id));
     r.changes ? res.json({ ok: true }) : res.status(404).json({ error: "no existe" });
+  });
+
+  // --- IA para el vendedor (requiere sesión) ---
+  // Genera el paquete SEO de un producto; con { guardar: true } lo aplica a la ficha.
+  app.post("/api/ia/seo", conSesion, async (req, res) => {
+    const { producto_id, guardar } = req.body || {};
+    const p = db.prepare(
+      `SELECT p.*, f.nombre AS ferreteria FROM productos p
+       JOIN ferreterias f ON f.id = p.ferreteria_id WHERE p.id = ?`).get(Number(producto_id));
+    if (!p) return res.status(404).json({ error: "producto no encontrado" });
+    if (req.sesion.rol !== "marketplace" && p.ferreteria_id !== req.sesion.ferreteria_id) {
+      return res.status(403).json({ error: "no es un producto de tu ferretería" });
+    }
+    const seo = await generarSeo(p);
+    if (guardar) {
+      db.prepare("UPDATE productos SET meta_descripcion = ? WHERE id = ?")
+        .run(seo.meta_descripcion, p.id);
+      seo.guardado = true;
+    }
+    res.json(seo);
+  });
+
+  // Estudio de competencia: cada ferretería ve el suyo; el marketplace, el global
+  // o el de una tienda puntual con ?ferreteria=ID.
+  app.get("/api/ia/competencia", conSesion, async (req, res) => {
+    const ferreteriaId = req.sesion.rol === "ferreteria"
+      ? req.sesion.ferreteria_id
+      : (req.query.ferreteria ? Number(req.query.ferreteria) : null);
+    res.json(await estudioCompetencia(db, ferreteriaId));
   });
 
   // --- Panel (requiere sesión) ---
