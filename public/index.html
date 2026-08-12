@@ -182,7 +182,7 @@
   </div>
   <div class="controles">
     <input id="q" type="search" aria-label="Buscar en el catálogo"
-           placeholder="Busca por producto, marca, SKU o categoría…">
+           placeholder="¿Qué buscas? Ej: taladro, motobomba, guadaña…">
     <button id="btn-carrito" aria-label="Ver tu pedido">🛒 <span id="carrito-n">0</span></button>
   </div>
 </header>
@@ -385,8 +385,10 @@ async function abrirFicha(slug) {
   $id("f-nombre").textContent = p.nombre;
   $id("f-tienda").textContent = "Vendido por " + p.ferreteria + " · despacho nacional";
   $id("f-precio").textContent = cop(p.precio);
-  $id("f-corta").innerHTML = p.descripcion_corta || "<p>(sin resumen)</p>";
-  $id("f-larga").innerHTML = p.descripcion || "<p>(sin descripción adicional)</p>";
+  $id("f-corta").innerHTML = p.descripcion_corta ||
+    "<p>Este producto aún no tiene resumen publicado.</p>";
+  $id("f-larga").innerHTML = p.descripcion ||
+    "<p>Aún no publicamos la ficha técnica completa. Escríbenos por WhatsApp y te contamos todo sobre este equipo.</p>";
   const btn = $id("f-agregar");
   btn.disabled = p.precio == null;
   btn.textContent = p.precio == null ? "Precio a consultar" : "Agregar al pedido";
@@ -464,7 +466,8 @@ $id("form-pedido").addEventListener("submit", async (e) => {
       notas: $id("c-notas").value.trim(),
       items: carrito.map(i => ({ producto_id: i.producto_id, cantidad: i.cantidad })),
     }),
-  }).then(x => x.json()).catch(() => ({ error: "no se pudo enviar, intenta de nuevo" }));
+  }).then(x => x.json()).catch(() =>
+    ({ error: "No pudimos enviar tu pedido. Revisa tu conexión e intenta de nuevo." }));
   boton.disabled = false;
   boton.textContent = textoBoton;
   if (!r.ok) { $id("c-error").textContent = r.error || "no se pudo enviar"; return; }
@@ -521,7 +524,8 @@ async function preguntarAsesor(mensaje, mostrar) {
   const r = await fetch("/api/asesor", {
     method: "POST", headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ mensaje }),
-  }).then(x => x.json()).catch(() => ({ texto: "Se me cruzaron los cables, intenta de nuevo.", productos: [] }));
+  }).then(x => x.json()).catch(() =>
+    ({ texto: "Se me fue la señal un momento. Escríbeme de nuevo, aquí sigo.", productos: [] }));
   const m = burbuja(r.texto, "bot");
   for (const p of r.productos || []) {
     const fila = document.createElement("div");

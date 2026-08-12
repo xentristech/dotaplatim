@@ -24,7 +24,7 @@ export function crearApp(db, SECRET) {
   };
   const conSesion = (req, res, next) => {
     const sesion = verificar((req.headers.authorization || "").replace("Bearer ", ""));
-    if (!sesion) return res.status(401).json({ error: "token inválido o vencido" });
+    if (!sesion) return res.status(401).json({ error: "Tu sesión venció. Vuelve a iniciar sesión." });
     req.sesion = sesion;
     next();
   };
@@ -44,7 +44,7 @@ export function crearApp(db, SECRET) {
         return res.json({ token, nombre: u.nombre, rol: u.rol });
       }
     }
-    res.status(401).json({ error: "credenciales incorrectas" });
+    res.status(401).json({ error: "Correo o contraseña incorrectos. Revisa e intenta de nuevo." });
   });
 
   // --- Lectura pública ---
@@ -222,7 +222,8 @@ export function crearApp(db, SECRET) {
   app.post("/api/pedidos", (req, res) => {
     const { cliente, telefono, ciudad, direccion, notas = "", items } = req.body || {};
     if (!cliente || !telefono || !ciudad || !direccion || !Array.isArray(items) || !items.length) {
-      return res.status(400).json({ error: "faltan datos: cliente, telefono, ciudad, direccion, items" });
+      return res.status(400).json({
+        error: "Completa tu nombre, teléfono, ciudad y dirección para poder despacharte." });
     }
     const detalle = [];
     for (const it of items) {
@@ -230,7 +231,8 @@ export function crearApp(db, SECRET) {
         .get(Number(it.producto_id));
       const cantidad = Math.floor(Number(it.cantidad));
       if (!p || !(cantidad > 0)) {
-        return res.status(400).json({ error: `item inválido: producto ${it.producto_id}` });
+        return res.status(400).json({
+          error: "Uno de los productos ya no está disponible. Quítalo del pedido e intenta de nuevo." });
       }
       detalle.push({ p, cantidad });
     }
@@ -293,7 +295,8 @@ export function crearApp(db, SECRET) {
 
   app.post("/api/ferreterias", conSesion, soloMarketplace, (req, res) => {
     const { nombre, slug, ciudad = "", telefono = "", email, password } = req.body || {};
-    if (!nombre || !slug) return res.status(400).json({ error: "faltan campos: nombre, slug" });
+    if (!nombre || !slug) return res.status(400).json({
+      error: "Escribe el nombre de la ferretería y su URL corta." });
     try {
       const r = db.prepare(`INSERT INTO ferreterias (nombre, slug, ciudad, telefono)
                             VALUES (?, ?, ?, ?)`).run(nombre, slug, ciudad, telefono);
@@ -306,7 +309,8 @@ export function crearApp(db, SECRET) {
       }
       res.status(201).json({ ok: true, id: Number(r.lastInsertRowid) });
     } catch (e) {
-      res.status(400).json({ error: "slug o email ya existe" });
+      res.status(400).json({
+        error: "Ya existe una ferretería con esa URL corta o un usuario con ese correo." });
     }
   });
 
@@ -366,7 +370,7 @@ export function crearApp(db, SECRET) {
     const ferreteriaId = req.sesion.rol === "marketplace"
       ? p.ferreteria_id : req.sesion.ferreteria_id;
     if (!ferreteriaId || !p.sku || !p.nombre || !p.slug) {
-      return res.status(400).json({ error: "faltan campos: ferreteria_id, sku, nombre, slug" });
+      return res.status(400).json({ error: "Completa el SKU y el nombre del producto." });
     }
     db.prepare(`INSERT INTO productos (ferreteria_id, sku, nombre, descripcion_corta,
                   descripcion, slug, meta_descripcion, precio, precio_regular, marca,

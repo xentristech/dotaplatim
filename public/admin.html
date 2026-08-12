@@ -85,8 +85,9 @@
           <input id="p-sku" placeholder="SKU *" style="width:130px">
           <input id="p-nombre" placeholder="Nombre *" style="flex:1;min-width:220px">
           <input id="p-marca" placeholder="Marca" style="width:120px">
-          <input id="p-precio" type="number" placeholder="Precio" style="width:120px">
-          <button class="btn" id="p-crear">Agregar</button>
+          <input id="p-precio" type="number" inputmode="numeric" aria-label="Precio"
+                 placeholder="Precio" style="width:120px">
+          <button class="btn" id="p-crear">Agregar producto</button>
         </div>
         <p class="error" id="p-error"></p>
       </div>
@@ -111,12 +112,13 @@
         <h2>Vincular ferretería nueva</h2>
         <div class="fila-form">
           <input id="n-nombre" placeholder="Nombre *" style="flex:1;min-width:180px">
-          <input id="n-slug" placeholder="slug-url *" style="width:150px">
+          <input id="n-slug" aria-label="URL corta de la ferretería"
+                 placeholder="URL corta (ej: ferre-lopez) *" style="width:170px">
           <input id="n-ciudad" placeholder="Ciudad" style="width:130px">
           <input id="n-telefono" placeholder="Teléfono" style="width:130px">
           <input id="n-email" placeholder="Correo de acceso" style="width:180px">
           <input id="n-pass" placeholder="Contraseña" style="width:140px">
-          <button class="btn" id="n-crear">Vincular</button>
+          <button class="btn" id="n-crear">Vincular ferretería</button>
         </div>
         <p class="error" id="n-error"></p>
       </div>
@@ -189,7 +191,7 @@ async function cargarPedidos() {
   const pedidos = await api("/api/admin/pedidos");
   $("pe-resumen").textContent = pedidos.length
     ? `${pedidos.length} pedidos (más recientes primero)`
-    : "Todavía no hay pedidos.";
+    : "Todavía no hay pedidos. Cuando un cliente compre en el catálogo, aparecerán aquí.";
   const cuerpo = $("pe-tabla"); cuerpo.innerHTML = "";
   for (const pe of pedidos) {
     const tr = document.createElement("tr");
