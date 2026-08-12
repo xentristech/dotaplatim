@@ -33,12 +33,29 @@ for (const u of [
              scryptSync(CLAVE_DEMO, salt, 64).toString("hex"), salt);
 }
 
-let productos = [], indexHtml = "", adminHtml = "";
-try {
-  [productos, indexHtml, adminHtml] = await Promise.all([
-    fetch(`${RAW}/data/productos.json`).then(r => r.json()),
+let productos = [], indexHtml = "", adminHtml = "", paginasDesde = 0;
+
+// Las páginas se refrescan cada 5 min (los cambios de diseño llegan sin redeploy);
+// el catálogo solo al arrancar (siembra la base en memoria).
+async function refrescarPaginas() {
+  const [ix, ad] = await Promise.all([
     fetch(`${RAW}/public/index.html`).then(r => r.text()),
     fetch(`${RAW}/public/admin.html`).then(r => r.text()),
+  ]);
+  indexHtml = ix; adminHtml = ad; paginasDesde = Date.now();
+}
+async function paginaFresca() {
+  if (Date.now() - paginasDesde > 5 * 60e3) {
+    try { await refrescarPaginas(); } catch (e) {
+      console.error("No se pudieron refrescar las páginas:", e.message);
+    }
+  }
+}
+
+try {
+  [productos] = await Promise.all([
+    fetch(`${RAW}/data/productos.json`).then(r => r.json()),
+    refrescarPaginas(),
   ]);
 } catch (e) {
   console.error("No se pudo cargar catálogo/páginas desde GitHub:", e.message);
@@ -59,8 +76,12 @@ for (const p of productos) {
 // La app: express() aquí mismo + rutas de la API montadas encima.
 // Secret por instancia: suficiente para la demo (el estado es efímero igual).
 const app = express();
-app.get(["/", "/index.html"], (_req, res) => res.type("html").send(indexHtml));
-app.get("/admin.html", (_req, res) => res.type("html").send(adminHtml));
+app.get(["/", "/index.html"], async (_req, res) => {
+  await paginaFresca(); res.type("html").send(indexHtml);
+});
+app.get("/admin.html", async (_req, res) => {
+  await paginaFresca(); res.type("html").send(adminHtml);
+});
 app.use(crearApp(db, randomBytes(32).toString("hex")));
 
 export default app;
