@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0D1B2A">
 <title>PLATIM Marketplace — Ferreterías de Colombia</title>
 <style>
   /* Identidad PLATIM (tomada del sitio oficial platim.co) */
@@ -23,6 +24,13 @@
   .controles input { flex: 1; }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden;
              clip: rect(0 0 0 0); white-space: nowrap; }
+  button, a { touch-action: manipulation; }
+  :focus-visible { outline: 3px solid var(--verde-osc); outline-offset: 2px; }
+  #carrito, #asesor, #ficha { overscroll-behavior: contain; }
+  @media (prefers-reduced-motion: reduce) {
+    .card { transition: none; }
+    .card:hover { transform: none; }
+  }
   #btn-carrito { background: var(--verde-osc); color: #fff; border: none; border-radius: 10px;
                  padding: .65rem 1.1rem; min-height: 44px; font-weight: 700; cursor: pointer;
                  white-space: nowrap; }
@@ -169,12 +177,13 @@
   <div>
     <h1 class="sr-only">PLATIM Marketplace — Ferreterías de Colombia</h1>
     <img src="https://raw.githubusercontent.com/xentristech/dotaplatim/main/public/logo-platim.png"
-         alt="PLATIM — Seguridad que inspira confianza">
+         alt="PLATIM — Seguridad que inspira confianza" width="150" height="44">
     <small>Marketplace ferretero · despachos a nivel nacional</small>
   </div>
   <div class="controles">
-    <input id="q" placeholder="Busca por producto, marca, SKU o categoría...">
-    <button id="btn-carrito">🛒 <span id="carrito-n">0</span></button>
+    <input id="q" type="search" aria-label="Buscar en el catálogo"
+           placeholder="Busca por producto, marca, SKU o categoría…">
+    <button id="btn-carrito" aria-label="Ver tu pedido">🛒 <span id="carrito-n">0</span></button>
   </div>
 </header>
 <main>
@@ -188,7 +197,7 @@
        target="_blank">Vincular mi ferretería</a>
   </div>
   <nav id="categorias" aria-label="Categorías"></nav>
-  <p id="resumen"></p>
+  <p id="resumen" aria-live="polite"></p>
   <div class="grid" id="grid"></div>
   <div class="pag">
     <button id="prev">&larr; Anterior</button>
@@ -198,7 +207,7 @@
 
 <div id="velo" hidden></div>
 <section id="ficha" hidden>
-  <button class="cerrar" id="ficha-cerrar">&times;</button>
+  <button class="cerrar" id="ficha-cerrar" aria-label="Cerrar ficha">&times;</button>
   <div class="arriba">
     <div class="foto" id="f-foto"></div>
     <div class="datos">
@@ -224,33 +233,38 @@
     <span style="font-size:1.4rem">🤖</span>
     <div class="titulo">Asesor PLATIM
       <small>Te ayudo a encontrar el equipo exacto y te lo despachamos</small></div>
-    <button id="asesor-cerrar">&times;</button>
+    <button id="asesor-cerrar" aria-label="Cerrar asesor">&times;</button>
   </header>
-  <div id="chat"></div>
+  <div id="chat" aria-live="polite"></div>
   <div id="chips"></div>
   <form id="asesor-form">
-    <input id="asesor-input" placeholder="Cuéntame qué necesitas..." autocomplete="off">
+    <input id="asesor-input" aria-label="Escribe qué necesitas"
+           placeholder="Cuéntame qué necesitas…" autocomplete="off">
     <button type="submit">Enviar</button>
   </form>
 </section>
 
 <aside id="carrito" hidden>
-  <button class="cerrar" id="carrito-cerrar">&times;</button>
+  <button class="cerrar" id="carrito-cerrar" aria-label="Cerrar pedido">&times;</button>
   <h2>Tu pedido</h2>
   <div id="carrito-items"></div>
   <p class="total" id="carrito-total"></p>
   <div id="checkout">
     <form id="form-pedido">
-      <input id="c-nombre" placeholder="Tu nombre *" required>
-      <input id="c-telefono" placeholder="Teléfono / WhatsApp *" required>
-      <input id="c-ciudad" placeholder="Ciudad *" required>
-      <input id="c-direccion" placeholder="Dirección de entrega *" required>
-      <input id="c-notas" placeholder="Notas (opcional)">
+      <input id="c-nombre" aria-label="Tu nombre" autocomplete="name"
+             placeholder="Tu nombre *" required>
+      <input id="c-telefono" type="tel" inputmode="tel" aria-label="Teléfono o WhatsApp"
+             autocomplete="tel" placeholder="Teléfono / WhatsApp *" required>
+      <input id="c-ciudad" aria-label="Ciudad" autocomplete="address-level2"
+             placeholder="Ciudad *" required>
+      <input id="c-direccion" aria-label="Dirección de entrega" autocomplete="street-address"
+             placeholder="Dirección de entrega *" required>
+      <input id="c-notas" aria-label="Notas del pedido" placeholder="Notas (opcional)">
       <button class="enviar" type="submit">Enviar pedido — despacho nacional</button>
-      <p class="error-pedido" id="c-error"></p>
+      <p class="error-pedido" id="c-error" aria-live="polite"></p>
     </form>
   </div>
-  <div class="exito" id="c-exito" hidden></div>
+  <div class="exito" id="c-exito" aria-live="polite" hidden></div>
 </aside>
 
 <script>
@@ -280,8 +294,12 @@ async function cargarCategorias() {
     nav.appendChild(b);
     return b;
   };
-  boton("Todo el catálogo", "").classList.add("activa");
-  for (const c of cats) boton(`${EMOJI[c.categoria] || "🔩"} ${c.categoria} (${c.productos})`, c.categoria);
+  const todo = boton("Todo el catálogo", "");
+  for (const c of cats) {
+    const b = boton(`${EMOJI[c.categoria] || "🔩"} ${c.categoria} (${c.productos})`, c.categoria);
+    if (c.categoria === categoriaActiva) b.classList.add("activa");
+  }
+  if (!categoriaActiva) todo.classList.add("activa");
 }
 
 // --- Listado ---
@@ -316,8 +334,27 @@ async function cargar() {
       btn.textContent = "Agregar al pedido";
       btn.onclick = (e) => { e.stopPropagation(); agregarAlCarrito(p); };
     }
+    card.setAttribute("role", "button");
+    card.tabIndex = 0;
+    card.setAttribute("aria-label", "Ver ficha de " + p.nombre);
     card.onclick = () => abrirFicha(p.slug);
+    card.onkeydown = (e) => { if (e.key === "Enter") abrirFicha(p.slug); };
     grid.appendChild(card);
+  }
+  // Sin resultados: ofrecer el asesor en vez de un callejón sin salida
+  if (r.total === 0 && q.trim()) {
+    const vacio = document.createElement("div");
+    vacio.className = "card invitacion";
+    vacio.innerHTML = `<h3>No encontramos nada</h3>
+      <p style="font-size:.85rem;color:var(--gris-texto);padding:0 .8rem"></p>
+      <a href="#" style="margin-top:.5rem">💬 Pregúntale al Asesor</a>`;
+    vacio.querySelector("p").textContent = `«${q.trim()}» no está en el catálogo todavía.`;
+    vacio.querySelector("a").onclick = (e) => {
+      e.preventDefault();
+      $id("btn-asesor").click();
+      setTimeout(() => preguntarAsesor(q.trim()), 400);
+    };
+    grid.appendChild(vacio);
   }
   const inv = document.createElement("div");
   inv.className = "card invitacion";
@@ -327,6 +364,12 @@ async function cargar() {
   grid.appendChild(inv);
   $id("prev").disabled = r.page <= 1;
   $id("next").disabled = r.page * r.porPagina >= r.total;
+  // La URL refleja búsqueda, categoría y página (compartible / botón atrás amable)
+  const params = new URLSearchParams();
+  if (q.trim()) params.set("q", q.trim());
+  if (categoriaActiva) params.set("cat", categoriaActiva);
+  if (page > 1) params.set("pag", page);
+  history.replaceState(null, "", params.toString() ? "?" + params : location.pathname);
 }
 
 // --- Ficha de producto ---
@@ -380,8 +423,8 @@ function pintarCarrito() {
     const fila = document.createElement("div");
     fila.className = "item";
     fila.innerHTML = `<span class="nom"></span>
-      <input type="number" min="1" value="${item.cantidad}">
-      <span class="sub"></span><button title="Quitar">&times;</button>`;
+      <input type="number" min="1" inputmode="numeric" aria-label="Cantidad" value="${item.cantidad}">
+      <span class="sub"></span><button title="Quitar" aria-label="Quitar del pedido">&times;</button>`;
     fila.querySelector(".nom").textContent = item.nombre;
     fila.querySelector(".sub").textContent = cop(item.precio * item.cantidad);
     fila.querySelector("input").onchange = (e) => {
@@ -405,6 +448,11 @@ $id("carrito-cerrar").onclick = () => { $id("carrito").hidden = true; };
 
 $id("form-pedido").addEventListener("submit", async (e) => {
   e.preventDefault();
+  const boton = e.target.querySelector(".enviar");
+  if (boton.disabled) return; // evita el doble clic = doble pedido
+  boton.disabled = true;
+  const textoBoton = boton.textContent;
+  boton.textContent = "Enviando pedido…";
   $id("c-error").textContent = "";
   const r = await fetch("/api/pedidos", {
     method: "POST", headers: { "Content-Type": "application/json" },
@@ -417,6 +465,8 @@ $id("form-pedido").addEventListener("submit", async (e) => {
       items: carrito.map(i => ({ producto_id: i.producto_id, cantidad: i.cantidad })),
     }),
   }).then(x => x.json()).catch(() => ({ error: "no se pudo enviar, intenta de nuevo" }));
+  boton.disabled = false;
+  boton.textContent = textoBoton;
   if (!r.ok) { $id("c-error").textContent = r.error || "no se pudo enviar"; return; }
   carrito = []; guardarCarrito(); pintarCarrito();
   $id("checkout").hidden = true;
@@ -429,6 +479,13 @@ $id("form-pedido").addEventListener("submit", async (e) => {
 $id("q").addEventListener("input", () => { page = 1; cargar(); });
 $id("prev").onclick = () => { page--; cargar(); };
 $id("next").onclick = () => { page++; cargar(); };
+// Restaurar estado desde la URL (deep-link compartible)
+{
+  const params = new URLSearchParams(location.search);
+  if (params.get("q")) $id("q").value = params.get("q");
+  categoriaActiva = params.get("cat") || "";
+  page = Math.max(1, Number(params.get("pag")) || 1);
+}
 cargarCategorias(); cargar(); guardarCarrito();
 
 // --- Asesor IA de ventas ---

@@ -50,8 +50,10 @@
 <main>
   <div class="caja" id="login">
     <h2>Iniciar sesión</h2>
-    <input id="l-email" type="email" placeholder="Correo" autocomplete="username">
-    <input id="l-pass" type="password" placeholder="Contraseña" autocomplete="current-password">
+    <input id="l-email" type="email" aria-label="Correo" placeholder="Correo"
+           autocomplete="username" spellcheck="false">
+    <input id="l-pass" type="password" aria-label="Contraseña" placeholder="Contraseña"
+           autocomplete="current-password">
     <button class="btn azul" id="l-entrar">Entrar</button>
     <p class="error" id="l-error"></p>
   </div>
@@ -91,7 +93,8 @@
       <div class="caja">
         <h2>Catálogo</h2>
         <div class="fila-form">
-          <input id="f-q" placeholder="Buscar por nombre o SKU..." style="flex:1;min-width:200px">
+          <input id="f-q" type="search" aria-label="Buscar en el catálogo"
+                 placeholder="Buscar por nombre o SKU…" style="flex:1;min-width:200px">
           <select id="f-ferreteria" hidden><option value="">Todas las ferreterías</option></select>
         </div>
         <p class="muted" id="p-resumen"></p>
@@ -248,11 +251,14 @@ async function cargarFerreterias() {
 }
 
 $("n-crear").onclick = async () => {
+  if ($("n-crear").disabled) return;
+  $("n-crear").disabled = true;
   const r = await api("/api/ferreterias", { method: "POST", body: JSON.stringify({
     nombre: $("n-nombre").value.trim(), slug: $("n-slug").value.trim(),
     ciudad: $("n-ciudad").value.trim(), telefono: $("n-telefono").value.trim(),
     email: $("n-email").value.trim() || undefined,
     password: $("n-pass").value || undefined }) });
+  $("n-crear").disabled = false;
   $("n-error").textContent = r.error || "";
   if (r.ok) {
     ["n-nombre","n-slug","n-ciudad","n-telefono","n-email","n-pass"].forEach(i => $(i).value = "");
@@ -300,6 +306,8 @@ $("f-q").addEventListener("input", () => cargarProductos());
 $("f-ferreteria").addEventListener("change", () => cargarProductos());
 
 $("p-crear").onclick = async () => {
+  if ($("p-crear").disabled) return;
+  $("p-crear").disabled = true;
   const nombre = $("p-nombre").value.trim();
   const slug = nombre.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
     .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -308,6 +316,7 @@ $("p-crear").onclick = async () => {
     sku: $("p-sku").value.trim(), nombre, slug,
     marca: $("p-marca").value.trim().toUpperCase(),
     precio: $("p-precio").value ? Number($("p-precio").value) : null }) });
+  $("p-crear").disabled = false;
   $("p-error").textContent = r.error || "";
   if (r.ok) { ["p-sku","p-nombre","p-marca","p-precio"].forEach(i => $(i).value = "");
               cargarProductos(); }
