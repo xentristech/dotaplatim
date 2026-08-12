@@ -57,8 +57,21 @@
   <div id="panel" hidden>
     <div class="tabs">
       <button data-tab="productos" class="activa">Productos</button>
+      <button data-tab="pedidos">Pedidos</button>
       <button data-tab="ferreterias" id="tab-ferr" hidden>Ferreterías</button>
     </div>
+
+    <section id="v-pedidos" hidden>
+      <div class="caja">
+        <h2>Pedidos y despachos</h2>
+        <p class="muted" id="pe-resumen"></p>
+        <table>
+          <thead><tr><th>Pedido</th><th>Fecha</th><th>Cliente</th><th>Destino</th>
+                     <th>Productos</th><th>Total</th><th>Estado</th></tr></thead>
+          <tbody id="pe-tabla"></tbody>
+        </table>
+      </div>
+    </section>
 
     <section id="v-productos">
       <div class="caja">
@@ -161,7 +174,48 @@ document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => {
   b.classList.add("activa");
   $("v-productos").hidden = b.dataset.tab !== "productos";
   $("v-ferreterias").hidden = b.dataset.tab !== "ferreterias";
+  $("v-pedidos").hidden = b.dataset.tab !== "pedidos";
+  if (b.dataset.tab === "pedidos") cargarPedidos();
 });
+
+// --- Pedidos ---
+const ESTADOS = ["recibido", "confirmado", "despachado", "entregado", "cancelado"];
+async function cargarPedidos() {
+  const pedidos = await api("/api/admin/pedidos");
+  $("pe-resumen").textContent = pedidos.length
+    ? `${pedidos.length} pedidos (más recientes primero)`
+    : "Todavía no hay pedidos.";
+  const cuerpo = $("pe-tabla"); cuerpo.innerHTML = "";
+  for (const pe of pedidos) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td></td><td></td><td></td><td></td><td class="items"></td>
+      <td></td><td class="estado-celda"></td>`;
+    tr.children[0].textContent = pe.numero;
+    tr.children[1].textContent = (pe.creado_en || "").slice(0, 16);
+    tr.children[2].textContent = `${pe.cliente} · ${pe.telefono}`;
+    tr.children[3].textContent = `${pe.ciudad} — ${pe.direccion}`;
+    tr.children[4].textContent = pe.items
+      .map(i => `${i.cantidad}× ${i.nombre}`).join(", ").slice(0, 120);
+    tr.children[5].textContent = cop(pe.total);
+    const celda = tr.querySelector(".estado-celda");
+    if (yo.rol === "marketplace") {
+      const sel = document.createElement("select");
+      for (const e of ESTADOS) {
+        const o = document.createElement("option");
+        o.value = e; o.textContent = e; o.selected = e === pe.estado;
+        sel.appendChild(o);
+      }
+      sel.onchange = async () => {
+        await api(`/api/pedidos/${pe.id}/estado`, { method: "PUT",
+          body: JSON.stringify({ estado: sel.value }) });
+      };
+      celda.appendChild(sel);
+    } else {
+      celda.textContent = pe.estado;
+    }
+    cuerpo.appendChild(tr);
+  }
+}
 
 // --- Ferreterías ---
 async function cargarFerreterias() {

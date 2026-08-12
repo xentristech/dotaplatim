@@ -86,6 +86,70 @@ export function crearApp(db, SECRET) {
     p ? res.json(p) : res.status(404).json({ error: "producto no encontrado" });
   });
 
+  // --- Pedidos (crear es público: es el checkout del catálogo) ---
+  app.post("/api/pedidos", (req, res) => {
+    const { cliente, telefono, ciudad, direccion, notas = "", items } = req.body || {};
+    if (!cliente || !telefono || !ciudad || !direccion || !Array.isArray(items) || !items.length) {
+      return res.status(400).json({ error: "faltan datos: cliente, telefono, ciudad, direccion, items" });
+    }
+    const detalle = [];
+    for (const it of items) {
+      const p = db.prepare("SELECT * FROM productos WHERE id = ? AND activo = 1")
+        .get(Number(it.producto_id));
+      const cantidad = Math.floor(Number(it.cantidad));
+      if (!p || !(cantidad > 0)) {
+        return res.status(400).json({ error: `item inválido: producto ${it.producto_id}` });
+      }
+      detalle.push({ p, cantidad });
+    }
+    const total = detalle.reduce((s, d) => s + (d.p.precio ?? 0) * d.cantidad, 0);
+    const numero = "P-" + String(
+      db.prepare("SELECT COUNT(*) AS n FROM pedidos").get().n + 1).padStart(4, "0");
+    const r = db.prepare(`INSERT INTO pedidos (numero, cliente, telefono, ciudad, direccion,
+                            notas, total) VALUES (?, ?, ?, ?, ?, ?, ?)`)
+      .run(numero, cliente, telefono, ciudad, direccion, notas, total);
+    const insItem = db.prepare(`INSERT INTO pedido_items
+        (pedido_id, producto_id, ferreteria_id, cantidad, precio_unitario)
+        VALUES (?, ?, ?, ?, ?)`);
+    for (const d of detalle) {
+      insItem.run(r.lastInsertRowid, d.p.id, d.p.ferreteria_id, d.cantidad, d.p.precio);
+    }
+    res.status(201).json({ ok: true, numero, total });
+  });
+
+  // Listado del panel: el marketplace ve todos; una ferretería, los que traen items suyos.
+  app.get("/api/admin/pedidos", conSesion, (req, res) => {
+    const esFerreteria = req.sesion.rol === "ferreteria";
+    const pedidos = db.prepare(
+      esFerreteria
+        ? `SELECT DISTINCT pe.* FROM pedidos pe
+           JOIN pedido_items i ON i.pedido_id = pe.id
+           WHERE i.ferreteria_id = ? ORDER BY pe.id DESC LIMIT 100`
+        : `SELECT * FROM pedidos ORDER BY id DESC LIMIT 100`
+    ).all(...(esFerreteria ? [req.sesion.ferreteria_id] : []));
+    const itemsDe = db.prepare(
+      `SELECT i.cantidad, i.precio_unitario, p.nombre, p.sku, f.nombre AS ferreteria
+       FROM pedido_items i
+       JOIN productos p ON p.id = i.producto_id
+       JOIN ferreterias f ON f.id = i.ferreteria_id
+       WHERE i.pedido_id = ?` + (esFerreteria ? " AND i.ferreteria_id = ?" : ""));
+    res.json(pedidos.map(pe => ({
+      ...pe,
+      items: itemsDe.all(...(esFerreteria ? [pe.id, req.sesion.ferreteria_id] : [pe.id])),
+    })));
+  });
+
+  app.put("/api/pedidos/:id/estado", conSesion, soloMarketplace, (req, res) => {
+    const estados = ["recibido", "confirmado", "despachado", "entregado", "cancelado"];
+    const { estado } = req.body || {};
+    if (!estados.includes(estado)) {
+      return res.status(400).json({ error: "estado inválido; usar: " + estados.join(", ") });
+    }
+    const r = db.prepare("UPDATE pedidos SET estado = ? WHERE id = ?")
+      .run(estado, Number(req.params.id));
+    r.changes ? res.json({ ok: true }) : res.status(404).json({ error: "no existe" });
+  });
+
   // --- Panel (requiere sesión) ---
   app.get("/api/me", conSesion, (req, res) => {
     const u = db.prepare(`SELECT u.id, u.email, u.nombre, u.rol, u.ferreteria_id,

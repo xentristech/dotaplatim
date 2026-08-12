@@ -58,5 +58,30 @@ export function crearEsquema(db) {
     );
     CREATE INDEX IF NOT EXISTS idx_productos_marca ON productos(marca);
     CREATE INDEX IF NOT EXISTS idx_productos_slug ON productos(slug);
+
+    CREATE TABLE IF NOT EXISTS pedidos (
+      id         INTEGER PRIMARY KEY,
+      numero     TEXT NOT NULL UNIQUE,
+      cliente    TEXT NOT NULL,
+      telefono   TEXT NOT NULL,
+      ciudad     TEXT NOT NULL,
+      direccion  TEXT NOT NULL,
+      notas      TEXT DEFAULT '',
+      estado     TEXT NOT NULL DEFAULT 'recibido'
+                 CHECK (estado IN ('recibido','confirmado','despachado','entregado','cancelado')),
+      total      INTEGER NOT NULL,
+      creado_en  TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+
+    CREATE TABLE IF NOT EXISTS pedido_items (
+      id              INTEGER PRIMARY KEY,
+      pedido_id       INTEGER NOT NULL REFERENCES pedidos(id),
+      producto_id     INTEGER NOT NULL REFERENCES productos(id),
+      ferreteria_id   INTEGER NOT NULL REFERENCES ferreterias(id),
+      cantidad        INTEGER NOT NULL,
+      precio_unitario INTEGER
+    );
+    CREATE INDEX IF NOT EXISTS idx_items_pedido ON pedido_items(pedido_id);
+    CREATE INDEX IF NOT EXISTS idx_items_ferreteria ON pedido_items(ferreteria_id);
   `);
 }

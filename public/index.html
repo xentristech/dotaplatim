@@ -41,6 +41,32 @@
                      align-items: center; justify-content: center; text-align: center; }
   .card.invitacion h3 { color: var(--azul); flex: 0; }
   .card.invitacion a { color: var(--azul); font-weight: 700; }
+  .card .agregar { margin-top: .7rem; background: var(--azul); color: #fff; border: none;
+                   border-radius: 8px; padding: .5rem .8rem; cursor: pointer; font-weight: 600; }
+  .card .agregar:disabled { opacity: .5; cursor: default; }
+  #btn-carrito { background: var(--acento); color: #222; border: none; border-radius: 10px;
+                 padding: .55rem 1rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
+  #carrito { position: fixed; top: 0; right: 0; height: 100%; width: min(400px, 100%);
+             background: #fff; box-shadow: -4px 0 18px rgb(0 0 0 / .2); z-index: 50;
+             display: flex; flex-direction: column; padding: 1.2rem;
+             overflow-y: auto; }
+  #carrito h2 { color: var(--azul); margin-bottom: 1rem; }
+  #carrito .item { display: flex; gap: .5rem; align-items: center; font-size: .88rem;
+                   border-bottom: 1px solid #eee; padding: .5rem 0; }
+  #carrito .item .nom { flex: 1; }
+  #carrito .item input { width: 56px; padding: .3rem; }
+  #carrito .item button { border: none; background: none; color: #b42318; cursor: pointer;
+                          font-weight: 700; }
+  #carrito .total { font-size: 1.15rem; font-weight: 700; color: var(--azul);
+                    margin: .9rem 0; }
+  #carrito form { display: flex; flex-direction: column; gap: .55rem; }
+  #carrito .enviar { background: var(--azul); color: #fff; border: none; border-radius: 9px;
+                     padding: .7rem; font-weight: 700; cursor: pointer; }
+  #carrito .cerrar { position: absolute; top: .8rem; right: 1rem; border: none;
+                     background: none; font-size: 1.4rem; cursor: pointer; color: #555; }
+  #carrito .exito { background: #e8f3ea; color: #1a7f37; border-radius: 10px;
+                    padding: 1rem; font-weight: 600; }
+  #carrito .error-pedido { color: #b42318; font-size: .88rem; min-height: 1.2em; }
 </style>
 </head>
 <body>
@@ -49,8 +75,28 @@
   <div class="controles">
     <input id="q" placeholder="Buscar producto o SKU...">
     <select id="marca"><option value="">Todas las marcas</option></select>
+    <button id="btn-carrito">🛒 <span id="carrito-n">0</span></button>
   </div>
 </header>
+
+<aside id="carrito" hidden>
+  <button class="cerrar" id="carrito-cerrar">&times;</button>
+  <h2>Tu pedido</h2>
+  <div id="carrito-items"></div>
+  <p class="total" id="carrito-total"></p>
+  <div id="checkout">
+    <form id="form-pedido">
+      <input id="c-nombre" placeholder="Tu nombre *" required>
+      <input id="c-telefono" placeholder="Teléfono / WhatsApp *" required>
+      <input id="c-ciudad" placeholder="Ciudad *" required>
+      <input id="c-direccion" placeholder="Dirección de entrega *" required>
+      <input id="c-notas" placeholder="Notas (opcional)">
+      <button class="enviar" type="submit">Enviar pedido — despacho nacional</button>
+      <p class="error-pedido" id="c-error"></p>
+    </form>
+  </div>
+  <div class="exito" id="c-exito" hidden></div>
+</aside>
 <main>
   <div class="cta" id="unirse">
     <div>
@@ -98,6 +144,14 @@ async function cargar() {
     card.querySelector("h3").textContent = p.nombre;
     card.querySelector(".precio").textContent = cop(p.precio);
     card.querySelector(".tienda").textContent = `${p.sku} · ${p.ferreteria}`;
+    const btn = document.createElement("button");
+    btn.className = "agregar";
+    if (p.precio == null) { btn.textContent = "Precio a consultar"; btn.disabled = true; }
+    else {
+      btn.textContent = "Agregar al pedido";
+      btn.onclick = () => agregarAlCarrito(p);
+    }
+    card.appendChild(btn);
     grid.appendChild(card);
   }
   const inv = document.createElement("div");
@@ -114,6 +168,78 @@ document.getElementById("marca").addEventListener("change", () => { page = 1; ca
 document.getElementById("prev").onclick = () => { page--; cargar(); };
 document.getElementById("next").onclick = () => { page++; cargar(); };
 cargarMarcas(); cargar();
+
+// --- Carrito (guardado en el navegador) ---
+const $id = x => document.getElementById(x);
+let carrito = JSON.parse(localStorage.getItem("carrito-platim") || "[]");
+
+function guardarCarrito() {
+  localStorage.setItem("carrito-platim", JSON.stringify(carrito));
+  $id("carrito-n").textContent = carrito.reduce((s, i) => s + i.cantidad, 0);
+}
+
+function agregarAlCarrito(p) {
+  const ya = carrito.find(i => i.producto_id === p.id);
+  if (ya) ya.cantidad++;
+  else carrito.push({ producto_id: p.id, nombre: p.nombre, precio: p.precio, cantidad: 1 });
+  guardarCarrito(); pintarCarrito();
+  $id("carrito").hidden = false;
+}
+
+function pintarCarrito() {
+  const cont = $id("carrito-items");
+  cont.innerHTML = "";
+  for (const item of carrito) {
+    const fila = document.createElement("div");
+    fila.className = "item";
+    fila.innerHTML = `<span class="nom"></span>
+      <input type="number" min="1" value="${item.cantidad}">
+      <span class="sub"></span><button title="Quitar">&times;</button>`;
+    fila.querySelector(".nom").textContent = item.nombre;
+    fila.querySelector(".sub").textContent = cop(item.precio * item.cantidad);
+    fila.querySelector("input").onchange = (e) => {
+      item.cantidad = Math.max(1, Math.floor(Number(e.target.value) || 1));
+      guardarCarrito(); pintarCarrito();
+    };
+    fila.querySelector("button").onclick = () => {
+      carrito = carrito.filter(i => i !== item);
+      guardarCarrito(); pintarCarrito();
+    };
+    cont.appendChild(fila);
+  }
+  const total = carrito.reduce((s, i) => s + i.precio * i.cantidad, 0);
+  $id("carrito-total").textContent = carrito.length
+    ? "Total: " + cop(total) : "El pedido está vacío — agrega productos del catálogo.";
+  $id("checkout").hidden = !carrito.length;
+}
+
+$id("btn-carrito").onclick = () => { pintarCarrito(); $id("carrito").hidden = false; };
+$id("carrito-cerrar").onclick = () => { $id("carrito").hidden = true; };
+
+$id("form-pedido").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  $id("c-error").textContent = "";
+  const r = await fetch("/api/pedidos", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      cliente: $id("c-nombre").value.trim(),
+      telefono: $id("c-telefono").value.trim(),
+      ciudad: $id("c-ciudad").value.trim(),
+      direccion: $id("c-direccion").value.trim(),
+      notas: $id("c-notas").value.trim(),
+      items: carrito.map(i => ({ producto_id: i.producto_id, cantidad: i.cantidad })),
+    }),
+  }).then(x => x.json()).catch(() => ({ error: "no se pudo enviar, intenta de nuevo" }));
+  if (!r.ok) { $id("c-error").textContent = r.error || "no se pudo enviar"; return; }
+  carrito = []; guardarCarrito(); pintarCarrito();
+  $id("checkout").hidden = true;
+  const ex = $id("c-exito");
+  ex.hidden = false;
+  ex.textContent = `¡Pedido ${r.numero} recibido por ${cop(r.total)}! ` +
+    `Te contactaremos por WhatsApp para confirmar el despacho.`;
+});
+
+guardarCarrito();
 </script>
 </body>
 </html>
