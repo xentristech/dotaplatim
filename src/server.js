@@ -6,7 +6,7 @@ import { readFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { abrirDb } from "./db.js";
-import { crearApp } from "./app.js";
+import { crearApp } from "./rutas.js";
 
 const raiz = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 // .env plano (sin dependencia dotenv)
