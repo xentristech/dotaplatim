@@ -52,6 +52,12 @@ export const MERCADO = {
     "Agro y ganadería": ["molino de martillos colombia", "picapasto precio", "ordeñadora portátil"],
     "Lavado y limpieza": ["hidrolavadora precio colombia", "hidrolavadora para carros"],
     "Motores": ["motor a gasolina 6.5 hp precio", "motor fuera de borda colombia"],
+    "Protección y EPP": ["elementos de proteccion personal colombia", "casco de seguridad industrial precio",
+      "guantes de seguridad industrial", "kit epp para obra"],
+    "Uniformes y dotación": ["dotacion empresarial colombia", "uniformes empresariales bogota",
+      "dotacion de ley para empleados", "uniformes antifluido salud"],
+    "Calzado de seguridad": ["botas de seguridad punta de acero precio", "botas dielectricas colombia",
+      "calzado de dotacion empresarial"],
   },
 };
 

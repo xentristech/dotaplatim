@@ -74,10 +74,15 @@ export function crearApp(db, SECRET) {
     if (q) {
       // Búsqueda inteligente: cada palabra debe aparecer en nombre, SKU, marca,
       // categoría o descripción corta (así "taladro dewalt 20v" encuentra lo correcto).
+      // Cada palabra se prueba también en singular ("botas" encuentra "bota de seguridad").
       for (const palabra of q.split(/\s+/).filter(Boolean).slice(0, 6)) {
-        filtros.push(`(p.nombre LIKE ? OR p.sku LIKE ? OR p.marca LIKE ?
-                       OR p.categoria LIKE ? OR p.descripcion_corta LIKE ?)`);
-        args.push(...Array(5).fill(`%${palabra}%`));
+        const formas = [...new Set([palabra,
+          palabra.replace(/([a-záéíóú])s$/i, "$1"),
+          palabra.replace(/([a-záéíóú])es$/i, "$1")])];
+        filtros.push("(" + formas.map(() =>
+          `(p.nombre LIKE ? OR p.sku LIKE ? OR p.marca LIKE ?
+            OR p.categoria LIKE ? OR p.descripcion_corta LIKE ?)`).join(" OR ") + ")");
+        for (const f of formas) args.push(...Array(5).fill(`%${f}%`));
       }
     }
     if (marca) { filtros.push("p.marca = ?"); args.push(marca); }
@@ -186,6 +191,16 @@ ${p.imagen ? `<p><img src="${esc(p.imagen)}" alt="${esc(p.nombre)}"></p>` : ""}
   // Diseñado para poder reemplazar el motor por un LLM (Claude API) sin tocar el frontend.
   const sinAcentos = (t) => t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   const INTENCIONES = [
+    { claves: ["dotacion", "uniforme", "camisa", "pantalon", "scrub", "bata", "delantal"],
+      categoria: "Uniformes y dotación",
+      texto: "Para la dotación de tu equipo, PLATIM confecciona con tu logo:" },
+    { claves: ["epp", "casco", "guante", "gafa", "tapon", "respirador", "tapaboca",
+               "chaleco", "overol", "proteccion"],
+      categoria: "Protección y EPP",
+      texto: "Para proteger a tu gente, estos elementos de seguridad:" },
+    { claves: ["bota", "calzado", "zueco", "zapato", "punta de acero", "dielectric"],
+      categoria: "Calzado de seguridad",
+      texto: "Para los pies de tu equipo, este calzado de seguridad:" },
     { claves: ["fumig", "plaga", "cultivo", "aspersor", "veneno", "herbicida"],
       categoria: "Fumigación",
       texto: "Para proteger tu cultivo estas fumigadoras son las más pedidas:" },

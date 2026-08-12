@@ -43,22 +43,29 @@ const passFerre = envActual.FERRETERIA_FUNDADORA_PASSWORD || randomBytes(9).toSt
 crearUsuario("admin@platim.co", "Administrador Marketplace", "marketplace", null, passAdmin);
 crearUsuario("fundadora@platim.co", "Ferretería Fundadora", "ferreteria", 1, passFerre);
 
-// --- 3. Catálogo ---
-const productos = JSON.parse(readFileSync(path.join(raiz, "data", "productos.json"), "utf-8"));
+// --- 3. Catálogos: ferretería fundadora (tienda 1) y PLATIM dotación/EPP (tienda 2) ---
 const insertar = db.prepare(`
   INSERT OR REPLACE INTO productos
     (ferreteria_id, sku, nombre, descripcion_corta, descripcion, slug,
      meta_descripcion, precio, precio_regular, marca, categoria, imagen)
-  VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
 
-let cargados = 0, omitidos = 0;
-for (const p of productos) {
-  if (p.sku.toUpperCase().startsWith("PRUEBA")) { omitidos++; continue; }
-  insertar.run(p.sku, p.nombre, p.descripcion_corta, p.descripcion, p.slug,
-               p.meta_descripcion, p.precio, p.precio_regular, p.marca,
-               p.categoria || "", p.imagen || "");
-  cargados++;
+function sembrarCatalogo(archivo, ferreteriaId) {
+  const ruta = path.join(raiz, "data", archivo);
+  if (!existsSync(ruta)) return 0;
+  let cargados = 0, omitidos = 0;
+  for (const p of JSON.parse(readFileSync(ruta, "utf-8"))) {
+    if (p.sku.toUpperCase().startsWith("PRUEBA")) { omitidos++; continue; }
+    insertar.run(ferreteriaId, p.sku, p.nombre, p.descripcion_corta, p.descripcion, p.slug,
+                 p.meta_descripcion, p.precio, p.precio_regular, p.marca,
+                 p.categoria || "", p.imagen || "");
+    cargados++;
+  }
+  console.log(`Tienda ${ferreteriaId}: ${cargados} productos de ${archivo}` +
+              (omitidos ? ` (omitidos de prueba: ${omitidos})` : ""));
+  return cargados;
 }
+const cargados = sembrarCatalogo("productos.json", 1) + sembrarCatalogo("productos-platim.json", 2);
 
 // --- Guardar credenciales en .env (solo si es la primera vez) ---
 if (!existsSync(envPath)) {
@@ -76,4 +83,4 @@ if (!existsSync(envPath)) {
   console.log(".env ya existe: se conservan las credenciales anteriores");
 }
 
-console.log(`Ferretería 1 lista. Productos cargados: ${cargados} (omitidos de prueba: ${omitidos})`);
+console.log(`Siembra completa. Productos totales cargados: ${cargados}`);

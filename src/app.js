@@ -33,7 +33,7 @@ for (const u of [
              scryptSync(CLAVE_DEMO, salt, 64).toString("hex"), salt);
 }
 
-let productos = [], indexHtml = "", adminHtml = "", paginasDesde = 0;
+let productos = [], productosPlatim = [], indexHtml = "", adminHtml = "", paginasDesde = 0;
 
 // Las páginas se refrescan cada 5 min (los cambios de diseño llegan sin redeploy);
 // el catálogo solo al arrancar (siembra la base en memoria).
@@ -53,8 +53,10 @@ async function paginaFresca() {
 }
 
 try {
-  [productos] = await Promise.all([
+  [productos, productosPlatim] = await Promise.all([
     fetch(`${RAW}/data/productos.json`).then(r => r.json()),
+    // Catálogo propio de PLATIM (dotación/EPP, tienda 2); si aún no existe, sigue vacío
+    fetch(`${RAW}/data/productos-platim.json`).then(r => r.ok ? r.json() : []).catch(() => []),
     refrescarPaginas(),
   ]);
 } catch (e) {
@@ -65,12 +67,14 @@ const insProd = db.prepare(`
   INSERT INTO productos (ferreteria_id, sku, nombre, descripcion_corta, descripcion,
                          slug, meta_descripcion, precio, precio_regular, marca,
                          categoria, imagen)
-  VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
-for (const p of productos) {
-  if (p.sku.toUpperCase().startsWith("PRUEBA")) continue;
-  insProd.run(p.sku, p.nombre, p.descripcion_corta, p.descripcion, p.slug,
-              p.meta_descripcion, p.precio, p.precio_regular, p.marca,
-              p.categoria || "", p.imagen || "");
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
+for (const [ferreteriaId, lista] of [[1, productos], [2, productosPlatim]]) {
+  for (const p of lista) {
+    if (p.sku.toUpperCase().startsWith("PRUEBA")) continue;
+    insProd.run(ferreteriaId, p.sku, p.nombre, p.descripcion_corta, p.descripcion, p.slug,
+                p.meta_descripcion, p.precio, p.precio_regular, p.marca,
+                p.categoria || "", p.imagen || "");
+  }
 }
 
 // La app: express() aquí mismo + rutas de la API montadas encima.
