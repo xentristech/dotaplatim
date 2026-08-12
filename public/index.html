@@ -21,16 +21,19 @@
   input, select { padding: .55rem .7rem; border: 1px solid var(--borde); border-radius: 8px;
                   font-size: .95rem; }
   .controles input { flex: 1; }
-  #btn-carrito { background: var(--verde); color: #fff; border: none; border-radius: 10px;
-                 padding: .55rem 1rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden;
+             clip: rect(0 0 0 0); white-space: nowrap; }
+  #btn-carrito { background: var(--verde-osc); color: #fff; border: none; border-radius: 10px;
+                 padding: .65rem 1.1rem; min-height: 44px; font-weight: 700; cursor: pointer;
+                 white-space: nowrap; }
   main { max-width: 1180px; margin: 1.4rem auto; padding: 0 1rem; }
   /* Chips de categorías */
   #categorias { display: flex; gap: .5rem; overflow-x: auto; padding-bottom: .6rem;
                 margin-bottom: 1rem; }
   #categorias button { border: 1px solid var(--borde); background: #fff; border-radius: 99px;
-                       padding: .45rem .95rem; cursor: pointer; white-space: nowrap;
-                       font-size: .88rem; color: var(--azul); }
-  #categorias button.activa { background: var(--verde); border-color: var(--verde);
+                       padding: .55rem 1rem; min-height: 42px; cursor: pointer;
+                       white-space: nowrap; font-size: .88rem; color: var(--azul); }
+  #categorias button.activa { background: var(--verde-osc); border-color: var(--verde-osc);
                               color: #fff; font-weight: 700; }
   #resumen { margin-bottom: 1rem; color: var(--gris-texto); font-size: .9rem; }
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
@@ -48,8 +51,9 @@
   .card h3 { font-size: .92rem; margin: .25rem 0 .5rem; flex: 1; font-weight: 600; }
   .card .precio { font-size: 1.08rem; font-weight: 800; color: var(--azul); }
   .card .tienda { font-size: .75rem; color: var(--gris-texto); margin-top: .3rem; }
-  .card .agregar { margin-top: .7rem; background: var(--verde); color: #fff; border: none;
-                   border-radius: 8px; padding: .5rem .8rem; cursor: pointer; font-weight: 700; }
+  .card .agregar { margin-top: .7rem; background: var(--verde-osc); color: #fff; border: none;
+                   border-radius: 8px; padding: .65rem .8rem; min-height: 44px;
+                   cursor: pointer; font-weight: 700; }
   .card .agregar:disabled { background: var(--gris-texto); opacity: .5; cursor: default; }
   .pag { display: flex; gap: .5rem; justify-content: center; margin: 1.5rem 0; }
   .pag button { padding: .5rem 1rem; border: none; border-radius: 8px; cursor: pointer;
@@ -62,8 +66,9 @@
          justify-content: space-between; }
   .cta h2 { font-size: 1.2rem; } .cta p { opacity: .9; font-size: .9rem; margin-top: .3rem;
          max-width: 60ch; }
-  .cta a { background: var(--verde); color: #fff; font-weight: 700; text-decoration: none;
-           padding: .7rem 1.3rem; border-radius: 10px; white-space: nowrap; }
+  .cta a { background: var(--verde-claro); color: var(--azul); font-weight: 800;
+           text-decoration: none; padding: .8rem 1.3rem; min-height: 44px; display: inline-flex;
+           align-items: center; border-radius: 10px; white-space: nowrap; }
   .card.invitacion { border: 2px dashed var(--verde); background: #f7fbef;
                      align-items: center; justify-content: center; text-align: center;
                      min-height: 240px; }
@@ -86,11 +91,12 @@
   #ficha h2 { font-size: 1.2rem; margin-bottom: .4rem; text-wrap: balance; }
   #ficha .precio { font-size: 1.5rem; font-weight: 800; color: var(--azul); margin: .5rem 0; }
   #ficha .acciones { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: .6rem; }
-  #ficha .acciones .agregar { background: var(--verde); color: #fff; border: none;
-      border-radius: 9px; padding: .65rem 1.1rem; font-weight: 700; cursor: pointer; }
+  #ficha .acciones .agregar { background: var(--verde-osc); color: #fff; border: none;
+      border-radius: 9px; padding: .7rem 1.1rem; min-height: 44px; font-weight: 700;
+      cursor: pointer; }
   #ficha .acciones .wsp { background: #fff; color: var(--verde-osc); text-decoration: none;
-      border: 2px solid var(--verde); border-radius: 9px; padding: .55rem 1rem;
-      font-weight: 700; }
+      border: 2px solid var(--verde-osc); border-radius: 9px; padding: .6rem 1rem;
+      min-height: 44px; display: inline-flex; align-items: center; font-weight: 700; }
   #ficha .descs h3 { font-size: .85rem; text-transform: uppercase; letter-spacing: .06em;
       color: var(--gris-texto); margin: 1rem 0 .4rem; border-bottom: 1px solid var(--borde);
       padding-bottom: .3rem; }
@@ -109,8 +115,9 @@
                           font-weight: 700; }
   #carrito .total { font-size: 1.15rem; font-weight: 800; color: var(--azul); margin: .9rem 0; }
   #carrito form { display: flex; flex-direction: column; gap: .55rem; }
-  #carrito .enviar { background: var(--verde); color: #fff; border: none; border-radius: 9px;
-                     padding: .7rem; font-weight: 700; cursor: pointer; }
+  #carrito .enviar { background: var(--verde-osc); color: #fff; border: none;
+                     border-radius: 9px; padding: .8rem; min-height: 46px; font-weight: 700;
+                     cursor: pointer; }
   #carrito .cerrar { position: absolute; top: .8rem; right: 1rem; border: none;
                      background: none; font-size: 1.4rem; cursor: pointer; color: #555; }
   #carrito .exito { background: #eef7e2; color: var(--verde-osc); border-radius: 10px;
@@ -118,7 +125,7 @@
   #carrito .error-pedido { color: #b42318; font-size: .88rem; min-height: 1.2em; }
   /* Asesor IA */
   #btn-asesor { position: fixed; bottom: 1.2rem; right: 1.2rem; z-index: 38;
-                background: var(--verde); color: #fff; border: none; border-radius: 99px;
+                background: var(--verde-osc); color: #fff; border: none; border-radius: 99px;
                 padding: .85rem 1.3rem; font-size: 1rem; font-weight: 800; cursor: pointer;
                 box-shadow: 0 6px 18px rgb(13 27 42 / .3); }
   #asesor { position: fixed; bottom: 1.2rem; right: 1.2rem; z-index: 48;
@@ -136,7 +143,7 @@
   .msg { max-width: 88%; padding: .6rem .8rem; border-radius: 12px; font-size: .88rem;
          line-height: 1.45; }
   .msg.bot { background: #fff; border: 1px solid var(--borde); align-self: flex-start; }
-  .msg.yo { background: var(--verde); color: #fff; align-self: flex-end; }
+  .msg.yo { background: var(--verde-osc); color: #fff; align-self: flex-end; }
   .msg .prod { display: flex; gap: .6rem; align-items: center; border-top: 1px solid var(--borde);
                padding: .5rem 0; }
   .msg .prod .icono { font-size: 1.6rem; }
@@ -144,9 +151,9 @@
   .msg .prod .info b { display: block; font-size: .8rem; font-weight: 600;
                        overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .msg .prod .info span { color: var(--azul); font-weight: 800; font-size: .85rem; }
-  .msg .prod button { background: var(--verde); color: #fff; border: none; border-radius: 7px;
-                      padding: .35rem .6rem; font-size: .76rem; font-weight: 700;
-                      cursor: pointer; }
+  .msg .prod button { background: var(--verde-osc); color: #fff; border: none;
+                      border-radius: 7px; padding: .55rem .7rem; min-height: 40px;
+                      font-size: .76rem; font-weight: 700; cursor: pointer; }
   #chips { display: flex; gap: .4rem; flex-wrap: wrap; padding: .5rem 1rem 0; }
   #chips button { border: 1px solid var(--verde); color: var(--verde-osc); background: #fff;
                   border-radius: 99px; padding: .3rem .75rem; font-size: .78rem;
@@ -160,6 +167,7 @@
 <body>
 <header>
   <div>
+    <h1 class="sr-only">PLATIM Marketplace — Ferreterías de Colombia</h1>
     <img src="https://raw.githubusercontent.com/xentristech/dotaplatim/main/public/logo-platim.png"
          alt="PLATIM — Seguridad que inspira confianza">
     <small>Marketplace ferretero · despachos a nivel nacional</small>
