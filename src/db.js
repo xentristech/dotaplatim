@@ -52,12 +52,15 @@ export function crearEsquema(db) {
       precio            INTEGER,
       precio_regular    INTEGER,
       marca             TEXT DEFAULT '',
+      categoria         TEXT DEFAULT '',
+      imagen            TEXT DEFAULT '',
       activo            INTEGER NOT NULL DEFAULT 1,
       creado_en         TEXT NOT NULL DEFAULT (datetime('now')),
       UNIQUE (ferreteria_id, sku)
     );
     CREATE INDEX IF NOT EXISTS idx_productos_marca ON productos(marca);
     CREATE INDEX IF NOT EXISTS idx_productos_slug ON productos(slug);
+    CREATE INDEX IF NOT EXISTS idx_productos_categoria ON productos(categoria);
 
     CREATE TABLE IF NOT EXISTS pedidos (
       id         INTEGER PRIMARY KEY,

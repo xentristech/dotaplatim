@@ -46,12 +46,14 @@ try {
 
 const insProd = db.prepare(`
   INSERT INTO productos (ferreteria_id, sku, nombre, descripcion_corta, descripcion,
-                         slug, meta_descripcion, precio, precio_regular, marca)
-  VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
+                         slug, meta_descripcion, precio, precio_regular, marca,
+                         categoria, imagen)
+  VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
 for (const p of productos) {
   if (p.sku.toUpperCase().startsWith("PRUEBA")) continue;
   insProd.run(p.sku, p.nombre, p.descripcion_corta, p.descripcion, p.slug,
-              p.meta_descripcion, p.precio, p.precio_regular, p.marca);
+              p.meta_descripcion, p.precio, p.precio_regular, p.marca,
+              p.categoria || "", p.imagen || "");
 }
 
 // La app: express() aquí mismo + rutas de la API montadas encima.

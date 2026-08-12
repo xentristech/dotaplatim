@@ -37,14 +37,15 @@ const productos = JSON.parse(readFileSync(path.join(raiz, "data", "productos.jso
 const insertar = db.prepare(`
   INSERT OR REPLACE INTO productos
     (ferreteria_id, sku, nombre, descripcion_corta, descripcion, slug,
-     meta_descripcion, precio, precio_regular, marca)
-  VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
+     meta_descripcion, precio, precio_regular, marca, categoria, imagen)
+  VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
 
 let cargados = 0, omitidos = 0;
 for (const p of productos) {
   if (p.sku.toUpperCase().startsWith("PRUEBA")) { omitidos++; continue; }
   insertar.run(p.sku, p.nombre, p.descripcion_corta, p.descripcion, p.slug,
-               p.meta_descripcion, p.precio, p.precio_regular, p.marca);
+               p.meta_descripcion, p.precio, p.precio_regular, p.marca,
+               p.categoria || "", p.imagen || "");
   cargados++;
 }
 

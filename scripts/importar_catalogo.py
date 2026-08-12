@@ -42,6 +42,39 @@ def precio(texto: str):
     return int(digitos) if digitos else None
 
 
+# Reglas de categoría: la primera palabra clave que aparezca en el nombre gana.
+CATEGORIAS = [
+    ("Herramientas eléctricas", ["taladro", "pulidora", "polichadora", "sierra", "tronzadora",
+                                 "mototool", "atornillador", "llave de impacto", "set de puntas",
+                                 "brocas", "v-line", "lijadora", "cepillo electrico",
+                                 "cepillo eléctrico", "medidor"]),
+    ("Jardín y forestal", ["motosierra", "sopladora", "guadaña", "guadana", "podadora",
+                           "cortasetos", "chipeadora", "cortacesped", "cortacésped"]),
+    ("Fumigación", ["fumigadora", "aspersora", "nebulizadora"]),
+    ("Agro y ganadería", ["motoazada", "motocultor", "molino", "picador", "peletizadora",
+                          "sembradora", "ordeño", "ordeno", "trapiche", "incubadora",
+                          "remolque"]),
+    ("Bombas y agua", ["bomba", "electrobomba", "motobomba", "lapicero", "presión", "presion",
+                       "esybox", "sumergible"]),
+    ("Lavado y limpieza", ["hidrolavadora", "aspiradora", "lavadora"]),
+    ("Energía", ["planta electrica", "planta eléctrica", "generador", "inverter",
+                 "estación de energia", "estacion de energia", "panel solar", "motosoldador"]),
+    ("Motores", ["motor fuera de borda", "motor eléctrico", "motor electrico", "motor "]),
+    ("Construcción", ["cortadora", "martillo", "compresor", "pescante", "torre de iluminacion",
+                      "torre de iluminación", "vibrador", "regla vibratoria", "mezcladora",
+                      "andamio", "carro de corte", "demoledor", "pluma grua", "pluma grúa",
+                      "cepillo de acabado", "texturizador"]),
+]
+
+
+def categoria_de(nombre: str) -> str:
+    plano = nombre.lower()
+    for cat, claves in CATEGORIAS:
+        if any(c in plano for c in claves):
+            return cat
+    return "Otros"
+
+
 def marca_de(nombre: str) -> str:
     plano = nombre.upper().replace("\\", "").replace("&DECKER", "+DECKER")
     for m in MARCAS:
@@ -74,6 +107,8 @@ def main() -> None:
         p["precio"] = precio(p["precio"])
         p["precio_regular"] = precio(p["precio_regular"])
         p["marca"] = marca_de(p["nombre"])
+        p["categoria"] = categoria_de(p["nombre"])
+        p["imagen"] = ""  # URL de foto; se llena desde el panel o una carga posterior
         if p["sku"] in skus:
             print(f"AVISO sku duplicado, se omite: {p['sku']}")
             continue
@@ -87,7 +122,7 @@ def main() -> None:
         json.dumps(productos, ensure_ascii=False, indent=2), encoding="utf-8")
 
     with (SALIDA / "productos.csv").open("w", encoding="utf-8-sig", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=COLUMNAS + ["marca"])
+        w = csv.DictWriter(fh, fieldnames=COLUMNAS + ["marca", "categoria", "imagen"])
         w.writeheader()
         w.writerows(productos)
 

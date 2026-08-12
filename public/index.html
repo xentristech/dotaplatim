@@ -5,79 +5,169 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PLATIM Marketplace — Ferreterías de Colombia</title>
 <style>
-  :root { --azul: #0d3b66; --acento: #f4a300; --gris: #f5f6f8; }
+  /* Identidad PLATIM (tomada del sitio oficial platim.co) */
+  :root { --azul: #0D1B2A; --verde: #6BAA1F; --verde-osc: #4d7a16; --verde-claro: #A7D957;
+          --gris-sec: #F6F7F9; --gris-texto: #51607a; --borde: #E5E7EB; --blanco: #fff; }
   * { box-sizing: border-box; margin: 0; }
-  body { font-family: system-ui, sans-serif; background: var(--gris); color: #222; }
-  header { background: var(--azul); color: #fff; padding: 1rem 1.5rem;
+  body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+         background: var(--gris-sec); color: var(--azul); }
+  header { background: var(--azul); color: #fff; padding: .9rem 1.5rem;
            display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
-  header h1 { font-size: 1.3rem; } header small { opacity: .8; }
+  header img { height: 44px; width: auto; }
+  header small { opacity: .75; display: block; font-size: .78rem; }
   .controles { display: flex; gap: .5rem; flex: 1; min-width: 260px; }
-  input, select { padding: .55rem .7rem; border: 1px solid #ccc; border-radius: 8px;
+  input, select { padding: .55rem .7rem; border: 1px solid var(--borde); border-radius: 8px;
                   font-size: .95rem; }
-  input { flex: 1; }
-  main { max-width: 1100px; margin: 1.5rem auto; padding: 0 1rem; }
-  #resumen { margin-bottom: 1rem; color: #555; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  .controles input { flex: 1; }
+  #btn-carrito { background: var(--verde); color: #fff; border: none; border-radius: 10px;
+                 padding: .55rem 1rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
+  main { max-width: 1180px; margin: 1.4rem auto; padding: 0 1rem; }
+  /* Chips de categorías */
+  #categorias { display: flex; gap: .5rem; overflow-x: auto; padding-bottom: .6rem;
+                margin-bottom: 1rem; }
+  #categorias button { border: 1px solid var(--borde); background: #fff; border-radius: 99px;
+                       padding: .45rem .95rem; cursor: pointer; white-space: nowrap;
+                       font-size: .88rem; color: var(--azul); }
+  #categorias button.activa { background: var(--verde); border-color: var(--verde);
+                              color: #fff; font-weight: 700; }
+  #resumen { margin-bottom: 1rem; color: var(--gris-texto); font-size: .9rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
           gap: 1rem; }
-  .card { background: #fff; border-radius: 12px; padding: 1rem;
-          box-shadow: 0 1px 4px rgb(0 0 0 / .08); display: flex; flex-direction: column; }
-  .card .marca { color: var(--acento); font-weight: 700; font-size: .78rem;
-                 text-transform: uppercase; }
-  .card h3 { font-size: .95rem; margin: .3rem 0 .6rem; flex: 1; }
-  .card .precio { font-size: 1.1rem; font-weight: 700; color: var(--azul); }
-  .card .tienda { font-size: .78rem; color: #777; margin-top: .4rem; }
+  .card { background: #fff; border-radius: 12px; overflow: hidden; cursor: pointer;
+          box-shadow: 0 1px 4px rgb(13 27 42 / .08); display: flex; flex-direction: column;
+          border: 1px solid var(--borde); transition: transform .12s, box-shadow .12s; }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgb(13 27 42 / .14); }
+  .card .foto { height: 140px; background: var(--gris-sec); display: flex;
+                align-items: center; justify-content: center; font-size: 3rem; }
+  .card .foto img { width: 100%; height: 100%; object-fit: contain; }
+  .card .cuerpo { padding: .8rem .9rem 1rem; display: flex; flex-direction: column; flex: 1; }
+  .card .marca { color: var(--verde-osc); font-weight: 700; font-size: .74rem;
+                 text-transform: uppercase; letter-spacing: .04em; }
+  .card h3 { font-size: .92rem; margin: .25rem 0 .5rem; flex: 1; font-weight: 600; }
+  .card .precio { font-size: 1.08rem; font-weight: 800; color: var(--azul); }
+  .card .tienda { font-size: .75rem; color: var(--gris-texto); margin-top: .3rem; }
+  .card .agregar { margin-top: .7rem; background: var(--verde); color: #fff; border: none;
+                   border-radius: 8px; padding: .5rem .8rem; cursor: pointer; font-weight: 700; }
+  .card .agregar:disabled { background: var(--gris-texto); opacity: .5; cursor: default; }
   .pag { display: flex; gap: .5rem; justify-content: center; margin: 1.5rem 0; }
   .pag button { padding: .5rem 1rem; border: none; border-radius: 8px; cursor: pointer;
                 background: var(--azul); color: #fff; }
   .pag button:disabled { opacity: .4; cursor: default; }
-  .cta { background: linear-gradient(100deg, var(--azul), #16548f); color: #fff;
-         border-radius: 14px; padding: 1.3rem 1.5rem; margin-bottom: 1.5rem;
+  /* CTA vincular ferretería */
+  .cta { background: linear-gradient(100deg, var(--azul), #1b3a5c); color: #fff;
+         border-radius: 14px; padding: 1.3rem 1.5rem; margin-bottom: 1.4rem;
          display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
          justify-content: space-between; }
-  .cta h2 { font-size: 1.25rem; } .cta p { opacity: .9; font-size: .92rem; margin-top: .3rem; }
-  .cta a { background: var(--acento); color: #222; font-weight: 700; text-decoration: none;
+  .cta h2 { font-size: 1.2rem; } .cta p { opacity: .9; font-size: .9rem; margin-top: .3rem;
+         max-width: 60ch; }
+  .cta a { background: var(--verde); color: #fff; font-weight: 700; text-decoration: none;
            padding: .7rem 1.3rem; border-radius: 10px; white-space: nowrap; }
-  .card.invitacion { border: 2px dashed var(--acento); background: #fffaf0;
-                     align-items: center; justify-content: center; text-align: center; }
+  .card.invitacion { border: 2px dashed var(--verde); background: #f7fbef;
+                     align-items: center; justify-content: center; text-align: center;
+                     min-height: 240px; }
   .card.invitacion h3 { color: var(--azul); flex: 0; }
-  .card.invitacion a { color: var(--azul); font-weight: 700; }
-  .card .agregar { margin-top: .7rem; background: var(--azul); color: #fff; border: none;
-                   border-radius: 8px; padding: .5rem .8rem; cursor: pointer; font-weight: 600; }
-  .card .agregar:disabled { opacity: .5; cursor: default; }
-  #btn-carrito { background: var(--acento); color: #222; border: none; border-radius: 10px;
-                 padding: .55rem 1rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
+  .card.invitacion a { color: var(--verde-osc); font-weight: 700; }
+  /* Ficha de producto (modal) */
+  #velo { position: fixed; inset: 0; background: rgb(13 27 42 / .55); z-index: 40; }
+  #ficha { position: fixed; inset: 0; margin: auto; z-index: 45; background: #fff;
+           width: min(760px, 94vw); height: min(620px, 92vh); border-radius: 14px;
+           padding: 1.4rem; overflow-y: auto; }
+  #ficha .cerrar { position: absolute; top: .7rem; right: 1rem; border: none; background: none;
+                   font-size: 1.5rem; cursor: pointer; color: var(--gris-texto); }
+  #ficha .arriba { display: flex; gap: 1.2rem; flex-wrap: wrap; margin-bottom: 1rem; }
+  #ficha .foto { flex: 0 0 220px; height: 200px; background: var(--gris-sec);
+                 border-radius: 10px; display: flex; align-items: center;
+                 justify-content: center; font-size: 4.5rem; }
+  #ficha .foto img { width: 100%; height: 100%; object-fit: contain; }
+  #ficha .datos { flex: 1; min-width: 240px; }
+  #ficha .ruta { font-size: .78rem; color: var(--gris-texto); margin-bottom: .3rem; }
+  #ficha h2 { font-size: 1.2rem; margin-bottom: .4rem; text-wrap: balance; }
+  #ficha .precio { font-size: 1.5rem; font-weight: 800; color: var(--azul); margin: .5rem 0; }
+  #ficha .acciones { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: .6rem; }
+  #ficha .acciones .agregar { background: var(--verde); color: #fff; border: none;
+      border-radius: 9px; padding: .65rem 1.1rem; font-weight: 700; cursor: pointer; }
+  #ficha .acciones .wsp { background: #fff; color: var(--verde-osc); text-decoration: none;
+      border: 2px solid var(--verde); border-radius: 9px; padding: .55rem 1rem;
+      font-weight: 700; }
+  #ficha .descs h3 { font-size: .85rem; text-transform: uppercase; letter-spacing: .06em;
+      color: var(--gris-texto); margin: 1rem 0 .4rem; border-bottom: 1px solid var(--borde);
+      padding-bottom: .3rem; }
+  #ficha .descs div { font-size: .92rem; line-height: 1.55; color: #23303d; }
+  #ficha .descs li { margin-left: 1.1rem; }
+  /* Carrito */
   #carrito { position: fixed; top: 0; right: 0; height: 100%; width: min(400px, 100%);
-             background: #fff; box-shadow: -4px 0 18px rgb(0 0 0 / .2); z-index: 50;
-             display: flex; flex-direction: column; padding: 1.2rem;
-             overflow-y: auto; }
+             background: #fff; box-shadow: -4px 0 18px rgb(13 27 42 / .25); z-index: 50;
+             display: flex; flex-direction: column; padding: 1.2rem; overflow-y: auto; }
   #carrito h2 { color: var(--azul); margin-bottom: 1rem; }
   #carrito .item { display: flex; gap: .5rem; align-items: center; font-size: .88rem;
-                   border-bottom: 1px solid #eee; padding: .5rem 0; }
+                   border-bottom: 1px solid var(--borde); padding: .5rem 0; }
   #carrito .item .nom { flex: 1; }
   #carrito .item input { width: 56px; padding: .3rem; }
   #carrito .item button { border: none; background: none; color: #b42318; cursor: pointer;
                           font-weight: 700; }
-  #carrito .total { font-size: 1.15rem; font-weight: 700; color: var(--azul);
-                    margin: .9rem 0; }
+  #carrito .total { font-size: 1.15rem; font-weight: 800; color: var(--azul); margin: .9rem 0; }
   #carrito form { display: flex; flex-direction: column; gap: .55rem; }
-  #carrito .enviar { background: var(--azul); color: #fff; border: none; border-radius: 9px;
+  #carrito .enviar { background: var(--verde); color: #fff; border: none; border-radius: 9px;
                      padding: .7rem; font-weight: 700; cursor: pointer; }
   #carrito .cerrar { position: absolute; top: .8rem; right: 1rem; border: none;
                      background: none; font-size: 1.4rem; cursor: pointer; color: #555; }
-  #carrito .exito { background: #e8f3ea; color: #1a7f37; border-radius: 10px;
+  #carrito .exito { background: #eef7e2; color: var(--verde-osc); border-radius: 10px;
                     padding: 1rem; font-weight: 600; }
   #carrito .error-pedido { color: #b42318; font-size: .88rem; min-height: 1.2em; }
 </style>
 </head>
 <body>
 <header>
-  <div><h1>PLATIM Marketplace</h1><small>Ferreterías de Colombia, despachos a nivel nacional</small></div>
+  <div>
+    <img src="https://raw.githubusercontent.com/xentristech/dotaplatim/main/public/logo-platim.png"
+         alt="PLATIM — Seguridad que inspira confianza">
+    <small>Marketplace ferretero · despachos a nivel nacional</small>
+  </div>
   <div class="controles">
-    <input id="q" placeholder="Buscar producto o SKU...">
-    <select id="marca"><option value="">Todas las marcas</option></select>
+    <input id="q" placeholder="Busca por producto, marca, SKU o categoría...">
     <button id="btn-carrito">🛒 <span id="carrito-n">0</span></button>
   </div>
 </header>
+<main>
+  <div class="cta" id="unirse">
+    <div>
+      <h2>¿Quieres que tu ferretería esté aquí?</h2>
+      <p>Tu catálogo en internet sin montar página web: nosotros ponemos la plataforma,
+         el posicionamiento y los despachos a todo el país. Tú solo vendes.</p>
+    </div>
+    <a href="https://wa.me/573023660481?text=Quiero%20vincular%20mi%20ferreter%C3%ADa%20a%20PLATIM"
+       target="_blank">Vincular mi ferretería</a>
+  </div>
+  <nav id="categorias" aria-label="Categorías"></nav>
+  <p id="resumen"></p>
+  <div class="grid" id="grid"></div>
+  <div class="pag">
+    <button id="prev">&larr; Anterior</button>
+    <button id="next">Siguiente &rarr;</button>
+  </div>
+</main>
+
+<div id="velo" hidden></div>
+<section id="ficha" hidden>
+  <button class="cerrar" id="ficha-cerrar">&times;</button>
+  <div class="arriba">
+    <div class="foto" id="f-foto"></div>
+    <div class="datos">
+      <p class="ruta" id="f-ruta"></p>
+      <h2 id="f-nombre"></h2>
+      <p class="tienda" id="f-tienda"></p>
+      <p class="precio" id="f-precio"></p>
+      <div class="acciones">
+        <button class="agregar" id="f-agregar">Agregar al pedido</button>
+        <a class="wsp" id="f-wsp" target="_blank">Consultar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+  <div class="descs">
+    <h3>Resumen</h3><div id="f-corta"></div>
+    <h3>Descripción completa</h3><div id="f-larga"></div>
+  </div>
+</section>
 
 <aside id="carrito" hidden>
   <button class="cerrar" id="carrito-cerrar">&times;</button>
@@ -97,80 +187,109 @@
   </div>
   <div class="exito" id="c-exito" hidden></div>
 </aside>
-<main>
-  <div class="cta" id="unirse">
-    <div>
-      <h2>¿Quieres que tu ferretería esté aquí?</h2>
-      <p>Tu catálogo en internet sin montar página web: nosotros ponemos la plataforma,
-         el posicionamiento y los despachos a todo el país. Tú solo vendes.</p>
-    </div>
-    <a href="https://wa.me/573000000000?text=Quiero%20vincular%20mi%20ferreter%C3%ADa%20a%20PLATIM"
-       target="_blank">Vincular mi ferretería</a>
-  </div>
-  <p id="resumen"></p>
-  <div class="grid" id="grid"></div>
-  <div class="pag">
-    <button id="prev">&larr; Anterior</button>
-    <button id="next">Siguiente &rarr;</button>
-  </div>
-</main>
-<script>
-const cop = n => n == null ? "Consultar" : "$" + n.toLocaleString("es-CO");
-let page = 1;
 
-async function cargarMarcas() {
-  const marcas = await (await fetch("/api/marcas")).json();
-  for (const m of marcas) {
-    const o = document.createElement("option");
-    o.value = m.marca; o.textContent = `${m.marca} (${m.productos})`;
-    document.getElementById("marca").appendChild(o);
-  }
+<script>
+const $id = x => document.getElementById(x);
+const cop = n => n == null ? "Consultar" : "$" + n.toLocaleString("es-CO");
+const WSP = "573023660481";
+const EMOJI = {
+  "Herramientas eléctricas": "🛠️", "Jardín y forestal": "🌳", "Fumigación": "🌾",
+  "Agro y ganadería": "🚜", "Bombas y agua": "💧", "Lavado y limpieza": "🧽",
+  "Energía": "🔋", "Motores": "⚙️", "Construcción": "🏗️",
+};
+let page = 1, categoriaActiva = "";
+
+// --- Categorías ---
+async function cargarCategorias() {
+  const cats = await (await fetch("/api/categorias")).json();
+  const nav = $id("categorias");
+  const boton = (texto, valor) => {
+    const b = document.createElement("button");
+    b.textContent = texto;
+    b.onclick = () => {
+      categoriaActiva = valor; page = 1;
+      [...nav.children].forEach(x => x.classList.remove("activa"));
+      b.classList.add("activa");
+      cargar();
+    };
+    nav.appendChild(b);
+    return b;
+  };
+  boton("Todo el catálogo", "").classList.add("activa");
+  for (const c of cats) boton(`${EMOJI[c.categoria] || "🔩"} ${c.categoria} (${c.productos})`, c.categoria);
 }
 
+// --- Listado ---
 async function cargar() {
-  const q = document.getElementById("q").value;
-  const marca = document.getElementById("marca").value;
-  const r = await (await fetch(`/api/productos?page=${page}&q=${encodeURIComponent(q)}&marca=${encodeURIComponent(marca)}`)).json();
-  document.getElementById("resumen").textContent =
+  const q = $id("q").value;
+  const r = await (await fetch(`/api/productos?page=${page}&q=${encodeURIComponent(q)}&categoria=${encodeURIComponent(categoriaActiva)}`)).json();
+  $id("resumen").textContent =
     `${r.total} productos — página ${r.page} de ${Math.max(1, Math.ceil(r.total / r.porPagina))}`;
-  const grid = document.getElementById("grid");
+  const grid = $id("grid");
   grid.innerHTML = "";
   for (const p of r.productos) {
     const card = document.createElement("div");
     card.className = "card";
-    card.innerHTML = `<span class="marca"></span><h3></h3>
-      <div class="precio"></div><div class="tienda"></div>`;
-    card.querySelector(".marca").textContent = p.marca || "genérico";
+    card.innerHTML = `<div class="foto"></div><div class="cuerpo">
+      <span class="marca"></span><h3></h3>
+      <div class="precio"></div><div class="tienda"></div>
+      <button class="agregar"></button></div>`;
+    const foto = card.querySelector(".foto");
+    if (p.imagen) { const im = document.createElement("img"); im.src = p.imagen;
+                    im.alt = p.nombre; im.loading = "lazy"; foto.appendChild(im); }
+    else foto.textContent = EMOJI[p.categoria] || "🔩";
+    card.querySelector(".marca").textContent =
+      (p.marca || "genérico") + " · " + (p.categoria || "");
     card.querySelector("h3").textContent = p.nombre;
     card.querySelector(".precio").textContent = cop(p.precio);
     card.querySelector(".tienda").textContent = `${p.sku} · ${p.ferreteria}`;
-    const btn = document.createElement("button");
-    btn.className = "agregar";
+    const btn = card.querySelector(".agregar");
     if (p.precio == null) { btn.textContent = "Precio a consultar"; btn.disabled = true; }
     else {
       btn.textContent = "Agregar al pedido";
-      btn.onclick = () => agregarAlCarrito(p);
+      btn.onclick = (e) => { e.stopPropagation(); agregarAlCarrito(p); };
     }
-    card.appendChild(btn);
+    card.onclick = () => abrirFicha(p.slug);
     grid.appendChild(card);
   }
   const inv = document.createElement("div");
   inv.className = "card invitacion";
   inv.innerHTML = `<h3>Aquí puede estar<br>tu ferretería</h3>
     <a href="#unirse">Quiero vincularme &uarr;</a>`;
+  inv.onclick = () => location.hash = "unirse";
   grid.appendChild(inv);
-  document.getElementById("prev").disabled = r.page <= 1;
-  document.getElementById("next").disabled = r.page * r.porPagina >= r.total;
+  $id("prev").disabled = r.page <= 1;
+  $id("next").disabled = r.page * r.porPagina >= r.total;
 }
 
-document.getElementById("q").addEventListener("input", () => { page = 1; cargar(); });
-document.getElementById("marca").addEventListener("change", () => { page = 1; cargar(); });
-document.getElementById("prev").onclick = () => { page--; cargar(); };
-document.getElementById("next").onclick = () => { page++; cargar(); };
-cargarMarcas(); cargar();
+// --- Ficha de producto ---
+async function abrirFicha(slug) {
+  const p = await (await fetch("/api/productos/" + encodeURIComponent(slug))).json();
+  if (p.error) return;
+  const foto = $id("f-foto");
+  foto.innerHTML = "";
+  if (p.imagen) { const im = document.createElement("img"); im.src = p.imagen;
+                  im.alt = p.nombre; foto.appendChild(im); }
+  else foto.textContent = EMOJI[p.categoria] || "🔩";
+  $id("f-ruta").textContent = `${p.categoria || "Catálogo"} › ${p.marca || "genérico"} › ${p.sku}`;
+  $id("f-nombre").textContent = p.nombre;
+  $id("f-tienda").textContent = "Vendido por " + p.ferreteria + " · despacho nacional";
+  $id("f-precio").textContent = cop(p.precio);
+  $id("f-corta").innerHTML = p.descripcion_corta || "<p>(sin resumen)</p>";
+  $id("f-larga").innerHTML = p.descripcion || "<p>(sin descripción adicional)</p>";
+  const btn = $id("f-agregar");
+  btn.disabled = p.precio == null;
+  btn.textContent = p.precio == null ? "Precio a consultar" : "Agregar al pedido";
+  btn.onclick = () => { agregarAlCarrito(p); cerrarFicha(); };
+  $id("f-wsp").href = `https://wa.me/${WSP}?text=` +
+    encodeURIComponent(`Hola PLATIM, quiero información del producto ${p.nombre} (SKU ${p.sku})`);
+  $id("velo").hidden = false; $id("ficha").hidden = false;
+}
+function cerrarFicha() { $id("velo").hidden = true; $id("ficha").hidden = true; }
+$id("ficha-cerrar").onclick = cerrarFicha;
+$id("velo").onclick = cerrarFicha;
 
 // --- Carrito (guardado en el navegador) ---
-const $id = x => document.getElementById(x);
 let carrito = JSON.parse(localStorage.getItem("carrito-platim") || "[]");
 
 function guardarCarrito() {
@@ -239,7 +358,10 @@ $id("form-pedido").addEventListener("submit", async (e) => {
     `Te contactaremos por WhatsApp para confirmar el despacho.`;
 });
 
-guardarCarrito();
+$id("q").addEventListener("input", () => { page = 1; cargar(); });
+$id("prev").onclick = () => { page--; cargar(); };
+$id("next").onclick = () => { page++; cargar(); };
+cargarCategorias(); cargar(); guardarCarrito();
 </script>
 </body>
 </html>

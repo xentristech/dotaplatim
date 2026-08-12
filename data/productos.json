@@ -8,7 +8,9 @@
     "meta_descripcion": "Venta de Set De Puntas DEWALT DWAMF30 de 30 piezas, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 129000,
     "precio_regular": 129000,
-    "marca": "DEWALT"
+    "marca": "DEWALT",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "DCK276D2-B3",
@@ -19,7 +21,9 @@
     "meta_descripcion": "Venta de Taladro PERCUTOR + Llave De Impacto DEWALT DCK276D2-B3, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 1029000,
     "precio_regular": 1029000,
-    "marca": "DEWALT"
+    "marca": "DEWALT",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "DCD7781D2-B3",
@@ -30,7 +34,9 @@
     "meta_descripcion": "Venta de Taladro PERCUTOR inalámbrico DEWALT DCD7781D2-B3, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 819000,
     "precio_regular": 819000,
-    "marca": "DEWALT"
+    "marca": "DEWALT",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "DCD7781D1-B3",
@@ -41,7 +47,9 @@
     "meta_descripcion": "Venta de Taladro PERCUTOR inalámbrico DEWALT DCD7781D1-B3 , contamos con amplio catálogo . Asesoría especializada, Envíos a todo Colombia.",
     "precio": 459000,
     "precio_regular": 459000,
-    "marca": "DEWALT"
+    "marca": "DEWALT",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "LD008-B3",
@@ -52,7 +60,9 @@
     "meta_descripcion": "Venta de Taladro/Atornillador Inalámbrico BLACK&DECKER LD008-B3, contamos con amplio catálogo . Asesoría especializada, Envíos a todo Colombia.",
     "precio": 149000,
     "precio_regular": 149000,
-    "marca": "BLACK+DECKER"
+    "marca": "BLACK+DECKER",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "CS1004-B3",
@@ -63,7 +73,9 @@
     "meta_descripcion": "Venta de Sierra Circular BLACK&DECKER CS1004-B3 , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 319000,
     "precio_regular": 319000,
-    "marca": "BLACK+DECKER"
+    "marca": "BLACK+DECKER",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "G720K-B3",
@@ -74,7 +86,9 @@
     "meta_descripcion": "Venta de Pulidora 4-½\" BLACK&DECKER G720K-B3 11.000rpm Eje 5/8”. Contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 179000,
     "precio_regular": 179000,
-    "marca": "BLACK+DECKER"
+    "marca": "BLACK+DECKER",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "G720-B3",
@@ -85,7 +99,9 @@
     "meta_descripcion": "Venta de Pulidora 4-½\" BLACK&DECKER G720-B3 11.000rpm Eje 5/8”. Contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 159000,
     "precio_regular": 159000,
-    "marca": "BLACK+DECKER"
+    "marca": "BLACK+DECKER",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "G650-B3",
@@ -96,7 +112,9 @@
     "meta_descripcion": "Venta de Pulidora 4-½\" BLACK&DECKER G650-B3 650W 11.000rpm Eje 5/8”. Contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 139000,
     "precio_regular": 139000,
-    "marca": "BLACK+DECKER"
+    "marca": "BLACK+DECKER",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "DWE4314-B3",
@@ -107,7 +125,9 @@
     "meta_descripcion": "Venta de Pulidora 4-½\" DEWALT DWE4314-B3 1,500W 11.000rpm Eje 5/8”. Contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 809000,
     "precio_regular": 809000,
-    "marca": "DEWALT"
+    "marca": "DEWALT",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "DWE4577-B3",
@@ -118,7 +138,9 @@
     "meta_descripcion": "Venta de Pulidora 7\" DEWALT DWE4577-B3 2.700W 8500rpm Eje 5/8\", contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 1079000,
     "precio_regular": 1079000,
-    "marca": "DEWALT"
+    "marca": "DEWALT",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "SL227-B3",
@@ -129,7 +151,9 @@
     "meta_descripcion": "Venta de Pulidora 7\" STANLEY SL227-B3 2.200W 8500rpm Eje 5/8\", contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 1079000,
     "precio_regular": 1079000,
-    "marca": "STANLEY"
+    "marca": "STANLEY",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "STGS9115-B3",
@@ -140,7 +164,9 @@
     "meta_descripcion": "Venta de Pulidora 4-½\" STANLEY STGS9115-B3 900W 11.000rpm Eje 5/8” . Contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 259000,
     "precio_regular": 259000,
-    "marca": "STANLEY"
+    "marca": "STANLEY",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "SG6115-B3",
@@ -151,7 +177,9 @@
     "meta_descripcion": "Venta de Pulidora 4-½\" STANLEY SG6115-B3 620W. Contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 189000,
     "precio_regular": 189000,
-    "marca": "STANLEY"
+    "marca": "STANLEY",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "SGS1045K-B3",
@@ -162,7 +190,9 @@
     "meta_descripcion": "Venta de Pulidora 4-½\" STANLEY SGS1045K-B3 .contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 309000,
     "precio_regular": 309000,
-    "marca": "STANLEY"
+    "marca": "STANLEY",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "SP137K-B3",
@@ -173,7 +203,9 @@
     "meta_descripcion": "Venta de Polichadora STANLEY 7\", (Profesional), contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 539000,
     "precio_regular": 539000,
-    "marca": "STANLEY"
+    "marca": "STANLEY",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "SSC22-B3",
@@ -184,7 +216,9 @@
     "meta_descripcion": "Venta de Tronzadora STANLEY SSC22-B3 2.200W, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 719000,
     "precio_regular": 719000,
-    "marca": "STANLEY"
+    "marca": "STANLEY",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "SH86",
@@ -195,7 +229,9 @@
     "meta_descripcion": "Venta de Sopladora/Aspiradora STIHL SH86 a gasolina 1,07hp . contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 1679000,
     "precio_regular": 1679000,
-    "marca": "STIHL"
+    "marca": "STIHL",
+    "categoria": "Jardín y forestal",
+    "imagen": ""
   },
   {
     "sku": "DTL10000",
@@ -206,7 +242,9 @@
     "meta_descripcion": "Venta de Motoazada Motocultor DUCATI DTL10000 a gasolina 7hp 6 velocidades , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 4199000,
     "precio_regular": 4199000,
-    "marca": "DUCATI"
+    "marca": "DUCATI",
+    "categoria": "Agro y ganadería",
+    "imagen": ""
   },
   {
     "sku": "429-GSP30",
@@ -217,7 +255,9 @@
     "meta_descripcion": "Venta de Fumigadora Estacionaria MASTER KTC 429-GSP30, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 1379000,
     "precio_regular": 1379000,
-    "marca": "MASTER"
+    "marca": "MASTER",
+    "categoria": "Fumigación",
+    "imagen": ""
   },
   {
     "sku": "TF030NE-GM200K",
@@ -228,7 +268,9 @@
     "meta_descripcion": "Venta de Fumigadora Estacionaria FORTE TF030NE-GM200K ,contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia",
     "precio": 1909000,
     "precio_regular": 1909000,
-    "marca": "FORTE"
+    "marca": "FORTE",
+    "categoria": "Fumigación",
+    "imagen": ""
   },
   {
     "sku": "GP200-TS28",
@@ -239,7 +281,9 @@
     "meta_descripcion": "Venta de Fumigadora Estacionaria HONDA GP200-TS28 motor 6.5hp gasolina, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia",
     "precio": 3899000,
     "precio_regular": 3899000,
-    "marca": "HONDA"
+    "marca": "HONDA",
+    "categoria": "Fumigación",
+    "imagen": ""
   },
   {
     "sku": "EM-RC20L-AL",
@@ -250,7 +294,9 @@
     "meta_descripcion": "Venta de fumigadoras Royal Condor EM-RC20L-AL para aplicaciones agrícolas y procesos de desinfección, Asesoría especializada. Envíos a todo Colombia.",
     "precio": 469000,
     "precio_regular": 469000,
-    "marca": "ROYAL CONDOR"
+    "marca": "ROYAL CONDOR",
+    "categoria": "Fumigación",
+    "imagen": ""
   },
   {
     "sku": "EM-RC20L-CL",
@@ -261,7 +307,9 @@
     "meta_descripcion": "Venta de fumigadoras Royal Condor EM-RC20L-CL para aplicaciones agrícolas y procesos de desinfección, Asesoría especializada. Envíos a todo Colombia.",
     "precio": 349000,
     "precio_regular": 349000,
-    "marca": "ROYAL CONDOR"
+    "marca": "ROYAL CONDOR",
+    "categoria": "Fumigación",
+    "imagen": ""
   },
   {
     "sku": "SC16-B3",
@@ -272,7 +320,9 @@
     "meta_descripcion": "Venta de Sierra circular STANLEY SC16-B3 1600w (profesional), contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 359000,
     "precio_regular": 359000,
-    "marca": "STANLEY"
+    "marca": "STANLEY",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "SS24-B3",
@@ -283,7 +333,9 @@
     "meta_descripcion": "Venta de Lijadora Rotorbital Inalambrica STANLEY SS24-B3. Contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 229000,
     "precio_regular": 229000,
-    "marca": "STANLEY"
+    "marca": "STANLEY",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "ESYBOX DIVER",
@@ -294,7 +346,9 @@
     "meta_descripcion": "Venta de Sistemas De Presión Inteligentes Garantizan el confort de la presión constante en un sistema hidráulico, con tecnología inverter. Envíos a todo Colombia.",
     "precio": 8339000,
     "precio_regular": 8339000,
-    "marca": "ESYBOX"
+    "marca": "ESYBOX",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "ESYBOX MAX 60/120",
@@ -305,7 +359,9 @@
     "meta_descripcion": "Venta de Sistemas De Presión Inteligentes Garantizan el confort de la presión constante en un sistema hidráulico, con tecnología inverter. Envíos a todo Colombia.",
     "precio": 17909000,
     "precio_regular": 17909000,
-    "marca": "ESYBOX"
+    "marca": "ESYBOX",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "ESYBOX+DCONNECT BOX2",
@@ -316,7 +372,9 @@
     "meta_descripcion": "Venta de Sistemas De Presión Inteligentes Garantizan el confort de la presión constante en un sistema hidráulico, con tecnología inverter. Envíos a todo Colombia.",
     "precio": 8319000,
     "precio_regular": 8319000,
-    "marca": "ESYBOX"
+    "marca": "ESYBOX",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "ESYBOX",
@@ -327,7 +385,9 @@
     "meta_descripcion": "Venta de Sistemas De Presión Inteligentes Garantizan el confort de la presión constante en un sistema hidráulico, con tecnología inverter. Envíos a todo Colombia.",
     "precio": 7039000,
     "precio_regular": 7039000,
-    "marca": "ESYBOX"
+    "marca": "ESYBOX",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "ESYBOX MINI",
@@ -338,7 +398,9 @@
     "meta_descripcion": "Venta de Sistemas De Presión Inteligentes Garantizan el confort de la presión constante en un sistema hidráulico, con tecnología inverter. Envíos a todo Colombia.",
     "precio": 4769000,
     "precio_regular": 4769000,
-    "marca": "ESYBOX"
+    "marca": "ESYBOX",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "EF60F-T",
@@ -349,7 +411,9 @@
     "meta_descripcion": "Venta de Motor fuera de borda HIDEA EF60F-T pata larga Mando Remoto, ideal para aumentar la potencia de las embarcaciones. Envíos a toda Colombia.",
     "precio": 27999000,
     "precio_regular": 27999000,
-    "marca": "HIDEA"
+    "marca": "HIDEA",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "75FHL-D",
@@ -360,7 +424,9 @@
     "meta_descripcion": "Venta de Motor fuera de borda HIDEA 75FHL-D pata larga , ideal para aumentar la potencia de las embarcaciones. Envíos a toda Colombia.",
     "precio": 22499000,
     "precio_regular": 22499000,
-    "marca": "HIDEA"
+    "marca": "HIDEA",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "15FHL",
@@ -371,7 +437,9 @@
     "meta_descripcion": "Venta de Motor fuera de borda HIDEA 15FHL pata larga , ideal para aumentar la potencia de las embarcaciones. Envíos a toda Colombia.",
     "precio": 6469000,
     "precio_regular": 6469000,
-    "marca": "HIDEA"
+    "marca": "HIDEA",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "15FHS",
@@ -382,7 +450,9 @@
     "meta_descripcion": "Venta de Motor fuera de borda HIDEA 15FHS pata corta, ideal para aumentar la potencia de las embarcaciones. Envíos a toda Colombia.",
     "precio": 6349000,
     "precio_regular": 6349000,
-    "marca": "HIDEA"
+    "marca": "HIDEA",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "9.8FHS",
@@ -393,7 +463,9 @@
     "meta_descripcion": "Venta de Motor fuera de borda HIDEA 9.8FHS pata corta, ideal para aumentar la potencia de las embarcaciones. Envíos a toda Colombia.",
     "precio": 5249000,
     "precio_regular": 5249000,
-    "marca": "HIDEA"
+    "marca": "HIDEA",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "5FHS",
@@ -404,7 +476,9 @@
     "meta_descripcion": "Venta de Motor fuera de borda HIDEA 5FHS pata corta, ideal para aumentar la potencia de las embarcaciones. Envíos a toda Colombia.",
     "precio": 3799000,
     "precio_regular": 3799000,
-    "marca": "HIDEA"
+    "marca": "HIDEA",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "LHS520",
@@ -415,7 +489,9 @@
     "meta_descripcion": "Venta de Motor fuera de borda HIDEA LHS520 pata corta, ideal para aumentar la potencia de las embarcaciones. Envíos a toda Colombia.",
     "precio": 849000,
     "precio_regular": 849000,
-    "marca": "HIDEA"
+    "marca": "HIDEA",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "EU3000IS",
@@ -426,7 +502,9 @@
     "meta_descripcion": "Venta de Planta Eléctrica EU3000IS HONDA SILENCIOSA Inverter 3000watt Monofásica, Arranque Manual 120V. Envíos a toda Colombia.",
     "precio": 15389000,
     "precio_regular": 15389000,
-    "marca": "HONDA"
+    "marca": "HONDA",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "460-EHPW22",
@@ -437,7 +515,9 @@
     "meta_descripcion": "Venta de Hidrolavadora Eléctrica de pistón MASTER/ KTC 2,200psi 386Litros/hora 2,2kw, 115/230v, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 3739000,
     "precio_regular": 3739000,
-    "marca": "MASTER"
+    "marca": "MASTER",
+    "categoria": "Lavado y limpieza",
+    "imagen": ""
   },
   {
     "sku": "FD500D",
@@ -448,7 +528,9 @@
     "meta_descripcion": "Venta de Motor DIESEL FD500D FORTE 13hp 3600rpm, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 2379000,
     "precio_regular": 2379000,
-    "marca": "FORTE"
+    "marca": "FORTE",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "JTRF400",
@@ -459,7 +541,9 @@
     "meta_descripcion": "Venta de, Molino triturador Forrajero TRAPP JTRF400 motor ELECTRICO 2hp/110v-220v/WEG . (Pica muele y tritura). Envíos a toda Colombia. Asesoría personal especializada. Somos EQUIPMASTER STORE",
     "precio": 2719000,
     "precio_regular": 2719000,
-    "marca": "TRAPP"
+    "marca": "TRAPP",
+    "categoria": "Agro y ganadería",
+    "imagen": ""
   },
   {
     "sku": "460-HGPW30",
@@ -470,7 +554,9 @@
     "meta_descripcion": "Venta de Hidrolavadora MASTER/KTC 460-HGPW30 Motor gasolina 6,5hp 3000psi arranque manual . Asesoría especializada, Envíos a todo Colombia.",
     "precio": 2349000,
     "precio_regular": 2349000,
-    "marca": "MASTER"
+    "marca": "MASTER",
+    "categoria": "Lavado y limpieza",
+    "imagen": ""
   },
   {
     "sku": "3wz-3000A-ME200",
@@ -481,7 +567,9 @@
     "meta_descripcion": "Venta de Hidrolavadora ECOMAX 3wz-3000A-ME200 Motor gasolina 6,5hp Presion 2300psi arranque manual, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 2789000,
     "precio_regular": 2789000,
-    "marca": "ECOMAX"
+    "marca": "ECOMAX",
+    "categoria": "Lavado y limpieza",
+    "imagen": ""
   },
   {
     "sku": "CP90M",
@@ -492,7 +580,9 @@
     "meta_descripcion": "Venta de Cepillo de acabado o texturizador MASTER 90cm x 3/4\" 2 tubos extendibles, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia",
     "precio": 1129000,
     "precio_regular": 1129000,
-    "marca": "MASTER"
+    "marca": "MASTER",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "ML100L145",
@@ -503,7 +593,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico ML100L145 TECHTOP Monofásico IE2 IEC (IP55) 3hp 1800rpm, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 1709000,
     "precio_regular": 1709000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "ML80123",
@@ -514,7 +606,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico ML80123 TECHTOP Monofásico IE2 IEC (IP55) 1hp 3600rpm , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 809000,
     "precio_regular": 809000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "T3A112M45",
@@ -525,7 +619,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico T3A112M45 TECHTOP Trifásico IE3 5hp 1800rpm (IP55) . Envíos a nivel nacional. Asesoría personal especializada.",
     "precio": 2539000,
     "precio_regular": 2539000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "T3A112M25",
@@ -536,7 +632,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico T3A112M25 TECHTOP Trifásico IE3 5hp 3600rpm (IP55) . Envíos a nivel nacional. Asesoría personal especializada.",
     "precio": 2359000,
     "precio_regular": 2359000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "ML90L45",
@@ -547,7 +645,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico ML90L45 TECHTOP Monofásico IE2 IEC (IP55) 2hp 1800rpm , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 1389000,
     "precio_regular": 1389000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "PRUEBA - GSB20-2 RE",
@@ -558,7 +658,9 @@
     "meta_descripcion": "Venta de Taladro percutor BOSCH GSB20-2 RE 800w. Caja del engranaje de metal robusto para una larga vida útil , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": null,
     "precio_regular": null,
-    "marca": "BOSCH"
+    "marca": "BOSCH",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "CP120M",
@@ -569,7 +671,9 @@
     "meta_descripcion": "Venta de Cepillo de acabado o texturizador MASTER 120cm x 3/4\" 2 tubos extendibles, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia",
     "precio": 1269000,
     "precio_regular": 1269000,
-    "marca": "MASTER"
+    "marca": "MASTER",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "T3A100L245",
@@ -580,7 +684,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico T3A100L245 TECHTOP Trifásico IE3 4hp 1800rpm (IP55) . Envíos a nivel nacional. Asesoría personal especializada.",
     "precio": 1929000,
     "precio_regular": 1929000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "T3A90L225",
@@ -591,7 +697,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico T3A90L225 TECHTOP Trifásico en aluminio IE3 4hp 3600rpm (IP55) . Envíos a nivel nacional. Asesoría personal especializada.",
     "precio": 1929000,
     "precio_regular": 1929000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "T3A90L245",
@@ -602,7 +710,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico T3A90L245 TECHTOP Trifásico en aluminio IE3 3hp 1800rpm (IP55) . Envíos a nivel nacional. Asesoría personal especializada.",
     "precio": 1669000,
     "precio_regular": 1669000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "T3A90L125",
@@ -613,7 +723,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico T3A90L125 TECHTOP Trifásico IE3 3hp 3600rpm (IP55) . Envíos a nivel nacional. Asesoría personal especializada.",
     "precio": 1429000,
     "precio_regular": 1429000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "T3A90L145",
@@ -624,7 +736,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico TECHTOP Trifásico en aluminio IE3 2hp 1800rpm (IP55) . Envíos a nivel nacional. Asesoría personal especializada.",
     "precio": 1389000,
     "precio_regular": 1389000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "T3A90S25",
@@ -635,7 +749,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico T3A90S25 TECHTOP Trifásico en aluminio IE3 2hp 3600rpm (IP55) . Envíos a nivel nacional. Asesoría personal especializada.",
     "precio": 1239000,
     "precio_regular": 1239000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "T3A80244",
@@ -646,7 +762,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico T3A80244 TECHTOP Trifásico en aluminio IE3 1hp 1800rpm (IP55). Envíos a nivel nacional. Asesoría personal especializada.",
     "precio": 1029000,
     "precio_regular": 1029000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "T3A80124",
@@ -657,7 +775,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico T3A80124 TECHTOP Trifásico en aluminio IE3 1hp 3600rpm (IP55). Envíos a nivel nacional. Asesoría personal especializada.",
     "precio": 899000,
     "precio_regular": 899000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "ML100L45",
@@ -668,7 +788,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico ML100L45 TECHTOP Monofásico IE2 IEC (IP55) 4hp 1800rpm, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 2199000,
     "precio_regular": 2199000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "ML112M45",
@@ -679,7 +801,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico ML112M45 TECHTOP Monofásico IE2 N56 (IP55) 5hp 1800rpm, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 2659000,
     "precio_regular": 2659000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "ML112M123",
@@ -690,7 +814,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico ML112M123 TECHTOP Monofásico IE2 N56 (IP55) 5hp 3600rpm , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 2039000,
     "precio_regular": 2039000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "ML90L23",
@@ -701,7 +827,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico ML90L23 TECHTOP Monofásico IE2 IEC (IP55) 3hp 3600rpm , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 1299000,
     "precio_regular": 1299000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "ML90S23",
@@ -712,7 +840,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico ML90S23 TECHTOP Monofásico IE2 IEC (IP55) 2hp 3600rpm, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 1069000,
     "precio_regular": 1069000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "ML80244",
@@ -723,7 +853,9 @@
     "meta_descripcion": "Venta de Motor Eléctrico ML80244 TECHTOP Monofásico IE2 IEC (IP55) 1hp 1800rpm , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 909000,
     "precio_regular": 909000,
-    "marca": "TECHTOP"
+    "marca": "TECHTOP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "F0134000NA",
@@ -734,7 +866,9 @@
     "meta_descripcion": "Venta de Mototool DREMEL F0134000NA con 36 accesorios + 3 aditamentos. Envíos a toda Colombia. Asesoría personal especializada. Somos EQUIPMASTER.",
     "precio": 569000,
     "precio_regular": 569000,
-    "marca": "DREMEL"
+    "marca": "DREMEL",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "FS291",
@@ -745,7 +879,9 @@
     "meta_descripcion": "Venta de Guadañadora STIHL FS291 . Para trabajos exigentes de siega y en superficies relacionados con la agricultura y la jardinería.",
     "precio": 1990000,
     "precio_regular": 2109000,
-    "marca": "STIHL"
+    "marca": "STIHL",
+    "categoria": "Jardín y forestal",
+    "imagen": ""
   },
   {
     "sku": "Fs161",
@@ -756,7 +892,9 @@
     "meta_descripcion": "Venta de Guadañadora STIHL FS161 . Para trabajos exigentes de siega y en superficies relacionados con la agricultura y la jardinería.",
     "precio": 2019000,
     "precio_regular": 2019000,
-    "marca": "STIHL"
+    "marca": "STIHL",
+    "categoria": "Jardín y forestal",
+    "imagen": ""
   },
   {
     "sku": "FS221",
@@ -767,7 +905,9 @@
     "meta_descripcion": "Venta de Guadañadora STIHL FS221. Para trabajos exigentes de siega y en superficies relacionados con la agricultura y la jardinería.",
     "precio": 2079000,
     "precio_regular": 2079000,
-    "marca": "STIHL"
+    "marca": "STIHL",
+    "categoria": "Jardín y forestal",
+    "imagen": ""
   },
   {
     "sku": "FS230",
@@ -778,7 +918,9 @@
     "meta_descripcion": "Venta de Guadañadora STIHL FS230 2-Tiempos. Para trabajos exigentes de siega y en superficies relacionados con la agricultura y la jardinería.",
     "precio": 1149000,
     "precio_regular": 1149000,
-    "marca": "STIHL"
+    "marca": "STIHL",
+    "categoria": "Jardín y forestal",
+    "imagen": ""
   },
   {
     "sku": "FM-073B",
@@ -789,7 +931,9 @@
     "meta_descripcion": "Venta de Fumigadora FORTE FM-073B de Espalda con lanza, 30 litros, 500psi, BOMBA EN BRONCE. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 579000,
     "precio_regular": 579000,
-    "marca": "FORTE"
+    "marca": "FORTE",
+    "categoria": "Fumigación",
+    "imagen": ""
   },
   {
     "sku": "FG11000F",
@@ -800,7 +944,9 @@
     "meta_descripcion": "Venta de Motoazada FORTE FG11000F a gasolina 13hp, Ancho de trabajo 80cm-120cm. Envíos a toda Colombia. Asesoría personal especializada. Somos EQUIPMASTER",
     "precio": 4429000,
     "precio_regular": 4429000,
-    "marca": "FORTE"
+    "marca": "FORTE",
+    "categoria": "Agro y ganadería",
+    "imagen": ""
   },
   {
     "sku": "GLM 30-23",
@@ -811,7 +957,9 @@
     "meta_descripcion": "Venta de Medidor de Distancia Láser BOSCH GLM 30-23 Alcance: 30mts • Precisión: +/- 3,0mm. Asesoría personal especializada.",
     "precio": 309000,
     "precio_regular": 309000,
-    "marca": "BOSCH"
+    "marca": "BOSCH",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "GKS 130",
@@ -822,7 +970,9 @@
     "meta_descripcion": "Venta de Sierra circular BOSCH GKS130 1300w 5800rpm disco 7-¼” peso 3,9kg. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 439000,
     "precio_regular": 439000,
-    "marca": "BOSCH"
+    "marca": "BOSCH",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "GST 680",
@@ -833,7 +983,9 @@
     "meta_descripcion": "Venta de Sierra Caladora BOSCH GST 680 450W 3.100cpm Caja de Cartón, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 389000,
     "precio_regular": 389000,
-    "marca": "BOSCH"
+    "marca": "BOSCH",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "BDK1863HYR",
@@ -844,7 +996,9 @@
     "meta_descripcion": "Venta de Motobomba presión KAMA 3X3 Diesel 10hp caudal Max 850 litros/min, presión Max 80mts/114psi. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 3139000,
     "precio_regular": 3139000,
-    "marca": "KAMA"
+    "marca": "KAMA",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "437-SDG55-3",
@@ -855,7 +1009,9 @@
     "meta_descripcion": "Venta de Planta Eléctrica MASTER KTC 60kva/48kw standby (55kva/44kw prime) Trifásica motor Diesel 1800rpm . Asesoría especializada, Envíos a todo Colombia.",
     "precio": 59589000,
     "precio_regular": 59589000,
-    "marca": "MASTER"
+    "marca": "MASTER",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "XIG2200I",
@@ -866,7 +1022,9 @@
     "meta_descripcion": "Venta de Planta Electrica Alterman A Gasolina 4T Inverter, 2 Kw encendido Manual . Envíos a toda Colombia.",
     "precio": 3996020,
     "precio_regular": 3996020,
-    "marca": "ALTERMAN"
+    "marca": "ALTERMAN",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "463-DIG4000G",
@@ -877,7 +1035,9 @@
     "meta_descripcion": "Venta de Planta Eléctrica 463-DIG4000G KTC SILENCIOSA DUAL Inverter 4,000w a gasolina Monofásica, Arranque Manual 120V . Envíos a toda Colombia.",
     "precio": 5109000,
     "precio_regular": 5109000,
-    "marca": "KTC"
+    "marca": "KTC",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "463-DIG2200",
@@ -888,7 +1048,9 @@
     "meta_descripcion": "Venta de Planta Electrica 463-DIG2200 KTC SILENCIOSA Inverter 2,200watt a gasolina Monofásica, Arranque Manual 120V . Envíos a toda Colombia.",
     "precio": 3179000,
     "precio_regular": 3179000,
-    "marca": "KTC"
+    "marca": "KTC",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "463-DIG1200",
@@ -899,7 +1061,9 @@
     "meta_descripcion": "Venta de Planta Electrica 463-DIG1200 KTC SILENCIOSA Inverter 1,200w a gasolina Monofasica, Arranque Manual 120V . Envíos a toda Colombia.",
     "precio": 2279000,
     "precio_regular": 2279000,
-    "marca": "KTC"
+    "marca": "KTC",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "DGR2300IS",
@@ -910,7 +1074,9 @@
     "meta_descripcion": "Venta de Planta Eléctrica DGR2300IS DUCATI SILENCIOSA Inverter 2000 watts máximo, monofásica. Asesoría especializada. Envíos a todo Colombia.",
     "precio": 2999000,
     "precio_regular": 2999000,
-    "marca": "DUCATI"
+    "marca": "DUCATI",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "RE130",
@@ -921,7 +1087,9 @@
     "meta_descripcion": "Venta de Hidrolavadora Eléctrica STIHL RE130 (trabajo profesional) , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 1709000,
     "precio_regular": 1709000,
-    "marca": "STIHL"
+    "marca": "STIHL",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "WF1011",
@@ -932,7 +1100,9 @@
     "meta_descripcion": "Venta Compresor de aire WOLFOX WF1011 12v presión máx 300psi. Amplio catalogo en compresor de aire. Asesoría especializada. Envíos nacionales.",
     "precio": 49000,
     "precio_regular": 49000,
-    "marca": "WOLFOX"
+    "marca": "WOLFOX",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "EM-M1B-LTM",
@@ -943,7 +1113,9 @@
     "meta_descripcion": "Venta de Mezcladora de Concreto Mezcladora MASTER 1 bulto (180litros/6.3ft³) MASTER LITE. Asesoría especializada. Envíos a todo Colombia.",
     "precio": 3889000,
     "precio_regular": null,
-    "marca": "MASTER"
+    "marca": "MASTER",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "EM-M1B-LTMSM",
@@ -954,7 +1126,9 @@
     "meta_descripcion": "Venta de Mezcladora de Concreto Mezcladora MASTER 1 bulto (180litros/6.3ft³) Sin motor MASTER LITE. Asesoría especializada. Envíos a todo Colombia.",
     "precio": 3889000,
     "precio_regular": 3889000,
-    "marca": "MASTER"
+    "marca": "MASTER",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "EM-PG-LTM",
@@ -965,7 +1139,9 @@
     "meta_descripcion": "Venta de Pluma Grúa MASTER LITE 150Kg. con diferentes opciones de motor. Envíos a todo Colombia. Asesoría especializada.",
     "precio": 3339000,
     "precio_regular": null,
-    "marca": "MASTER"
+    "marca": "MASTER",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "EM-PG-LTM-SM",
@@ -976,7 +1152,9 @@
     "meta_descripcion": "Venta de Pluma Grúa MASTER LITE 150Kg sin motor con balde. Envíos a todo Colombia. Asesoría especializada.",
     "precio": 3339000,
     "precio_regular": 3339000,
-    "marca": "MASTER"
+    "marca": "MASTER",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "YDE8500T3",
@@ -987,7 +1165,9 @@
     "meta_descripcion": "Venta de Planta Eléctrica YDE8500T3 YORKING CABINADA 9000watt máximo, Trifásica, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia",
     "precio": 8229000,
     "precio_regular": 8229000,
-    "marca": "YORKING"
+    "marca": "YORKING",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "YDE8500E3",
@@ -998,7 +1178,9 @@
     "meta_descripcion": "Venta de Planta Eléctrica YDE8500E3 YORKING 9000watt máximo, Motor Diesel 14hp Trifásica, Arranque eléctrico, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia",
     "precio": 6479000,
     "precio_regular": 6479000,
-    "marca": "YORKING"
+    "marca": "YORKING",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "GA7020",
@@ -1009,7 +1191,9 @@
     "meta_descripcion": "Venta de Pulidora 7\" MAKITA GA7020 2.200w 8500rpm Eje 5/8\", contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 789000,
     "precio_regular": 789000,
-    "marca": "MAKITA"
+    "marca": "MAKITA",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "KDF4000X",
@@ -1020,7 +1204,9 @@
     "meta_descripcion": "Venta de Planta Eléctrica Diesel KDF4000X ECOHORSE 3000watt máximo. Contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia",
     "precio": 4129000,
     "precio_regular": 4129000,
-    "marca": "ECOHORSE"
+    "marca": "ECOHORSE",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "KDF2500X",
@@ -1031,7 +1217,9 @@
     "meta_descripcion": "Venta de Planta Eléctrica Diesel KDF2500X ECOHORSE 2200watt máximo. Contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia",
     "precio": 3499000,
     "precio_regular": 3499000,
-    "marca": "ECOHORSE"
+    "marca": "ECOHORSE",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "GSB20-2 RE",
@@ -1042,7 +1230,9 @@
     "meta_descripcion": "Venta de Taladro percutor BOSCH GSB20-2 RE 800w , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 849000,
     "precio_regular": 849000,
-    "marca": "BOSCH"
+    "marca": "BOSCH",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "GHO 700",
@@ -1053,7 +1243,9 @@
     "meta_descripcion": "Venta de Cepillo Electrico GHO 700 BOSCH, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 419000,
     "precio_regular": 419000,
-    "marca": "BOSCH"
+    "marca": "BOSCH",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "Ms382-63",
@@ -1064,7 +1256,9 @@
     "meta_descripcion": "Venta de Motosierra STIHL Ms382-63. Amplio catalogo de motosierras. Asesoría personalizada especializada. Envíos a nivel nacional.",
     "precio": 2829000,
     "precio_regular": 2829000,
-    "marca": "STIHL"
+    "marca": "STIHL",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "495-DWG300AI",
@@ -1075,7 +1269,9 @@
     "meta_descripcion": "Venta de Motosoldador 495-DWG300AI, generalmente son utilizados en trabajos de construcción y reparación de infraestructuras., contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 17179000,
     "precio_regular": 17179000,
-    "marca": "KTC"
+    "marca": "KTC",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "485-DWG200A",
@@ -1086,7 +1282,9 @@
     "meta_descripcion": "Venta de Motosoldador 485-DWG200A, generalmente son utilizados en trabajos de construcción y reparación de infraestructuras., contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 8859000,
     "precio_regular": 8859000,
-    "marca": "KTC"
+    "marca": "KTC",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "YDE6500EW",
@@ -1097,7 +1295,9 @@
     "meta_descripcion": "Venta de Motosoldador YDE6500EW, generalmente son utilizados en trabajos de construcción y reparación de infraestructuras., contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 7289000,
     "precio_regular": 7289000,
-    "marca": "YORKING"
+    "marca": "YORKING",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "WG6500DC-1",
@@ -1108,7 +1308,9 @@
     "meta_descripcion": "Venta de Motosoldador WG6500DC-1generalmente son utilizados en trabajos de construcción y reparación de infraestructuras., contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 6399000,
     "precio_regular": 6399000,
-    "marca": "FORTE"
+    "marca": "FORTE",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "ML44+GG2800",
@@ -1119,7 +1321,9 @@
     "meta_descripcion": "Venta de Torre de iluminación MASALTA 4 lamparas LED de 200Wcada una, + Planta eléctrica ALTERMAN, contamos con amplio catálogo en torres de iluminación. Envíos a todo Colombia.",
     "precio": 12759000,
     "precio_regular": 12759000,
-    "marca": "ALTERMAN"
+    "marca": "ALTERMAN",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "SM18-B3",
@@ -1130,7 +1334,9 @@
     "meta_descripcion": "Venta de Sierra Ingleteadora Telescopica 10\" STANLEY SM18-B3 120V,1800 W. Asesoria especializada. Envios a todo Colombia.",
     "precio": 1519000,
     "precio_regular": 1519000,
-    "marca": "STANLEY"
+    "marca": "STANLEY",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "CFD-50E",
@@ -1141,7 +1347,9 @@
     "meta_descripcion": "Venta de Chipeadora FORTE CFD-50E diametro 7\", Motor 50hp Diesel, 275kg Arranque electrico contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 9359,
     "precio_regular": 9359,
-    "marca": "FORTE"
+    "marca": "FORTE",
+    "categoria": "Jardín y forestal",
+    "imagen": ""
   },
   {
     "sku": "FDG30-S",
@@ -1152,7 +1360,9 @@
     "meta_descripcion": "Venta de Planta Electrica FDG30-S FORTE CABINADA trifasica 33kva/26,4kva. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 38829000,
     "precio_regular": 38829000,
-    "marca": "FORTE"
+    "marca": "FORTE",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "FDG25-S",
@@ -1163,7 +1373,9 @@
     "meta_descripcion": "Venta de Planta Electrica FDG25-S FORTE CABINADA trifasica 27,5kva/22kva. Asesoría especializada, Envíos a todo Colombia.",
     "precio": null,
     "precio_regular": null,
-    "marca": "FORTE"
+    "marca": "FORTE",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "FDG15-S",
@@ -1174,7 +1386,9 @@
     "meta_descripcion": "Venta de Planta Eléctrica FDG15-S FORTE CABINADA trifásica. motor Diesel peso 680kg. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 29309000,
     "precio_regular": 29309000,
-    "marca": "FORTE"
+    "marca": "FORTE",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "TRM-600",
@@ -1185,7 +1399,9 @@
     "meta_descripcion": "Venta de Remolque para motoazadas capacidad de carga de 600Kg dos ruedas , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 2919000,
     "precio_regular": 2919000,
-    "marca": ""
+    "marca": "",
+    "categoria": "Agro y ganadería",
+    "imagen": ""
   },
   {
     "sku": "DTL13000",
@@ -1196,7 +1412,9 @@
     "meta_descripcion": "Venta de Motoazada Motocultor DUCATI DTL13000, motor 13hp 4 velocidades , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 5189000,
     "precio_regular": 5189000,
-    "marca": "DUCATI"
+    "marca": "DUCATI",
+    "categoria": "Agro y ganadería",
+    "imagen": ""
   },
   {
     "sku": "FG900",
@@ -1207,7 +1425,9 @@
     "meta_descripcion": "Venta de Motoazada FORTE FG900 a gasolina 7hp , Ancho de trabajo 80cm-110cm. Envíos a toda Colombia. Asesoría personal especializada. Somos EQUIPMASTER",
     "precio": 2729000,
     "precio_regular": 2729000,
-    "marca": "FORTE"
+    "marca": "FORTE",
+    "categoria": "Agro y ganadería",
+    "imagen": ""
   },
   {
     "sku": "XAS98KD",
@@ -1218,7 +1438,9 @@
     "meta_descripcion": "Venta de Compresor portátil ATLAS COPCO Tipo tornillo 45hp Diesel, Asesoría especializada. Envíos a todo Colombia.",
     "precio": null,
     "precio_regular": null,
-    "marca": "ATLAS COPCO"
+    "marca": "ATLAS COPCO",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "V4+K",
@@ -1229,7 +1451,9 @@
     "meta_descripcion": "Venta de Torre de iluminación ATLAS COPCO 4 lamparas LED 250w, Variedad del catálogo en torres de iluminación. Envíos a todo Colombia. Asesoría especializada.",
     "precio": null,
     "precio_regular": null,
-    "marca": "ATLAS COPCO"
+    "marca": "ATLAS COPCO",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "TPB-90",
@@ -1240,7 +1464,9 @@
     "meta_descripcion": "Venta de Martillo Neumatico POWERIN TPB-90 Consumo de aire 78CFM, Asesoría especializada. Envíos a todo Colombia.",
     "precio": null,
     "precio_regular": null,
-    "marca": "POWERIN"
+    "marca": "POWERIN",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "TPB-60",
@@ -1251,7 +1477,9 @@
     "meta_descripcion": "Venta de Martillo Neumatico POWERIN TPB-60 Consumo de aire 49CFM, Asesoría especializada. Envíos a todo Colombia.",
     "precio": null,
     "precio_regular": null,
-    "marca": "POWERIN"
+    "marca": "POWERIN",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "XAS88KD",
@@ -1262,7 +1490,9 @@
     "meta_descripcion": "Venta de Compresor portátil ATLAS COPCO Tipo tornillo 45hp Diesel, Asesoría especializada. Envíos a todo Colombia.",
     "precio": null,
     "precio_regular": null,
-    "marca": "ATLAS COPCO"
+    "marca": "ATLAS COPCO",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "PS-400w",
@@ -1273,7 +1503,9 @@
     "meta_descripcion": "Venta Panel Solar portatil PS-400W de 400w Tipo de celda Silicio Monocristalino .Asesoría especializada. Envíos a nivel nacional.",
     "precio": 3899900,
     "precio_regular": 3899900,
-    "marca": ""
+    "marca": "",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "PS-220w",
@@ -1284,7 +1516,9 @@
     "meta_descripcion": "Venta Panel Solar portatil PS-220W de 220w Tipo de celda Silicio Monocristalino .Asesoría especializada. Envíos a nivel nacional.",
     "precio": 2399900,
     "precio_regular": 2399900,
-    "marca": ""
+    "marca": "",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "PS-160w",
@@ -1295,7 +1529,9 @@
     "meta_descripcion": "Venta Panel Solar portatil PS-160W de 160w Tipo de celda Silicio Monocristalino .Asesoría especializada. Envíos a nivel nacional.",
     "precio": 1599900,
     "precio_regular": 1599900,
-    "marca": ""
+    "marca": "",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "PS-110w",
@@ -1306,7 +1542,9 @@
     "meta_descripcion": "Venta Panel Solar portatil PS-110W de 110w Tipo de celda Silicio Monocristalino .Asesoría especializada. Envíos a nivel nacional.",
     "precio": 1099900,
     "precio_regular": 1099900,
-    "marca": ""
+    "marca": "",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "DELTA 2 PRO",
@@ -1317,7 +1555,9 @@
     "meta_descripcion": "Venta de la evolución de las plantas eléctricas. Estación de energia portátil DELTA 2 PRO .Asesoría especializada. Envíos a nivel nacional.",
     "precio": 16499900,
     "precio_regular": 19999900,
-    "marca": "ECOFLOW"
+    "marca": "ECOFLOW",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "DELTA 2 MAX",
@@ -1328,7 +1568,9 @@
     "meta_descripcion": "Venta de la evolución de las plantas eléctricas. Estación de energía portátil DELTA 2 MAX .Asesoría especializada. Envíos a nivel nacional.",
     "precio": 8499900,
     "precio_regular": 10999900,
-    "marca": "ECOFLOW"
+    "marca": "ECOFLOW",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "DELTA 2",
@@ -1339,7 +1581,9 @@
     "meta_descripcion": "Venta de la evolución de las plantas eléctricas. Estación de energía portátil DELTA 2 .Asesoría especializada. Envíos a nivel nacional.",
     "precio": 4099900,
     "precio_regular": 6599900,
-    "marca": "ECOFLOW"
+    "marca": "ECOFLOW",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "RIVER 2 PRO",
@@ -1350,7 +1594,9 @@
     "meta_descripcion": "Venta de la evolución de las plantas eléctricas. Estación de energía portátil RIVER 2 PRO .Asesoría especializada. Envíos a nivel nacional.",
     "precio": 2599900,
     "precio_regular": 3999900,
-    "marca": "ECOFLOW"
+    "marca": "ECOFLOW",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "RIVER 2 MAX",
@@ -1361,7 +1607,9 @@
     "meta_descripcion": "Venta de la evolución de las plantas eléctricas. Estación de energía portátil RIVER 2 MAX .Asesoría especializada. Envíos a nivel nacional.",
     "precio": 2099900,
     "precio_regular": 2299900,
-    "marca": "ECOFLOW"
+    "marca": "ECOFLOW",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "RIVER 2",
@@ -1372,7 +1620,9 @@
     "meta_descripcion": "Venta de la evolución de las plantas eléctricas. Estación de energía portátil RIVER 2. Asesoría especializada. Envíos a nivel nacional.",
     "precio": 1099900,
     "precio_regular": 1999900,
-    "marca": "ECOFLOW"
+    "marca": "ECOFLOW",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "463-GG190EG-3",
@@ -1383,7 +1633,9 @@
     "meta_descripcion": "Venta Planta eléctrica 463-GG190EG-3 KTC MASTER 18,800watt máx. Generador para carga de baterías de drones t30 y t40 Potencia real máxima 15.000w. Envíos a nivel nacional.",
     "precio": 11519000,
     "precio_regular": 11519000,
-    "marca": "MASTER"
+    "marca": "MASTER",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "463-GG150EG",
@@ -1394,7 +1646,9 @@
     "meta_descripcion": "Venta Planta eléctrica 463-GG150EG KTC MASTER 15,000watt máx. (Generador para carga de baterías de drones t30 y t40 Potencia real máxima 15.000w ). Envíos a nivel nacional.",
     "precio": 11059000,
     "precio_regular": 11059000,
-    "marca": "MASTER"
+    "marca": "MASTER",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "CFG-120E",
@@ -1405,7 +1659,9 @@
     "meta_descripcion": "Venta de Chipeadora FORTE CFG-120E diametro 4\" , 3 cuchillas , Motor 15hp gasolina, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 7069000,
     "precio_regular": 7069000,
-    "marca": "FORTE"
+    "marca": "FORTE",
+    "categoria": "Jardín y forestal",
+    "imagen": ""
   },
   {
     "sku": "CFG-120",
@@ -1416,7 +1672,9 @@
     "meta_descripcion": "Venta de Chipeadora FORTE CFG-120 diametro 4\" , 3 cuchillas , Motor 15hp gasolina, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 6809000,
     "precio_regular": 6809000,
-    "marca": "FORTE"
+    "marca": "FORTE",
+    "categoria": "Jardín y forestal",
+    "imagen": ""
   },
   {
     "sku": "CFG-150",
@@ -1427,7 +1685,9 @@
     "meta_descripcion": "Venta de Chipeadora FORTE CFG-150 diametro 4\" , 3 cuchillas , Motor 15hp gasolina, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 7679000,
     "precio_regular": 7679000,
-    "marca": "FORTE"
+    "marca": "FORTE",
+    "categoria": "Jardín y forestal",
+    "imagen": ""
   },
   {
     "sku": "CFG100",
@@ -1438,7 +1698,9 @@
     "meta_descripcion": "Venta de Chipeadora FORTE CFG-100 diametro 3\" ,3 cuchillas,Motor 6,5hp gasolina, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 3559000,
     "precio_regular": 3559000,
-    "marca": "FORTE"
+    "marca": "FORTE",
+    "categoria": "Jardín y forestal",
+    "imagen": ""
   },
   {
     "sku": "TCR-4",
@@ -1449,7 +1711,9 @@
     "meta_descripcion": "Venta de Chipeadora PENAGOS TCR-4 diámetro de 4\" (10cm) . 4 cuchillas y 2 contra cuchillas, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 19799000,
     "precio_regular": 19799000,
-    "marca": "PENAGOS"
+    "marca": "PENAGOS",
+    "categoria": "Jardín y forestal",
+    "imagen": ""
   },
   {
     "sku": "PR-6",
@@ -1460,7 +1724,9 @@
     "meta_descripcion": "Venta de Picador de residuos orgánicos PENAGOS PR-6 . Envíos a toda Colombia. Asesoría personal especializada. Somos EQUIPMASTER",
     "precio": 2689000,
     "precio_regular": null,
-    "marca": "PENAGOS"
+    "marca": "PENAGOS",
+    "categoria": "Agro y ganadería",
+    "imagen": ""
   },
   {
     "sku": "PR-6SM",
@@ -1471,7 +1737,9 @@
     "meta_descripcion": "Venta de Picador de residuos orgánicos PENAGOS PR-6 . Envíos a toda Colombia. Asesoría personal especializada. Somos EQUIPMASTER",
     "precio": 2689000,
     "precio_regular": 2689000,
-    "marca": "PENAGOS"
+    "marca": "PENAGOS",
+    "categoria": "Agro y ganadería",
+    "imagen": ""
   },
   {
     "sku": "JTRC-50LF",
@@ -1482,7 +1750,9 @@
     "meta_descripcion": "Venta de Triturador de cocos TRAPP JTRC-50LF motor a gasolina 6,5hp a 3600rpm. Envíos a toda Colombia. Asesoría personal especializada. Somos EQUIPMASTER",
     "precio": 6989000,
     "precio_regular": 6989000,
-    "marca": "TRAPP"
+    "marca": "TRAPP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "JTRC-40",
@@ -1493,7 +1763,9 @@
     "meta_descripcion": "Venta de Triturador de cocos TRAPP JTRC-40 motor electrico de 5hp 110/220v. Envíos a toda Colombia. Asesoría personal especializada. Somos EQUIPMASTER",
     "precio": 5419000,
     "precio_regular": 5419000,
-    "marca": "TRAPP"
+    "marca": "TRAPP",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "BD 50/50",
@@ -1504,7 +1776,9 @@
     "meta_descripcion": "Venta de Fregadora -Aspiradora a Bateria KARCHER BD 50/50 , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 18109000,
     "precio_regular": 18109000,
-    "marca": "KARCHER"
+    "marca": "KARCHER",
+    "categoria": "Lavado y limpieza",
+    "imagen": ""
   },
   {
     "sku": "VCL 3",
@@ -1515,7 +1789,9 @@
     "meta_descripcion": "Venta de Aspiradora Karcher Aspiradora KARCHER VCL2 capacidad 500ml , contamos con amplio catálogo . Asesoría especializada, Envíos a todo Colombia.",
     "precio": 549000,
     "precio_regular": 549000,
-    "marca": "KARCHER"
+    "marca": "KARCHER",
+    "categoria": "Lavado y limpieza",
+    "imagen": ""
   },
   {
     "sku": "VCL 2",
@@ -1526,7 +1802,9 @@
     "meta_descripcion": "Venta de Aspiradora Karcher Aspiradora KARCHER VCL2 capacidad 500ml , contamos con amplio catálogo . Asesoría especializada, Envíos a todo Colombia.",
     "precio": 349000,
     "precio_regular": 349000,
-    "marca": "KARCHER"
+    "marca": "KARCHER",
+    "categoria": "Lavado y limpieza",
+    "imagen": ""
   },
   {
     "sku": "DML814",
@@ -1537,7 +1815,9 @@
     "meta_descripcion": "Venta de Torre de iluminacion a Bateria MAKITA DML814, Variedad del catálogo en torres de iluminación. Envíos a todo Colombia. Asesoría especializada.",
     "precio": 3429000,
     "precio_regular": 3429000,
-    "marca": "MAKITA"
+    "marca": "MAKITA",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "EM-M1/2B-LTM",
@@ -1548,7 +1828,9 @@
     "meta_descripcion": "Venta de Mezcladora de Concreto Mezcladora MASTER 1/2 bulto (110litros/3,9ft³) Sin motor MASTER LITE. Asesoría especializada. Envíos a todo Colombia.",
     "precio": 2899000,
     "precio_regular": null,
-    "marca": "MASTER"
+    "marca": "MASTER",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "EM-M1/2B-LTMSM",
@@ -1559,7 +1841,9 @@
     "meta_descripcion": "Venta de Mezcladora de Concreto Mezcladora MASTER 1/2 bulto (110litros/3,9ft³) Sin motor MASTER LITE. Asesoria especializada. Envios a todo Colombia.",
     "precio": 2899000,
     "precio_regular": 2899000,
-    "marca": "MASTER"
+    "marca": "MASTER",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "BT 131-200",
@@ -1570,7 +1854,9 @@
     "meta_descripcion": "Venta de Ahoyadora STIHL BT 131-200, 36,3cm³, 10Kg motor 4-MIX , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 5549000,
     "precio_regular": 5549000,
-    "marca": "STIHL"
+    "marca": "STIHL",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "BT 131-150",
@@ -1581,7 +1867,9 @@
     "meta_descripcion": "Venta de Ahoyadora STIHL BT 131-150, 36,3cm³, 10Kg motor 4-MIX , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 5469000,
     "precio_regular": 5469000,
-    "marca": "STIHL"
+    "marca": "STIHL",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "BT 131-120",
@@ -1592,7 +1880,9 @@
     "meta_descripcion": "Venta de Ahoyadora STIHL BT 131-120, 36,3cm³, 10Kg motor 4-MIX , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 5439000,
     "precio_regular": 5439000,
-    "marca": "STIHL"
+    "marca": "STIHL",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "EM-EO-E",
@@ -1603,7 +1893,9 @@
     "meta_descripcion": "Equipo de ordeño FARETTY motor electrico 2hp 3600rpm Cantina de aluminio e inoxidable. Asesoría personal especializada. Somos EQUIPMASTER",
     "precio": 6309000,
     "precio_regular": 6309000,
-    "marca": "FARETTY"
+    "marca": "FARETTY",
+    "categoria": "Agro y ganadería",
+    "imagen": ""
   },
   {
     "sku": "TDG8500S",
@@ -1614,7 +1906,9 @@
     "meta_descripcion": "Venta de Planta Electrica TDG8500S TOYAMA CABINADA 7000watt maximo, Motor Diesel 14hp Monofasica, Incluye transferencia. contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia. mercado libre planta eléctrica, planta electrica home center",
     "precio": 8669000,
     "precio_regular": 8669000,
-    "marca": "TOYAMA"
+    "marca": "TOYAMA",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "RE80X",
@@ -1625,7 +1919,9 @@
     "meta_descripcion": "Venta de Hidrolavadora Electrica STIHL RE80X , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 639000,
     "precio_regular": 639000,
-    "marca": "STIHL"
+    "marca": "STIHL",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "F0133000PF",
@@ -1636,7 +1932,9 @@
     "meta_descripcion": "Venta de Mototool DREMEL 3000 130w con 26 accesorios. Envíos a toda Colombia. Asesoría personal especializada. Somos EQUIPMASTER.",
     "precio": 309000,
     "precio_regular": 309000,
-    "marca": "DREMEL"
+    "marca": "DREMEL",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "M9510B",
@@ -1647,7 +1945,9 @@
     "meta_descripcion": "Venta de Pulidora 4-½\" MAKITA M9510B 850w , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 269000,
     "precio_regular": 269000,
-    "marca": "MAKITA"
+    "marca": "MAKITA",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "2607017397",
@@ -1658,7 +1958,9 @@
     "meta_descripcion": "Venta de Juego de herramientas manuales 100 Pzs Bosch, contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 119900,
     "precio_regular": 119900,
-    "marca": ""
+    "marca": "",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "SU-A048",
@@ -1669,7 +1971,9 @@
     "meta_descripcion": "Venta de Sembradora Manual de Maiz y Granos Secos SU-A048 FARETTY. Asesoría especializada. Envíos a todo Colombia.",
     "precio": 989000,
     "precio_regular": 989000,
-    "marca": "FARETTY"
+    "marca": "FARETTY",
+    "categoria": "Agro y ganadería",
+    "imagen": ""
   },
   {
     "sku": "GSB 185 LI",
@@ -1680,7 +1984,9 @@
     "meta_descripcion": "Venta de Taladro percutor inalambrico bosch GSB 185 LI , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 699000,
     "precio_regular": 699000,
-    "marca": "BOSCH"
+    "marca": "BOSCH",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "GBM 50-2RE",
@@ -1691,7 +1997,9 @@
     "meta_descripcion": "Venta de Taladro con núcleo magnético GBM 50-2 RE , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 6849000,
     "precio_regular": 6849000,
-    "marca": "BOSCH"
+    "marca": "BOSCH",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "SEA 20",
@@ -1702,7 +2010,9 @@
     "meta_descripcion": "Venta de Aspiradora electrica STIHL SEA 20 , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 629000,
     "precio_regular": 629000,
-    "marca": "STIHL"
+    "marca": "STIHL",
+    "categoria": "Lavado y limpieza",
+    "imagen": ""
   },
   {
     "sku": "MH 610",
@@ -1713,7 +2023,9 @@
     "meta_descripcion": "Venta de Motoazada cultivador STIHL MH610 a gasolina 5,9hp 6,9metros/s², Asesoría especializada. Envíos a todo Colombia.",
     "precio": 3909000,
     "precio_regular": 3909000,
-    "marca": "STIHL"
+    "marca": "STIHL",
+    "categoria": "Agro y ganadería",
+    "imagen": ""
   },
   {
     "sku": "Ms462",
@@ -1724,7 +2036,9 @@
     "meta_descripcion": "Venta de Motosierra STIHL MS462. Amplio catalogo de motosierras. Asesoría personalizada especializada. Envíos a nivel nacional.",
     "precio": 3279000,
     "precio_regular": 3279000,
-    "marca": "STIHL"
+    "marca": "STIHL",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "BR800",
@@ -1735,7 +2049,9 @@
     "meta_descripcion": "Venta de Sopladora STIHL de espalda Br800 a gasolina , contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 3539000,
     "precio_regular": 3539000,
-    "marca": "STIHL"
+    "marca": "STIHL",
+    "categoria": "Jardín y forestal",
+    "imagen": ""
   },
   {
     "sku": "RMA 510",
@@ -1746,7 +2062,9 @@
     "meta_descripcion": "Venta de Cortacesped STIHL RMA 510 a bateria Ancho de corte 20\"( 51cm). Contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 2419000,
     "precio_regular": 2419000,
-    "marca": "STIHL"
+    "marca": "STIHL",
+    "categoria": "Jardín y forestal",
+    "imagen": ""
   },
   {
     "sku": "RMA 460",
@@ -1757,7 +2075,9 @@
     "meta_descripcion": "Venta de Cortacesped STIHL RMA 460 a bateria Ancho de corte 18\"( 46cm). Contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 2129000,
     "precio_regular": 2129000,
-    "marca": "STIHL"
+    "marca": "STIHL",
+    "categoria": "Jardín y forestal",
+    "imagen": ""
   },
   {
     "sku": "RMA 235",
@@ -1768,7 +2088,9 @@
     "meta_descripcion": "Venta de Cortacesped STIHL RMA 235 a bateria Ancho de corte 12\"( 33cm). Contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 1099000,
     "precio_regular": 1099000,
-    "marca": "STIHL"
+    "marca": "STIHL",
+    "categoria": "Jardín y forestal",
+    "imagen": ""
   },
   {
     "sku": "9F-20",
@@ -1779,7 +2101,9 @@
     "meta_descripcion": "Venta de Molino de granos secos FARETTY 9F-20 Para alimentación de animales , Asesoría especializada. Envíos a todo Colombia.",
     "precio": 749000,
     "precio_regular": null,
-    "marca": "FARETTY"
+    "marca": "FARETTY",
+    "categoria": "Agro y ganadería",
+    "imagen": ""
   },
   {
     "sku": "9F-20SM",
@@ -1790,7 +2114,9 @@
     "meta_descripcion": "Venta de Molino de granos secos FARETTY 9F-20 Para alimentación de animales (no incluye motor), Asesoría especializada. Envíos a todo Colombia.",
     "precio": 749000,
     "precio_regular": 749000,
-    "marca": "FARETTY"
+    "marca": "FARETTY",
+    "categoria": "Agro y ganadería",
+    "imagen": ""
   },
   {
     "sku": "BDC704C1-B3",
@@ -1801,7 +2127,9 @@
     "meta_descripcion": "Venta de Taladro/PERCUTOR Inalambrico BDC704C1-B3, 20v, contamos con amplio catálogo . Asesoría especializada, Envíos a todo Colombia.",
     "precio": 309000,
     "precio_regular": 309000,
-    "marca": "BLACK+DECKER"
+    "marca": "BLACK+DECKER",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "BDC702C1-B3",
@@ -1812,7 +2140,9 @@
     "meta_descripcion": "Venta de Taladro/Atornillador Inalambrico BLACK&DECKER BDC702C1-B3, 20v, contamos con amplio catálogo . Asesoría especializada, Envíos a todo Colombia.",
     "precio": 269000,
     "precio_regular": 269000,
-    "marca": "BLACK+DECKER"
+    "marca": "BLACK+DECKER",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "4PWP60G 50C16P3C",
@@ -1823,7 +2153,9 @@
     "meta_descripcion": "Venta de BOMBA tipo LAPICERO sumergible multietapas PEARL 5hp (220v 27,1amp) , Asesoría especializada. Envíos a todo Colombia.",
     "precio": 5509000,
     "precio_regular": 5509000,
-    "marca": "PEARL"
+    "marca": "PEARL",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "4PWP35G 30C16P3C",
@@ -1834,7 +2166,9 @@
     "meta_descripcion": "Venta de BOMBA tipo LAPICERO sumergible multietapas PEARL 3hp (220v 16,1amp) , Asesoría especializada. Envíos a todo Colombia.",
     "precio": 3375000,
     "precio_regular": 3375000,
-    "marca": "PEARL"
+    "marca": "PEARL",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "4PWP35G 20C16P3C",
@@ -1845,7 +2179,9 @@
     "meta_descripcion": "Venta de BOMBA tipo LAPICERO sumergible multietapas PEARL 2hp (220v 12,2amp) , Asesoría especializada. Envíos a todo Colombia.",
     "precio": 2759000,
     "precio_regular": 2759000,
-    "marca": "PEARL"
+    "marca": "PEARL",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "4PWP25G 15C16P3C",
@@ -1856,7 +2192,9 @@
     "meta_descripcion": "Venta de BOMBA tipo LAPICERO sumergible multietapas PEARL 1.5hp (220v 10,3amp) , Asesoría especializada. Envíos a todo Colombia.",
     "precio": 2289000,
     "precio_regular": 2289000,
-    "marca": "PEARL"
+    "marca": "PEARL",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "4PWP25G 10C16P3C",
@@ -1867,7 +2205,9 @@
     "meta_descripcion": "Venta de BOMBA tipo LAPICERO sumergible multietapas PEARL 1hp (220v 7,6amp) , Asesoría especializada. Envíos a todo Colombia.",
     "precio": 1849000,
     "precio_regular": 1849000,
-    "marca": "PEARL"
+    "marca": "PEARL",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "VPC1-13 15C16S",
@@ -1878,7 +2218,9 @@
     "meta_descripcion": "Electrobomba multietapas PEARL VPC1-13 15C16S 1.5hp . Envíos a toda Colombia. Asesoría personal especializada. Somos EQUIPMASTER",
     "precio": 3795000,
     "precio_regular": 3795000,
-    "marca": "PEARL"
+    "marca": "PEARL",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "VPC 5-12 40H36",
@@ -1889,7 +2231,9 @@
     "meta_descripcion": "Electrobomba multietapas PEARL VPC 5-12 40H36 5hp . Envíos a toda Colombia. Asesoría personal especializada. Somos EQUIPMASTER",
     "precio": 4539000,
     "precio_regular": 4539000,
-    "marca": "PEARL"
+    "marca": "PEARL",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "GQNM 50-15-60",
@@ -1900,7 +2244,9 @@
     "meta_descripcion": "Venta de Bomba sumergible VORTEX GQNM 50-15-60 2\" 1,5hp 220v monofasica, Contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 3129000,
     "precio_regular": 3129000,
-    "marca": "CALPEDA"
+    "marca": "CALPEDA",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "ML44-HYLDG6000S",
@@ -1911,7 +2257,9 @@
     "meta_descripcion": "Venta de Torre de iluminación y Planta electrica HYUNDAI Diesel cabinada, contamos con amplio catálogo en torres de iluminación. Envíos a todo Colombia.",
     "precio": 16939000,
     "precio_regular": 16939000,
-    "marca": "MASALTA"
+    "marca": "MASALTA",
+    "categoria": "Energía",
+    "imagen": ""
   },
   {
     "sku": "CA102",
@@ -1922,7 +2270,9 @@
     "meta_descripcion": "Venta de Pescante de acero telescópico capacidad de carga 180kg, Asesoría especializada. Envíos a todo Colombia.",
     "precio": 3289000,
     "precio_regular": 3289000,
-    "marca": ""
+    "marca": "",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "CA103-2",
@@ -1933,7 +2283,9 @@
     "meta_descripcion": "Venta de Pescante de acero tipo tigre capacidad de carga 350kg, Asesoría especializada. Envíos a todo Colombia.",
     "precio": 649000,
     "precio_regular": 649000,
-    "marca": ""
+    "marca": "",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "CA108",
@@ -1944,7 +2296,9 @@
     "meta_descripcion": "Venta de Pescante de acero tipo cercha capacidad de carga 197kg, Asesoría especializada. Envíos a todo Colombia.",
     "precio": 599000,
     "precio_regular": 599000,
-    "marca": ""
+    "marca": "",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "CA106",
@@ -1955,7 +2309,9 @@
     "meta_descripcion": "Venta de Pescante de acero tipo vigueta capacidad de carga 142kg, Asesoría especializada. Envíos a todo Colombia.",
     "precio": 899000,
     "precio_regular": 899000,
-    "marca": ""
+    "marca": "",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "CA105",
@@ -1966,7 +2322,9 @@
     "meta_descripcion": "Venta de Pescante de acero tipo esquinero capacidad de carga 96kg, Asesoría especializada. Envíos a todo Colombia.",
     "precio": 569000,
     "precio_regular": 569000,
-    "marca": ""
+    "marca": "",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "CA104",
@@ -1977,7 +2335,9 @@
     "meta_descripcion": "Venta de Pescante de acero tipo mampara capacidad de carga 103kg, Asesoría especializada. Envíos a todo Colombia.",
     "precio": 439000,
     "precio_regular": 439000,
-    "marca": ""
+    "marca": "",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "CA103",
@@ -1988,7 +2348,9 @@
     "meta_descripcion": "Venta de Pescante de acero tipo tigre capacidad de carga 55kg, Asesoría especializada. Envíos a todo Colombia.",
     "precio": 369000,
     "precio_regular": 369000,
-    "marca": ""
+    "marca": "",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "CA101",
@@ -1999,7 +2361,9 @@
     "meta_descripcion": "Venta de Pescante de acero tipo brida capacidad de carga 110kg, Asesoría especializada. Envíos a todo Colombia.",
     "precio": 649000,
     "precio_regular": 649000,
-    "marca": ""
+    "marca": "",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "KL 160",
@@ -2010,7 +2374,9 @@
     "meta_descripcion": "Venta dePeletizadora de alimento FARETTY KL 160 S/M Para alimentación de animales, Asesoría especializada. Envíos a todo Colombia.",
     "precio": 5629000,
     "precio_regular": null,
-    "marca": "FARETTY"
+    "marca": "FARETTY",
+    "categoria": "Agro y ganadería",
+    "imagen": ""
   },
   {
     "sku": "KL 160 S/M",
@@ -2021,7 +2387,9 @@
     "meta_descripcion": "Venta dePeletizadora de alimento FARETTY KL 160 S/M Para alimentación de animales (no incluye motor), Asesoría especializada. Envíos a todo Colombia.",
     "precio": 5629000,
     "precio_regular": 5629000,
-    "marca": "FARETTY"
+    "marca": "FARETTY",
+    "categoria": "Agro y ganadería",
+    "imagen": ""
   },
   {
     "sku": "GQSM 50-15-60",
@@ -2032,7 +2400,9 @@
     "meta_descripcion": "Venta de Bomba sumergible VORTEX GQSM 50-15-60 2\" 2hp 220v Monofasica, Contamos con amplio catálogo. Asesoría especializada, Envíos a todo Colombia.",
     "precio": 3399000,
     "precio_regular": 3399000,
-    "marca": "CALPEDA"
+    "marca": "CALPEDA",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "JCP 15F16S",
@@ -2043,7 +2413,9 @@
     "meta_descripcion": "Venta de Bomba autocebante JET PEARL JCP 15F16S 0,5hp presion max:56mts Caudal Max:100litros/min 110-220v , Asesoría especializada. Envíos a todo Colombia.",
     "precio": 1219000,
     "precio_regular": 1219000,
-    "marca": "PEARL"
+    "marca": "PEARL",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "JSP 05A16S",
@@ -2054,7 +2426,9 @@
     "meta_descripcion": "Venta de Bomba autocebante JET PEARL JSP 05A16S 0,5hp presion max:41mts Caudal Max:45litros/min 110v , Asesoría especializada. Envíos a todo Colombia.",
     "precio": 539000,
     "precio_regular": 539000,
-    "marca": "PEARL"
+    "marca": "PEARL",
+    "categoria": "Bombas y agua",
+    "imagen": ""
   },
   {
     "sku": "PG400T",
@@ -2065,7 +2439,9 @@
     "meta_descripcion": "Venta de Pulidora de piso HUSQVARNA PG400T motor electrico 220V Trifasico 400mm . Envios a todo Colombia. Asesoria especializada.",
     "precio": 15919000,
     "precio_regular": 15919000,
-    "marca": "HUSQVARNA"
+    "marca": "HUSQVARNA",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "PG450",
@@ -2076,7 +2452,9 @@
     "meta_descripcion": "Venta de Pulidora de piso HUSQVARNA PG450 motor electrico 220V Monofasico 450mm. Envios a todo Colombia. Asesoria especializada.",
     "precio": 32369000,
     "precio_regular": 32369000,
-    "marca": "HUSQVARNA"
+    "marca": "HUSQVARNA",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "PG400",
@@ -2087,7 +2465,9 @@
     "meta_descripcion": "Venta de Pulidora de piso HUSQVARNA PG400 motor electrico 220V Monofasico 400mm . Envios a todo Colombia. Asesoria especializada.",
     "precio": 15919000,
     "precio_regular": 15919000,
-    "marca": "HUSQVARNA"
+    "marca": "HUSQVARNA",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "PG280",
@@ -2098,7 +2478,9 @@
     "meta_descripcion": "Venta de Pulidora de piso HUSQVARNA PG280 motor electrico 220V Monofasico 280mm . Envios a todo Colombia. Asesoria especializada.",
     "precio": 10879000,
     "precio_regular": 10879000,
-    "marca": "HUSQVARNA"
+    "marca": "HUSQVARNA",
+    "categoria": "Herramientas eléctricas",
+    "imagen": ""
   },
   {
     "sku": "FS4800D",
@@ -2109,7 +2491,9 @@
     "meta_descripcion": "Venta de Cortadora de piso HUSQVARNA FS4800D motor diesel YANMAR de 48hp para disco de maximo 36\". Envios a todo Colombia. Asesoria especializada.",
     "precio": 158029000,
     "precio_regular": 158029000,
-    "marca": "HUSQVARNA"
+    "marca": "HUSQVARNA",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "FS3500G",
@@ -2120,7 +2504,9 @@
     "meta_descripcion": "Venta de Cortadora de piso HUSQVARNA FS3500G motor gasolina KHOLER de 37hp para disco de maximo 30\". Envios a todo Colombia. Asesoria especializada.",
     "precio": 129339000,
     "precio_regular": 129339000,
-    "marca": "HUSQVARNA"
+    "marca": "HUSQVARNA",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "LP6500",
@@ -2131,7 +2517,9 @@
     "meta_descripcion": "Venta de Rodillo Vibrocompactador Doble HUSQVARNA LP6500 con motor Diesel Kohler; 60hm/hora Fuerza:38Kn, Asesoría especializada. Envíos a todo Colombia.",
     "precio": 57649000,
     "precio_regular": 57649000,
-    "marca": "HUSQVARNA"
+    "marca": "HUSQVARNA",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "CRT 36-26A",
@@ -2142,7 +2530,9 @@
     "meta_descripcion": "Venta de Allanadora de 36\" HUSQVARNA CRT 36-26A motor a gasolina HONDA 22hp motor a gasolina, Asesoría especializada. Envíos a todo Colombia.",
     "precio": 85439000,
     "precio_regular": 85439000,
-    "marca": "HUSQVARNA"
+    "marca": "HUSQVARNA",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "CT48-8A",
@@ -2153,7 +2543,9 @@
     "meta_descripcion": "Venta de Allanadora de 48\" HUSQVARNA CT48-8A motor a gasolina HONDA 8hp con juego de aspas . Envíos a todo Colombia.",
     "precio": 16499000,
     "precio_regular": 16499000,
-    "marca": "HUSQVARNA"
+    "marca": "HUSQVARNA",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "CT36-8A",
@@ -2164,7 +2556,9 @@
     "meta_descripcion": "Venta de Allanadora de 36\" HUSQVARNA CT36-8A motor a gasolina HONDA 8hp con juego de aspas, Asesoría especializada. Envíos a todo Colombia.",
     "precio": 15889000,
     "precio_regular": 15889000,
-    "marca": "HUSQVARNA"
+    "marca": "HUSQVARNA",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "CT36-5A",
@@ -2175,7 +2569,9 @@
     "meta_descripcion": "Venta de Allanadora de 36\" HUSQVARNA CT36-5A motor a gasolina HONDA 4.8hp con juego de aspas, Asesoría especializada. Envíos a todo Colombia.",
     "precio": 14549000,
     "precio_regular": 14549000,
-    "marca": "HUSQVARNA"
+    "marca": "HUSQVARNA",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "BG244",
@@ -2186,7 +2582,9 @@
     "meta_descripcion": "Venta de Allanadora de 24\" HUSQVARNA BG244 motor a gasolina HONDA 3,2hp con juego de aspas, Asesoría especializada. Envíos a todo Colombia.",
     "precio": 10939000,
     "precio_regular": 10939000,
-    "marca": "HUSQVARNA"
+    "marca": "HUSQVARNA",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "BG479",
@@ -2197,7 +2595,9 @@
     "meta_descripcion": "Venta de Allanadora de 48\" HUSQVARNA BG479 motor a gasolina HONDA 6.5hp con juego de aspas, Asesoría especializada. Envíos a todo Colombia.",
     "precio": 8079000,
     "precio_regular": 8079000,
-    "marca": "HUSQVARNA"
+    "marca": "HUSQVARNA",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "BG375",
@@ -2208,7 +2608,9 @@
     "meta_descripcion": "Venta de Allanadora de 36\" HUSQVARNA BG375 motor a gasolina HONDA 5.5hp con juego de aspas, Asesoría especializada. Envíos a todo Colombia.",
     "precio": 6569000,
     "precio_regular": 6569000,
-    "marca": "HUSQVARNA"
+    "marca": "HUSQVARNA",
+    "categoria": "Motores",
+    "imagen": ""
   },
   {
     "sku": "587768401",
@@ -2219,7 +2621,9 @@
     "meta_descripcion": "Venta de Carro de corte con ruedas HUSQVARNA con tanque de agua para K770 Y K790. Envíos a toda Colombia. Asesoría personal especializada.",
     "precio": 5259000,
     "precio_regular": 5259000,
-    "marca": "HUSQVARNA"
+    "marca": "HUSQVARNA",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "K4000CNB",
@@ -2230,7 +2634,9 @@
     "meta_descripcion": "Venta de Cortadora de Mano para pared HUSQVARNA K4000CNB hidraulica Cut-n-Break . Envíos a toda Colombia. Asesoría personal especializada.",
     "precio": 12959000,
     "precio_regular": 12959000,
-    "marca": "HUSQVARNA"
+    "marca": "HUSQVARNA",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "K4000CNBE",
@@ -2241,7 +2647,9 @@
     "meta_descripcion": "Venta de Cortadora de Mano para pared HUSQVARNA K4000CNBE electrica Cut-n-Break motor 2 tiempos . Envíos a toda Colombia. Asesoría personal especializada.",
     "precio": 12959000,
     "precio_regular": 12959000,
-    "marca": "HUSQVARNA"
+    "marca": "HUSQVARNA",
+    "categoria": "Construcción",
+    "imagen": ""
   },
   {
     "sku": "K4000",
@@ -2252,6 +2660,8 @@
     "meta_descripcion": "Venta de Cortadora de Mano Piso y pared HUSQVARNA K4000 electrica 110v para Disco hasta 9\" . Envíos a toda Colombia. Asesoría personal especializada.",
     "precio": 6189000,
     "precio_regular": 6189000,
-    "marca": "HUSQVARNA"
+    "marca": "HUSQVARNA",
+    "categoria": "Construcción",
+    "imagen": ""
   }
 ]

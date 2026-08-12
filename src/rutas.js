@@ -60,18 +60,33 @@ export function crearApp(db, SECRET) {
                          ORDER BY productos DESC`).all());
   });
 
+  app.get("/api/categorias", (_req, res) => {
+    res.json(db.prepare(`SELECT categoria, COUNT(*) AS productos FROM productos
+                         WHERE activo = 1 AND categoria != '' GROUP BY categoria
+                         ORDER BY productos DESC`).all());
+  });
+
   app.get("/api/productos", (req, res) => {
-    const { q = "", marca = "", ferreteria = "", page = "1" } = req.query;
+    const { q = "", marca = "", categoria = "", ferreteria = "", page = "1" } = req.query;
     const porPagina = 24;
     const filtros = ["p.activo = 1"], args = [];
-    if (q) { filtros.push("(p.nombre LIKE ? OR p.sku LIKE ?)"); args.push(`%${q}%`, `%${q}%`); }
+    if (q) {
+      // Búsqueda inteligente: cada palabra debe aparecer en nombre, SKU, marca,
+      // categoría o descripción corta (así "taladro dewalt 20v" encuentra lo correcto).
+      for (const palabra of q.split(/\s+/).filter(Boolean).slice(0, 6)) {
+        filtros.push(`(p.nombre LIKE ? OR p.sku LIKE ? OR p.marca LIKE ?
+                       OR p.categoria LIKE ? OR p.descripcion_corta LIKE ?)`);
+        args.push(...Array(5).fill(`%${palabra}%`));
+      }
+    }
     if (marca) { filtros.push("p.marca = ?"); args.push(marca); }
+    if (categoria) { filtros.push("p.categoria = ?"); args.push(categoria); }
     if (ferreteria) { filtros.push("p.ferreteria_id = ?"); args.push(Number(ferreteria)); }
     const where = filtros.join(" AND ");
     const total = db.prepare(`SELECT COUNT(*) AS n FROM productos p WHERE ${where}`).get(...args).n;
     const filas = db.prepare(
       `SELECT p.id, p.sku, p.nombre, p.slug, p.precio, p.precio_regular, p.marca,
-              f.nombre AS ferreteria
+              p.categoria, p.imagen, f.nombre AS ferreteria
        FROM productos p JOIN ferreterias f ON f.id = p.ferreteria_id
        WHERE ${where} ORDER BY p.nombre LIMIT ? OFFSET ?`
     ).all(...args, porPagina, (Number(page) - 1) * porPagina);
@@ -217,13 +232,15 @@ export function crearApp(db, SECRET) {
     }
     const c = req.body || {};
     db.prepare(`UPDATE productos SET nombre = ?, descripcion_corta = ?, descripcion = ?,
-                  meta_descripcion = ?, precio = ?, precio_regular = ?, marca = ?, activo = ?
+                  meta_descripcion = ?, precio = ?, precio_regular = ?, marca = ?,
+                  categoria = ?, imagen = ?, activo = ?
                 WHERE id = ?`)
       .run(c.nombre ?? p.nombre, c.descripcion_corta ?? p.descripcion_corta,
            c.descripcion ?? p.descripcion, c.meta_descripcion ?? p.meta_descripcion,
            c.precio === undefined ? p.precio : c.precio,
            c.precio_regular === undefined ? p.precio_regular : c.precio_regular,
-           c.marca ?? p.marca, c.activo === undefined ? p.activo : (c.activo ? 1 : 0), p.id);
+           c.marca ?? p.marca, c.categoria ?? p.categoria, c.imagen ?? p.imagen,
+           c.activo === undefined ? p.activo : (c.activo ? 1 : 0), p.id);
     res.json({ ok: true });
   });
 
@@ -235,11 +252,12 @@ export function crearApp(db, SECRET) {
       return res.status(400).json({ error: "faltan campos: ferreteria_id, sku, nombre, slug" });
     }
     db.prepare(`INSERT INTO productos (ferreteria_id, sku, nombre, descripcion_corta,
-                  descripcion, slug, meta_descripcion, precio, precio_regular, marca)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
+                  descripcion, slug, meta_descripcion, precio, precio_regular, marca,
+                  categoria, imagen)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
       .run(ferreteriaId, p.sku, p.nombre, p.descripcion_corta || "", p.descripcion || "",
            p.slug, p.meta_descripcion || "", p.precio ?? null, p.precio_regular ?? null,
-           p.marca || "");
+           p.marca || "", p.categoria || "", p.imagen || "");
     res.status(201).json({ ok: true });
   });
 
