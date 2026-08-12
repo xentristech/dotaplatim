@@ -44,12 +44,12 @@ def precio(texto: str):
 
 # Reglas de categoría: la primera palabra clave que aparezca en el nombre gana.
 CATEGORIAS = [
+    ("Jardín y forestal", ["motosierra", "sopladora", "guadaña", "guadana", "podadora",
+                           "cortasetos", "chipeadora", "cortacesped", "cortacésped"]),
     ("Herramientas eléctricas", ["taladro", "pulidora", "polichadora", "sierra", "tronzadora",
                                  "mototool", "atornillador", "llave de impacto", "set de puntas",
                                  "brocas", "v-line", "lijadora", "cepillo electrico",
                                  "cepillo eléctrico", "medidor"]),
-    ("Jardín y forestal", ["motosierra", "sopladora", "guadaña", "guadana", "podadora",
-                           "cortasetos", "chipeadora", "cortacesped", "cortacésped"]),
     ("Fumigación", ["fumigadora", "aspersora", "nebulizadora"]),
     ("Agro y ganadería", ["motoazada", "motocultor", "molino", "picador", "peletizadora",
                           "sembradora", "ordeño", "ordeno", "trapiche", "incubadora",
