@@ -105,9 +105,12 @@
          justify-content: space-between; }
   .cta h2 { font-size: 1.2rem; } .cta p { opacity: .9; font-size: .9rem; margin-top: .3rem;
          max-width: 60ch; }
-  .cta a { background: var(--verde-claro); color: var(--azul); font-weight: 800;
+  .cta a, .cta .cta-acciones button { background: var(--verde-claro); color: var(--azul);
+           font-weight: 800; font-size: 1rem; border: none; cursor: pointer;
            text-decoration: none; padding: .8rem 1.3rem; min-height: 44px; display: inline-flex;
            align-items: center; border-radius: 10px; white-space: nowrap; }
+  .cta .cta-acciones { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .cta .cta-acciones a { background: transparent; color: #fff; border: 1px solid #6f6f6f; }
   .card.invitacion { border: 2px dashed var(--verde); background: #f7f7f7;
                      align-items: center; justify-content: center; text-align: center;
                      min-height: 240px; }
@@ -162,6 +165,10 @@
   #carrito .exito { background: #ececec; color: var(--verde-osc); border-radius: 10px;
                     padding: 1rem; font-weight: 600; }
   #carrito .error-pedido { color: #b42318; font-size: .88rem; min-height: 1.2em; }
+  #carrito .wsp-carrito { background: #fff; color: var(--azul); border: 1px solid var(--borde);
+                          border-radius: 9px; padding: .8rem; min-height: 46px; font-weight: 700;
+                          cursor: pointer; }
+  #carrito .exito a { color: var(--azul); font-weight: 800; }
   /* Asesor IA */
   #btn-asesor { position: fixed; bottom: 1.2rem; right: 1.2rem; z-index: 38;
                 background: var(--verde-osc); color: #fff; border: none; border-radius: 99px;
@@ -213,19 +220,22 @@
   </div>
   <div class="controles">
     <input id="q" type="search" aria-label="Buscar en el catálogo"
-           placeholder="¿Qué buscas? Ej: taladro, motobomba, guadaña…">
+           placeholder="¿Qué buscas? Ej: guantes, botas, taladro, motobomba…">
     <button id="btn-carrito" aria-label="Ver tu pedido">🛒 <span id="carrito-n">0</span></button>
   </div>
 </header>
 <main>
-  <div class="cta" id="unirse">
+  <div class="cta">
     <div>
-      <h2>¿Quieres que tu ferretería esté aquí?</h2>
-      <p>Tu catálogo en internet sin montar página web: nosotros ponemos la plataforma,
-         el posicionamiento y los despachos a todo el país. Tú solo vendes.</p>
+      <h2>Herramienta, dotación y EPP para tu empresa</h2>
+      <p>Pide en línea con despacho a toda Colombia, o cotiza en minutos con un asesor real.
+         Marcas originales de ferreterías verificadas.</p>
     </div>
-    <a href="https://wa.me/573023660481?text=Quiero%20vincular%20mi%20ferreter%C3%ADa%20a%20PLATIM"
-       target="_blank">Vincular mi ferretería</a>
+    <div class="cta-acciones">
+      <button id="hero-dotacion" type="button">🦺 Cotizar mi dotación</button>
+      <a href="https://wa.me/573023660481?text=Hola%20PLATIM%2C%20quiero%20cotizar%20para%20mi%20empresa"
+         target="_blank">💬 Cotizar por WhatsApp</a>
+    </div>
   </div>
   <ul class="confianza" aria-label="Por qué comprar en PLATIM">
     <li><b>✓</b> Ferreterías verificadas</li>
@@ -239,6 +249,15 @@
   <div class="pag">
     <button id="prev">&larr; Anterior</button>
     <button id="next">Siguiente &rarr;</button>
+  </div>
+  <div class="cta" id="unirse">
+    <div>
+      <h2>¿Quieres que tu ferretería esté aquí?</h2>
+      <p>Tu catálogo en internet sin montar página web: nosotros ponemos la plataforma,
+         el posicionamiento y los despachos a todo el país. Tú solo vendes.</p>
+    </div>
+    <a href="https://wa.me/573023660481?text=Quiero%20vincular%20mi%20ferreter%C3%ADa%20a%20PLATIM"
+       target="_blank">Vincular mi ferretería</a>
   </div>
 </main>
 
@@ -298,6 +317,7 @@
              placeholder="Dirección de entrega *" required>
       <input id="c-notas" aria-label="Notas del pedido" placeholder="Notas (opcional)">
       <button class="enviar" type="submit">Enviar pedido — despacho nacional</button>
+      <button class="wsp-carrito" type="button" id="c-wsp">💬 Prefiero pedirlo por WhatsApp</button>
       <p class="error-pedido" id="c-error" aria-live="polite"></p>
     </form>
   </div>
@@ -361,14 +381,17 @@ async function cargar() {
       <button class="agregar"></button></div>`;
     const foto = card.querySelector(".foto");
     if (p.imagen) { const im = document.createElement("img"); im.src = p.imagen;
-                    im.alt = p.nombre; im.loading = "lazy"; foto.appendChild(im); }
+                    im.alt = p.nombre; im.loading = "lazy";
+                    im.onerror = () => { im.remove(); foto.textContent = EMOJI[p.categoria] || "🔩"; };
+                    foto.appendChild(im); }
     else foto.textContent = EMOJI[p.categoria] || "🔩";
     card.querySelector(".marca").textContent =
       (p.marca || "genérico") + " · " + (p.categoria || "");
     const enlace = card.querySelector("h3 a");
     enlace.textContent = p.nombre;
     enlace.href = "/p/" + encodeURIComponent(p.slug);
-    enlace.onclick = (e) => e.preventDefault(); // el clic de la card abre el modal
+    // El enlace del título es el control accesible (teclado); abre la ficha sin navegar.
+    enlace.onclick = (e) => { e.preventDefault(); e.stopPropagation(); abrirFicha(p.slug); };
     card.querySelector(".precio").textContent = cop(p.precio);
     if (p.precio_regular && p.precio && p.precio_regular > p.precio) {
       const antes = document.createElement("span");
@@ -383,11 +406,7 @@ async function cargar() {
       btn.textContent = "Agregar al pedido";
       btn.onclick = (e) => { e.stopPropagation(); agregarAlCarrito(p); };
     }
-    card.setAttribute("role", "button");
-    card.tabIndex = 0;
-    card.setAttribute("aria-label", "Ver ficha de " + p.nombre);
-    card.onclick = () => abrirFicha(p.slug);
-    card.onkeydown = (e) => { if (e.key === "Enter") abrirFicha(p.slug); };
+    card.onclick = () => abrirFicha(p.slug); // atajo de ratón; el teclado usa el enlace del título
     grid.appendChild(card);
   }
   // Sin resultados: ofrecer el asesor en vez de un callejón sin salida
@@ -428,7 +447,9 @@ async function abrirFicha(slug) {
   const foto = $id("f-foto");
   foto.innerHTML = "";
   if (p.imagen) { const im = document.createElement("img"); im.src = p.imagen;
-                  im.alt = p.nombre; foto.appendChild(im); }
+                  im.alt = p.nombre;
+                  im.onerror = () => { im.remove(); foto.textContent = EMOJI[p.categoria] || "🔩"; };
+                  foto.appendChild(im); }
   else foto.textContent = EMOJI[p.categoria] || "🔩";
   $id("f-ruta").textContent = `${p.categoria || "Catálogo"} › ${p.marca || "genérico"} › ${p.sku}`;
   $id("f-nombre").textContent = p.nombre;
@@ -535,9 +556,26 @@ $id("form-pedido").addEventListener("submit", async (e) => {
   $id("checkout").hidden = true;
   const ex = $id("c-exito");
   ex.hidden = false;
-  ex.textContent = `¡Pedido ${r.numero} recibido por ${cop(r.total)}! ` +
-    `Te contactaremos por WhatsApp para confirmar el despacho.`;
+  const linkWsp = `https://wa.me/${WSP}?text=` +
+    encodeURIComponent(`Hola PLATIM, acabo de hacer el pedido ${r.numero}`);
+  ex.innerHTML = `¡Pedido ${r.numero} recibido por ${cop(r.total)}! ` +
+    `Te contactaremos por WhatsApp para confirmar el despacho. ` +
+    `<a href="${linkWsp}" target="_blank">Escríbenos ahora &rarr;</a>`;
 });
+
+$id("c-wsp").onclick = () => {
+  if (!carrito.length) return;
+  const lineas = carrito.map(i => `- ${i.cantidad} x ${i.nombre} (${cop(i.precio)})`);
+  const total = carrito.reduce((s, i) => s + (i.precio || 0) * i.cantidad, 0);
+  window.open(`https://wa.me/${WSP}?text=` + encodeURIComponent(
+    `Hola PLATIM, quiero hacer este pedido:\n${lineas.join("\n")}\nTotal: ${cop(total)}`), "_blank");
+};
+
+$id("hero-dotacion").onclick = () => {
+  $id("btn-asesor").hidden = true;
+  $id("asesor").hidden = false;
+  preguntarAsesor("Dotación para mis empleados");
+};
 
 $id("q").addEventListener("input", () => { page = 1; cargar(); });
 $id("prev").onclick = () => { page--; cargar(); };

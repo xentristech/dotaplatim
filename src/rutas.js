@@ -94,7 +94,8 @@ export function crearApp(db, SECRET) {
       `SELECT p.id, p.sku, p.nombre, p.slug, p.precio, p.precio_regular, p.marca,
               p.categoria, p.imagen, f.nombre AS ferreteria
        FROM productos p JOIN ferreterias f ON f.id = p.ferreteria_id
-       WHERE ${where} ORDER BY p.nombre LIMIT ? OFFSET ?`
+       WHERE ${where}
+       ORDER BY (p.imagen IS NULL OR p.imagen = ''), p.nombre LIMIT ? OFFSET ?`
     ).all(...args, porPagina, (Number(page) - 1) * porPagina);
     res.json({ total, page: Number(page), porPagina, productos: filas });
   });
@@ -170,6 +171,7 @@ color:#1b1b1b;line-height:1.5}a.btn{display:inline-block;background:#2e2e2e;colo
 padding:.7rem 1.2rem;border-radius:9px;text-decoration:none;font-weight:700;margin:.3rem .4rem 0 0}
 img{max-width:100%;max-height:320px;object-fit:contain}.precio{font-size:1.6rem;font-weight:800}
 small{color:#5f5f5f}</style></head><body>
+<main>
 <p><a href="/">← PLATIM Marketplace</a> · ${esc(p.categoria || "Catálogo")}</p>
 <h1>${esc(p.nombre)}</h1>
 <small>${esc(p.marca || "")} · SKU ${esc(p.sku)} · Vendido por ${esc(p.ferreteria)} (verificada)</small>
@@ -180,8 +182,9 @@ ${p.imagen ? `<p><img src="${esc(p.imagen)}" alt="${esc(p.nombre)}"></p>` : ""}
 <a class="btn" style="background:#111111"
    href="https://wa.me/573023660481?text=${encodeURIComponent(`Hola PLATIM, quiero información de ${p.nombre} (SKU ${p.sku})`)}">
    Preguntar por WhatsApp</a></p>
-<div>${p.descripcion || ""}</div>
+${p.descripcion ? `<h2>Descripción</h2><div>${p.descripcion}</div>` : ""}
 <p><small>Despacho a toda Colombia desde ferreterías verificadas · PLATIM Marketplace</small></p>
+</main>
 </body></html>`);
   });
 
