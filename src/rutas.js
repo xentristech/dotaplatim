@@ -125,6 +125,8 @@ export function crearApp(db, SECRET) {
     const filas = db.prepare(
       "SELECT slug, creado_en FROM productos WHERE activo = 1 ORDER BY id").all();
     const urls = [`<url><loc>${base}/</loc><changefreq>daily</changefreq></url>`,
+      `<url><loc>${base}/cotizar-dotacion</loc></url>`,
+      `<url><loc>${base}/vincular-ferreteria</loc></url>`,
       ...filas.map(f => `<url><loc>${base}/p/${encodeURIComponent(f.slug)}</loc>` +
         `<lastmod>${(f.creado_en || "").slice(0, 10)}</lastmod></url>`)];
     res.type("application/xml").send(
