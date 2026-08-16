@@ -4,6 +4,7 @@
 import express from "express";
 import { createHmac, scryptSync, timingSafeEqual, randomBytes } from "node:crypto";
 import { generarSeo, estudioCompetencia } from "./ia.js";
+import { enviarLeadSendPulse, estadoSendPulse } from "./sendpulse.js";
 
 export function crearApp(db, SECRET) {
   const app = express();
@@ -186,6 +187,162 @@ ${p.descripcion ? `<h2>Descripción</h2><div>${p.descripcion}</div>` : ""}
 <p><small>Despacho a toda Colombia desde ferreterías verificadas · PLATIM Marketplace</small></p>
 </main>
 </body></html>`);
+  });
+
+  // --- Embudos de captación (páginas de aterrizaje + leads → SendPulse) ---
+  // Directriz de marca: paleta gris/negro/blanco, wordmark XENTRIS, sin logos PLATIM.
+  const EMBUDOS = {
+    dotacion: {
+      titulo: "La dotación de tus empleados, resuelta en una semana",
+      sub: "Uniformes, EPP y calzado de seguridad con tu logo, despachados a toda Colombia. " +
+           "Cumple la dotación de ley (art. 230 CST) sin vueltas.",
+      bullets: ["Cotización en menos de 24 horas", "Marcas originales certificadas",
+                "Confección con el logo de tu empresa", "Despacho nacional"],
+      campos: `<input name="nombre" placeholder="Tu nombre *" required autocomplete="name">
+        <input name="empresa" placeholder="Empresa *" required autocomplete="organization">
+        <input name="whatsapp" type="tel" placeholder="WhatsApp *" required autocomplete="tel">
+        <input name="empleados" inputmode="numeric" placeholder="Nº de empleados">
+        <input name="correo" type="email" placeholder="Correo *" required autocomplete="email">`,
+      cta: "Recibir mi cotización gratis",
+      gracias: "¡Listo! Recibimos tu solicitud. Un asesor te escribe hoy mismo.",
+      wsp: "Hola, acabo de pedir una cotización de dotación para mi empresa",
+      meta: "Cotiza la dotación de ley de tu empresa: uniformes, EPP y calzado de seguridad " +
+            "con despacho a toda Colombia. Respuesta en menos de 24 horas.",
+    },
+    ferreteria: {
+      titulo: "Tu ferretería vendiendo en internet, sin montar página web",
+      sub: "Nosotros ponemos la plataforma, el posicionamiento en Google y los despachos " +
+           "a todo el país. Tú solo vendes.",
+      bullets: ["Catálogo en línea en días, no meses", "Pedidos y despachos gestionados",
+                "SEO y asesor con IA incluidos", "Sin costos de desarrollo"],
+      campos: `<input name="nombre" placeholder="Tu nombre *" required autocomplete="name">
+        <input name="empresa" placeholder="Nombre de la ferretería *" required>
+        <input name="ciudad" placeholder="Ciudad *" required>
+        <input name="whatsapp" type="tel" placeholder="WhatsApp *" required autocomplete="tel">
+        <input name="correo" type="email" placeholder="Correo *" required autocomplete="email">`,
+      cta: "Quiero vincular mi ferretería",
+      gracias: "¡Recibido! Te contactamos para mostrarte la plataforma funcionando en vivo.",
+      wsp: "Hola, quiero vincular mi ferretería a la plataforma",
+      meta: "Pon tu ferretería a vender en internet sin montar página web: plataforma, " +
+            "posicionamiento y despachos a todo el país incluidos.",
+    },
+  };
+
+  const paginaEmbudo = (tipo) => {
+    const e = EMBUDOS[tipo];
+    return `<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(e.titulo)} — XENTRIS</title>
+<meta name="description" content="${esc(e.meta)}">
+<meta name="robots" content="index,follow">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: system-ui, sans-serif; background: #F4F4F4; color: #1b1b1b;
+         line-height: 1.5; min-height: 100vh; display: flex; flex-direction: column; }
+  header { padding: 1.1rem 1.4rem; font-weight: 900; letter-spacing: .25em;
+           font-size: 1.05rem; } header small { letter-spacing: 0; color: #5f5f5f;
+           font-weight: 400; margin-left: .8rem; }
+  main { flex: 1; display: flex; align-items: center; justify-content: center;
+         padding: 1.5rem 1rem 3rem; }
+  .caja { background: #fff; border: 1px solid #DCDCDC; border-radius: 16px;
+          max-width: 520px; width: 100%; padding: 2rem 1.8rem;
+          box-shadow: 0 8px 28px rgb(0 0 0 / .08); }
+  h1 { font-size: 1.55rem; line-height: 1.25; }
+  .sub { color: #5f5f5f; margin: .7rem 0 1rem; }
+  ul { list-style: none; margin-bottom: 1.2rem; }
+  li { padding: .2rem 0; } li b { color: #111; margin-right: .4rem; }
+  form { display: flex; flex-direction: column; gap: .6rem; }
+  input { border: 1px solid #DCDCDC; border-radius: 9px; padding: .8rem .9rem;
+          font-size: 1rem; background: #fff; color: #1b1b1b; }
+  input:focus { outline: 2px solid #111; border-color: #111; }
+  button { background: #111; color: #fff; border: none; border-radius: 10px;
+           padding: .95rem; font-size: 1.05rem; font-weight: 800; cursor: pointer;
+           min-height: 48px; }
+  button:disabled { opacity: .6; }
+  .error { color: #b42318; min-height: 1.2em; font-size: .9rem; }
+  .gracias { text-align: center; display: none; }
+  .gracias h2 { margin-bottom: .6rem; }
+  .gracias a.wsp { display: inline-block; background: #111; color: #fff; font-weight: 800;
+                   text-decoration: none; border-radius: 10px; padding: .9rem 1.3rem;
+                   margin-top: 1rem; }
+  .gracias a.cat { display: block; margin-top: .9rem; color: #5f5f5f; }
+  footer { text-align: center; color: #5f5f5f; font-size: .8rem; padding: 1rem; }
+</style></head><body>
+<header>XENTRIS<small>soluciones digitales para negocios reales</small></header>
+<main><div class="caja">
+  <div id="captura">
+    <h1>${esc(e.titulo)}</h1>
+    <p class="sub">${esc(e.sub)}</p>
+    <ul>${e.bullets.map(b => `<li><b>✓</b>${esc(b)}</li>`).join("")}</ul>
+    <form id="f">
+      ${e.campos}
+      <button type="submit">${esc(e.cta)}</button>
+      <p class="error" id="error" aria-live="polite"></p>
+    </form>
+  </div>
+  <div class="gracias" id="gracias" aria-live="polite">
+    <h2>${esc(e.gracias)}</h2>
+    <a class="wsp" target="_blank" rel="noopener"
+       href="https://wa.me/573023660481?text=${encodeURIComponent(e.wsp)}">
+       Adelantar por WhatsApp &rarr;</a>
+    <a class="cat" href="/">Mientras tanto, mira el catálogo &rarr;</a>
+  </div>
+</div></main>
+<footer>Operado por XENTRIS · Despachos a toda Colombia</footer>
+<script>
+document.getElementById("f").addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  const boton = ev.target.querySelector("button");
+  boton.disabled = true; boton.textContent = "Enviando…";
+  const datos = Object.fromEntries(new FormData(ev.target));
+  datos.tipo = ${JSON.stringify(tipo)};
+  const r = await fetch("/api/leads", { method: "POST",
+    headers: { "Content-Type": "application/json" }, body: JSON.stringify(datos) })
+    .then(x => x.json()).catch(() => ({ error: "No se pudo enviar. Intenta de nuevo." }));
+  if (r.error) {
+    document.getElementById("error").textContent = r.error;
+    boton.disabled = false; boton.textContent = ${JSON.stringify(e.cta)};
+    return;
+  }
+  document.getElementById("captura").style.display = "none";
+  document.getElementById("gracias").style.display = "block";
+});
+</script></body></html>`;
+  };
+
+  app.get("/cotizar-dotacion", (_req, res) => res.type("html").send(paginaEmbudo("dotacion")));
+  app.get("/vincular-ferreteria", (_req, res) => res.type("html").send(paginaEmbudo("ferreteria")));
+
+  app.post("/api/leads", async (req, res) => {
+    const c = req.body || {};
+    const tipo = c.tipo === "ferreteria" ? "ferreteria" : "dotacion";
+    const nombre = String(c.nombre || "").trim().slice(0, 120);
+    const whatsapp = String(c.whatsapp || "").trim().slice(0, 30);
+    const correo = String(c.correo || "").trim().slice(0, 160);
+    if (!nombre || !whatsapp || !/.+@.+\..+/.test(correo)) {
+      return res.status(400).json({
+        error: "Completa tu nombre, WhatsApp y un correo válido para poder contactarte." });
+    }
+    const lead = { tipo, nombre, whatsapp, correo,
+      empresa: String(c.empresa || "").trim().slice(0, 160),
+      ciudad: String(c.ciudad || "").trim().slice(0, 80),
+      empleados: String(c.empleados || "").trim().slice(0, 20) };
+    const enviado = await enviarLeadSendPulse(lead); // false si no hay credenciales aún
+    db.prepare(`INSERT INTO leads (tipo, nombre, empresa, ciudad, whatsapp, correo,
+                                   empleados, sendpulse)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)`)
+      .run(lead.tipo, lead.nombre, lead.empresa, lead.ciudad, lead.whatsapp,
+           lead.correo, lead.empleados, enviado ? 1 : 0);
+    res.status(201).json({ ok: true, sendpulse: enviado });
+  });
+
+  // Panel: ver los leads capturados y el estado de la conexión SendPulse.
+  app.get("/api/admin/leads", conSesion, (_req, res) => {
+    res.json(db.prepare("SELECT * FROM leads ORDER BY id DESC LIMIT 200").all());
+  });
+  app.get("/api/admin/sendpulse", conSesion, async (_req, res) => {
+    res.json(await estadoSendPulse());
   });
 
   // --- Asesor IA de ventas ---

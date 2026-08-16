@@ -86,5 +86,18 @@ export function crearEsquema(db) {
     );
     CREATE INDEX IF NOT EXISTS idx_items_pedido ON pedido_items(pedido_id);
     CREATE INDEX IF NOT EXISTS idx_items_ferreteria ON pedido_items(ferreteria_id);
+
+    CREATE TABLE IF NOT EXISTS leads (
+      id         INTEGER PRIMARY KEY,
+      tipo       TEXT NOT NULL CHECK (tipo IN ('dotacion','ferreteria')),
+      nombre     TEXT NOT NULL,
+      empresa    TEXT DEFAULT '',
+      ciudad     TEXT DEFAULT '',
+      whatsapp   TEXT NOT NULL,
+      correo     TEXT NOT NULL,
+      empleados  TEXT DEFAULT '',
+      sendpulse  INTEGER NOT NULL DEFAULT 0,
+      creado_en  TEXT NOT NULL DEFAULT (datetime('now'))
+    );
   `);
 }
