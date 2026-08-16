@@ -194,8 +194,8 @@ ${p.descripcion ? `<h2>Descripción</h2><div>${p.descripcion}</div>` : ""}
   const EMBUDOS = {
     dotacion: {
       titulo: "La dotación de tus empleados, resuelta en una semana",
-      sub: "Uniformes, EPP y calzado de seguridad con tu logo, despachados a toda Colombia. " +
-           "Cumple la dotación de ley (art. 230 CST) sin vueltas.",
+      sub: "Uniformes, EPP y calzado de seguridad con el logo de tu empresa, entregados " +
+           "en cualquier ciudad de Colombia. Tú mandas la lista; nosotros la resolvemos.",
       bullets: ["Cotización en menos de 24 horas", "Marcas originales certificadas",
                 "Confección con el logo de tu empresa", "Despacho nacional"],
       campos: `<input name="nombre" placeholder="Tu nombre *" required autocomplete="name">
@@ -208,11 +208,38 @@ ${p.descripcion ? `<h2>Descripción</h2><div>${p.descripcion}</div>` : ""}
       wsp: "Hola, acabo de pedir una cotización de dotación para mi empresa",
       meta: "Cotiza la dotación de ley de tu empresa: uniformes, EPP y calzado de seguridad " +
             "con despacho a toda Colombia. Respuesta en menos de 24 horas.",
+      problema: { titulo: "Cada abril, agosto y diciembre, la misma carrera",
+        parrafos: [
+          "La ley (art. 230 del CST) obliga a entregar dotación tres veces al año a " +
+          "quien gane hasta dos salarios mínimos: antes del 30 de abril, del 31 de " +
+          "agosto y del 20 de diciembre. Y siempre pasa lo mismo: el proveedor se " +
+          "cuelga, las tallas llegan malas y la fecha se viene encima.",
+          "Incumplir no es solo un regaño: es sanción laboral y demandas. Y resolverlo " +
+          "a la carrera es pagar de más por menos calidad.",
+          "Con una sola lista — cuántas personas, qué puestos, qué tallas — te " +
+          "devolvemos una cotización clara y llegamos antes de la fecha." ] },
+      pasos: [
+        ["1", "Cuéntanos tu necesidad", "Llena el formulario: cuántas personas y para qué cargos. Dos minutos."],
+        ["2", "Recibe tu cotización en 24 h", "Precios por volumen, tallas y opciones de marca. Sin compromiso."],
+        ["3", "Recibe la dotación", "Confección con tu logo y despacho a tu sede, en cualquier ciudad del país."]],
+      prueba: { titulo: "Esto no es una promesa: ya está funcionando",
+        items: [
+          "Catálogo de dotación en línea con precios publicados: overoles, camibusos, botas con puntera, cascos, guantes y más",
+          "Kit de dotación de ley (art. 230 CST) ya armado: camisa + pantalón + calzado por trabajador",
+          "Marcas de seguridad certificadas y confección con tu logo bordado o estampado",
+          "Respaldo de un marketplace ferretero con más de 230 productos y despacho nacional" ] },
+      faq: [
+        ["¿Hay un pedido mínimo?", "No. Cotizamos desde equipos pequeños hasta plantas completas; el precio mejora con el volumen."],
+        ["¿Manejan facturación?", "Sí, factura electrónica a nombre de tu empresa, como lo exige tu contabilidad."],
+        ["¿Qué pasa si una talla llega mal?", "Se cambia. Tomamos la tabla de tallas contigo antes de confeccionar para que casi nunca pase."],
+        ["¿En cuánto tiempo entregan?", "La cotización llega en 24 horas. La confección y entrega típica toma entre una y dos semanas según el volumen y la ciudad."],
+        ["¿Atienden mi ciudad?", "Sí: despachamos a toda Colombia con transportadoras nacionales."]],
+      ctaFinal: "La próxima fecha de dotación no se mueve. Tu cotización tarda 2 minutos.",
     },
     ferreteria: {
       titulo: "Tu ferretería vendiendo en internet, sin montar página web",
-      sub: "Nosotros ponemos la plataforma, el posicionamiento en Google y los despachos " +
-           "a todo el país. Tú solo vendes.",
+      sub: "La plataforma, el posicionamiento en Google y la logística los ponemos nosotros. " +
+           "Tú publicas tus productos y despachas ventas.",
       bullets: ["Catálogo en línea en días, no meses", "Pedidos y despachos gestionados",
                 "SEO y asesor con IA incluidos", "Sin costos de desarrollo"],
       campos: `<input name="nombre" placeholder="Tu nombre *" required autocomplete="name">
@@ -225,6 +252,32 @@ ${p.descripcion ? `<h2>Descripción</h2><div>${p.descripcion}</div>` : ""}
       wsp: "Hola, quiero vincular mi ferretería a la plataforma",
       meta: "Pon tu ferretería a vender en internet sin montar página web: plataforma, " +
             "posicionamiento y despachos a todo el país incluidos.",
+      problema: { titulo: "Tus clientes ya compran en internet. Solo que no te compran a ti",
+        parrafos: [
+          "Cada día, gente de tu ciudad busca en Google «taladro percutor precio» o " +
+          "«motobomba 3 pulgadas»… y termina comprándole a Homecenter o a un vendedor " +
+          "anónimo de Mercado Libre, aunque tú tengas el producto en la vitrina.",
+          "Montar tienda propia cuesta millones, tarda meses y luego nadie la visita: " +
+          "el problema no es la página, es el posicionamiento y la logística.",
+          "En el marketplace tu catálogo se publica con SEO, cada producto muestra el " +
+          "nombre de TU ferretería, y los pedidos te llegan listos para despachar." ] },
+      pasos: [
+        ["1", "Mándanos tu catálogo", "Un Excel, fotos o hasta la lista de tu proveedor. Nosotros lo organizamos."],
+        ["2", "Lo publicamos con SEO", "Fichas con foto, precio y posicionamiento en Google. Tu marca visible en cada producto."],
+        ["3", "Recibes pedidos y vendes", "Panel con tus pedidos, estudio de competencia con IA y despachos nacionales coordinados."]],
+      prueba: { titulo: "La plataforma ya está andando, con ferreterías reales",
+        items: [
+          "Más de 230 productos publicados de marcas como STIHL, HUSQVARNA y DeWalt",
+          "La primera ferretería vinculada ya tiene su catálogo completo en línea, con fotos y SEO por producto",
+          "Cada producto tiene página propia indexable en Google, con precio y botón de compra",
+          "Asesor de ventas con IA que atiende a los compradores y estudio de competencia para cada ferretería" ] },
+      faq: [
+        ["¿Cuánto cuesta?", "No pagas desarrollo ni montaje. El modelo comercial se acuerda contigo según tu catálogo — sin sorpresas ni permanencias."],
+        ["¿Pierdo mi marca o mis clientes?", "No: cada producto muestra el nombre de tu ferretería, con el sello de tienda verificada."],
+        ["¿Necesito saber de computadores?", "No. Nos mandas el catálogo como lo tengas y nosotros lo dejamos publicado."],
+        ["¿Quién hace los despachos?", "Los coordinamos juntos con transportadoras nacionales; tú entregas el producto, el pedido llega listo."],
+        ["¿Y si quiero salirme?", "Sin permanencia: tu catálogo es tuyo, entras y sales cuando quieras."]],
+      ctaFinal: "Cada mes fuera de internet son ventas que se lleva otro. Vincularte tarda 2 minutos.",
     },
   };
 
@@ -243,11 +296,36 @@ ${p.descripcion ? `<h2>Descripción</h2><div>${p.descripcion}</div>` : ""}
   header { padding: 1.1rem 1.4rem; font-weight: 900; letter-spacing: .25em;
            font-size: 1.05rem; } header small { letter-spacing: 0; color: #5f5f5f;
            font-weight: 400; margin-left: .8rem; }
-  main { flex: 1; display: flex; align-items: center; justify-content: center;
-         padding: 1.5rem 1rem 3rem; }
+  main { flex: 1; display: flex; flex-direction: column; align-items: center;
+         padding: 1.5rem 1rem 3rem; gap: 2.2rem; }
   .caja { background: #fff; border: 1px solid #DCDCDC; border-radius: 16px;
           max-width: 520px; width: 100%; padding: 2rem 1.8rem;
           box-shadow: 0 8px 28px rgb(0 0 0 / .08); }
+  .seccion { max-width: 640px; width: 100%; }
+  .seccion h2 { font-size: 1.3rem; margin-bottom: .7rem; }
+  .seccion p { color: #3d3d3d; margin-bottom: .7rem; }
+  .pasos { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+           gap: .8rem; }
+  .paso { background: #fff; border: 1px solid #DCDCDC; border-radius: 12px;
+          padding: 1rem; }
+  .paso .num { display: inline-flex; width: 2rem; height: 2rem; border-radius: 50%;
+               background: #111; color: #fff; align-items: center; justify-content: center;
+               font-weight: 800; margin-bottom: .5rem; }
+  .paso b { display: block; margin-bottom: .3rem; }
+  .paso span { color: #5f5f5f; font-size: .9rem; }
+  .prueba li { padding: .25rem 0; color: #3d3d3d; }
+  .prueba li b { color: #111; margin-right: .4rem; }
+  details { background: #fff; border: 1px solid #DCDCDC; border-radius: 10px;
+            padding: .8rem 1rem; margin-bottom: .5rem; }
+  summary { font-weight: 700; cursor: pointer; }
+  details p { margin-top: .5rem; color: #3d3d3d; }
+  .cta-final { text-align: center; background: linear-gradient(100deg, #111, #3a3a3a);
+               color: #fff; border-radius: 16px; padding: 1.8rem 1.4rem; max-width: 640px;
+               width: 100%; }
+  .cta-final p { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; }
+  .cta-final a { display: inline-block; background: #e8e8e8; color: #1b1b1b;
+                 font-weight: 800; text-decoration: none; border-radius: 10px;
+                 padding: .9rem 1.4rem; }
   h1 { font-size: 1.55rem; line-height: 1.25; }
   .sub { color: #5f5f5f; margin: .7rem 0 1rem; }
   ul { list-style: none; margin-bottom: 1.2rem; }
@@ -270,7 +348,7 @@ ${p.descripcion ? `<h2>Descripción</h2><div>${p.descripcion}</div>` : ""}
   footer { text-align: center; color: #5f5f5f; font-size: .8rem; padding: 1rem; }
 </style></head><body>
 <header>XENTRIS<small>soluciones digitales para negocios reales</small></header>
-<main><div class="caja">
+<main><div class="caja" id="arriba">
   <div id="captura">
     <h1>${esc(e.titulo)}</h1>
     <p class="sub">${esc(e.sub)}</p>
@@ -288,7 +366,31 @@ ${p.descripcion ? `<h2>Descripción</h2><div>${p.descripcion}</div>` : ""}
        Adelantar por WhatsApp &rarr;</a>
     <a class="cat" href="/">Mientras tanto, mira el catálogo &rarr;</a>
   </div>
-</div></main>
+</div>
+<section class="seccion">
+  <h2>${esc(e.problema.titulo)}</h2>
+  ${e.problema.parrafos.map(p => `<p>${esc(p)}</p>`).join("")}
+</section>
+<section class="seccion">
+  <h2>Así funciona</h2>
+  <div class="pasos">${e.pasos.map(([n, t, d]) =>
+    `<div class="paso"><span class="num">${esc(n)}</span><b>${esc(t)}</b><span>${esc(d)}</span></div>`).join("")}
+  </div>
+</section>
+<section class="seccion prueba">
+  <h2>${esc(e.prueba.titulo)}</h2>
+  <ul>${e.prueba.items.map(i => `<li><b>✓</b>${esc(i)}</li>`).join("")}</ul>
+</section>
+<section class="seccion">
+  <h2>Preguntas frecuentes</h2>
+  ${e.faq.map(([q, a]) =>
+    `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("")}
+</section>
+<div class="cta-final">
+  <p>${esc(e.ctaFinal)}</p>
+  <a href="#arriba">${esc(e.cta)} &uarr;</a>
+</div>
+</main>
 <footer>Operado por XENTRIS · Despachos a toda Colombia</footer>
 <script>
 document.getElementById("f").addEventListener("submit", async (ev) => {
