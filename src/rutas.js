@@ -195,6 +195,8 @@ ${p.descripcion ? `<h2>Descripción</h2><div>${p.descripcion}</div>` : ""}
   // Directriz de marca: paleta gris/negro/blanco, wordmark XENTRIS, sin logos PLATIM.
   const EMBUDOS = {
     dotacion: {
+      imagen: "https://raw.githubusercontent.com/xentristech/dotaplatim/main/public/img/hero-dotacion.jpg",
+      imagenAlt: "Equipo de trabajadores con casco y chaleco de seguridad en una bodega industrial",
       titulo: "La dotación de tus empleados, resuelta en una semana",
       sub: "Uniformes, EPP y calzado de seguridad con el logo de tu empresa, entregados " +
            "en cualquier ciudad de Colombia. Tú mandas la lista; nosotros la resolvemos.",
@@ -239,6 +241,8 @@ ${p.descripcion ? `<h2>Descripción</h2><div>${p.descripcion}</div>` : ""}
       ctaFinal: "La próxima fecha de dotación no se mueve. Tu cotización tarda 2 minutos.",
     },
     ferreteria: {
+      imagen: "https://raw.githubusercontent.com/xentristech/dotaplatim/main/public/img/hero-ferreteria.jpg",
+      imagenAlt: "Dueño de una ferretería en su local, rodeado de herramientas",
       titulo: "Tu ferretería vendiendo en internet, sin montar página web",
       sub: "La plataforma, el posicionamiento en Google y la logística los ponemos nosotros. " +
            "Tú publicas tus productos y despachas ventas.",
@@ -291,6 +295,9 @@ ${p.descripcion ? `<h2>Descripción</h2><div>${p.descripcion}</div>` : ""}
 <title>${esc(e.titulo)} — XENTRIS</title>
 <meta name="description" content="${esc(e.meta)}">
 <meta name="robots" content="index,follow">
+<meta property="og:title" content="${esc(e.titulo)}">
+<meta property="og:description" content="${esc(e.meta)}">
+<meta property="og:image" content="${esc(e.imagen)}">
 <style>
   * { box-sizing: border-box; margin: 0; }
   body { font-family: system-ui, sans-serif; background: #F4F4F4; color: #1b1b1b;
@@ -303,6 +310,8 @@ ${p.descripcion ? `<h2>Descripción</h2><div>${p.descripcion}</div>` : ""}
   .caja { background: #fff; border: 1px solid #DCDCDC; border-radius: 16px;
           max-width: 520px; width: 100%; padding: 2rem 1.8rem;
           box-shadow: 0 8px 28px rgb(0 0 0 / .08); }
+  .hero-img { display: block; width: calc(100% + 3.6rem); margin: -2rem -1.8rem 1.3rem;
+              border-radius: 15px 15px 0 0; }
   .seccion { max-width: 640px; width: 100%; }
   .seccion h2 { font-size: 1.3rem; margin-bottom: .7rem; }
   .seccion p { color: #3d3d3d; margin-bottom: .7rem; }
@@ -351,6 +360,7 @@ ${p.descripcion ? `<h2>Descripción</h2><div>${p.descripcion}</div>` : ""}
 </style></head><body>
 <header>XENTRIS<small>soluciones digitales para negocios reales</small></header>
 <main><div class="caja" id="arriba">
+  <img class="hero-img" src="${esc(e.imagen)}" alt="${esc(e.imagenAlt)}" width="1024" height="512">
   <div id="captura">
     <h1>${esc(e.titulo)}</h1>
     <p class="sub">${esc(e.sub)}</p>
