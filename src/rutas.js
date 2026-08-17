@@ -310,8 +310,8 @@ ${p.descripcion ? `<h2>Descripción</h2><div>${p.descripcion}</div>` : ""}
   .caja { background: #fff; border: 1px solid #DCDCDC; border-radius: 16px;
           max-width: 520px; width: 100%; padding: 2rem 1.8rem;
           box-shadow: 0 8px 28px rgb(0 0 0 / .08); }
-  .hero-img { display: block; width: calc(100% + 3.6rem); margin: -2rem -1.8rem 1.3rem;
-              border-radius: 15px 15px 0 0; }
+  .hero-img { display: block; width: calc(100% + 3.6rem); height: auto;
+              margin: -2rem -1.8rem 1.3rem; border-radius: 15px 15px 0 0; }
   .seccion { max-width: 640px; width: 100%; }
   .seccion h2 { font-size: 1.3rem; margin-bottom: .7rem; }
   .seccion p { color: #3d3d3d; margin-bottom: .7rem; }
